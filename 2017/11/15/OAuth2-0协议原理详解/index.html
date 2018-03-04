@@ -1,0 +1,975 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="OAuth2.0," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="OAuth 2.0 是目前比较流行的做法，它率先被Google, Yahoo, Microsoft, Facebook等使用。之所以标注为 2.0，是因为最初有一个1.0协议，但这个1.0协议被弄得太复杂，易用性差，所以没有得到普及。2.0是一个新的设计，协议简单清晰，但它并不兼容1.0，可以说与1.0没什么关系。所以，我就只介绍2.0。 协议的参与者从引言部分的描述我们可以看出，OAuth的参与">
+<meta name="keywords" content="OAuth2.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OAuth2.0协议原理详解">
+<meta property="og:url" content="http://www.dearcharles.cn/2017/11/15/OAuth2-0协议原理详解/index.html">
+<meta property="og:site_name" content="Charles&#39; Big Plan">
+<meta property="og:description" content="OAuth 2.0 是目前比较流行的做法，它率先被Google, Yahoo, Microsoft, Facebook等使用。之所以标注为 2.0，是因为最初有一个1.0协议，但这个1.0协议被弄得太复杂，易用性差，所以没有得到普及。2.0是一个新的设计，协议简单清晰，但它并不兼容1.0，可以说与1.0没什么关系。所以，我就只介绍2.0。 协议的参与者从引言部分的描述我们可以看出，OAuth的参与">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/EhKFDe828d.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/2ADL41klgD.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/09C27L1jL6.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/L5JLCIb1ce.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/Fh0ekDKjb6.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/fJ61GilAF3.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/i3GBmdi6jb.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/gI3F4IdC32.png">
+<meta property="og:updated_time" content="2017-11-15T14:27:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OAuth2.0协议原理详解">
+<meta name="twitter:description" content="OAuth 2.0 是目前比较流行的做法，它率先被Google, Yahoo, Microsoft, Facebook等使用。之所以标注为 2.0，是因为最初有一个1.0协议，但这个1.0协议被弄得太复杂，易用性差，所以没有得到普及。2.0是一个新的设计，协议简单清晰，但它并不兼容1.0，可以说与1.0没什么关系。所以，我就只介绍2.0。 协议的参与者从引言部分的描述我们可以看出，OAuth的参与">
+<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171115/EhKFDe828d.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/15/OAuth2-0协议原理详解/"/>
+
+
+
+
+
+  <title> OAuth2.0协议原理详解 | Charles' Big Plan </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4f115866ae087276fb78c5184bd75863";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Charles' Big Plan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Tell some stories about Charles daily work</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-echart">
+          <a href="/echart" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            词云
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/15/OAuth2-0协议原理详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/8390209.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Big Plan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                OAuth2.0协议原理详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:03:00+05:30">
+                2017-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络安全/" itemprop="url" rel="index">
+                    <span itemprop="name">网络安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/15/OAuth2-0协议原理详解/" class="leancloud_visitors" data-flag-title="OAuth2.0协议原理详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OAuth 2.0 是目前比较流行的做法，它率先被Google, Yahoo, Microsoft, Facebook等使用。之所以标注为 2.0，是因为最初有一个1.0协议，但这个1.0协议被弄得太复杂，易用性差，所以没有得到普及。2.0是一个新的设计，协议简单清晰，但它并不兼容1.0，可以说与1.0没什么关系。所以，我就只介绍2.0。</p>
+<h1 id="协议的参与者"><a href="#协议的参与者" class="headerlink" title="协议的参与者"></a>协议的参与者</h1><p>从引言部分的描述我们可以看出，OAuth的参与实体至少有如下4个：</p>
+<ul>
+<li>RO (resource owner): 资源所有者，对资源具有授权能力的人。如上文中的用户Alice。</li>
+<li>RS (resource server): 资源服务器，它存储资源，并处理对资源的访问请求。如Google资源服务器，它所保管的资源就是用户Alice的照片。</li>
+<li>Client: 第三方应用，它获得RO的授权后便可以去访问RO的资源。如网易印像服务。</li>
+<li>AS (authorization server): 授权服务器，它认证RO的身份，为RO提供授权审批流程，并最终颁发授权令牌(Access Token)。读者请注意，为了便于协议的描述，这里只是在逻辑上把AS与RS区分开来；在物理上，AS与RS的功能可以由同一个服务器来提供服务。<a id="more"></a>
+</li>
+</ul>
+<h1 id="授权类型"><a href="#授权类型" class="headerlink" title="授权类型"></a>授权类型</h1><p>在开放授权中，第三方应用(Client)可能是一个Web站点，也可能是在浏览器中运行的一段JavaScript代码，还可能是安装在本地的一个应用程序。这些第三方应用都有各自的安全特性。对于Web站点来说，它与RO浏览器是分离的，它可以自己保存协议中的敏感数据，这些密钥可以不暴露给RO；对于javascript代码和本地安全的应用程序来说，它本来就运行在RO的浏览器中，RO是可以访问到Client在协议中的敏感数据。</p>
+<p>OAuth为了支持这些不同类型的第三方应用，提出了多种授权类型，如：</p>
+<ul>
+<li>授权码 (Authorization Code Grant)</li>
+<li>隐式授权 (Implicit Grant)</li>
+<li>RO凭证授权 (Resource Owner Password Credentials Grant)</li>
+<li>Client凭证授权 (Client Credentials Grant)</li>
+</ul>
+<p>由于本文旨在帮助用户理解OAuth协议，所以我将先介绍这些授权类型的基本思路，然后选择其中最核心、最难理解、也是最广泛使用的一种授权类型——“授权码”，进行深入的介绍。 </p>
+<h3 id="2-1-授权码模式"><a href="#2-1-授权码模式" class="headerlink" title="2.1 授权码模式"></a>2.1 授权码模式</h3><p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/EhKFDe828d.png" alt="mark"></p>
+<p> (A) web客户端通过将终端用户的user-agent重定向到授权服务器来发起这个流程。客户端传入它的客户端标识符、请求作用域、本地状态和一个重定向URI，在访问被许可（或被拒绝）后授权服务器会重新将终端用户引导回这个URI。</p>
+<p>(B) 授权服务器验证终端用户（借助于user-agent），并确定终端用户是否许可客户端的访问请求。</p>
+<p>(C) 假定终端用户许可了这次访问，授权服务器会将user-agent重定向到之前提供的重定向URI上去。授权服务器为客户端传回一个授权码做获取访问令牌之用。</p>
+<p>(D) 客户端通过验证并传入上一步取得的授权码从授权服务器请求一个访问令牌。（需要带上ClientId和Secret，ClientId和Secret是通过平台授予）</p>
+<p>(E) 授权服务器验证客户端私有证书和授权码的有效性并返回访问令牌。</p>
+<h3 id="2-2-隐授权模式（implicit-grant-type）"><a href="#2-2-隐授权模式（implicit-grant-type）" class="headerlink" title="2.2 隐授权模式（implicit grant type）"></a>2.2 隐授权模式（implicit grant type）</h3><p>User-Agent适用于客户端不能保存客户端私有证书的App（纯客户端App，无Server参与）。因为纯客户端的程序不能保存密钥</p>
+<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/2ADL41klgD.png" alt="mark"></p>
+<p>(A) 客户端将user-agent引导到终端用户授权endpoint。客户端传入它的客户端标识符、请求作用域、本地状态和一个重定向URI，在访问被许可（或被拒绝）后授权服务器会重新将终端用户引导回这个URI。</p>
+<p>(B) 授权服务器验证终端用户（通过user-agent）并确认终端用户是许可还是拒绝了客户端的访问请求。</p>
+<p>(C) 如果终端用户许可了这次访问，那么授权服务器会将user-agent引导到之前提供的重定向URI。重定向URI会在URI片断{译者注：URI片断是指URI中#号之后的内容}中包含访问令牌。</p>
+<p>(D) user-agent响应重定向指令，向web服务器发送不包含URI片断的请求。user-agent在本地保存URI片断。</p>
+<p>(E) web服务器返回一个web页面（通常是嵌入了脚本的HTML网页），这个页面能够访问完整的重定向URI，它包含了由user-agent保存的URI片断，同时这个页面能够将包含在URI片断中的访问令牌（和其它参数）提取出来。</p>
+<p>(F) user-agent在本地执行由web服务器提供的脚本，该脚本提取出访问令牌并将它传递给客户端。</p>
+<h3 id="2-3-密码模式"><a href="#2-3-密码模式" class="headerlink" title="2.3 密码模式"></a>2.3 密码模式</h3><p>密码模式就是将密码托管给第三方App，但是必须要保证第三方App高度可信。</p>
+<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/09C27L1jL6.png" alt="mark"></p>
+<p>（A）用户向客户端提供用户名和密码。</p>
+<p>（B）客户端将用户名和密码发给认证服务器，向后者请求令牌。</p>
+<p>（C）认证服务器确认无误后，向客户端提供访问令牌。</p>
+<h3 id="2-4-客户端模式"><a href="#2-4-客户端模式" class="headerlink" title="2.4 客户端模式"></a>2.4 客户端模式</h3><p>这种模式不需要终端用户的参与，只是Client和Server端的交互。通常只用于Client状态的获取。</p>
+<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/L5JLCIb1ce.png" alt="mark"></p>
+<p>（A）客户端向认证服务器进行身份认证，并要求一个访问令牌。</p>
+<p>（B）认证服务器确认无误后，向客户端提供访问令牌。</p>
+<h1 id="授权码模式的实例化描述"><a href="#授权码模式的实例化描述" class="headerlink" title="授权码模式的实例化描述"></a>授权码模式的实例化描述</h1><p>面我以实例化方式来帮助读者理解授权码类型的授权协议的运行过程。假设: </p>
+<p>(1) Alice有一个有效的Google帐号；</p>
+<p>(2) Facebook.com已经在Google Authorization Server上注册了Client身份，已经获得(client_id, client_secret)，注意client_secret是Client与AS之间的一个共享密钥。</p>
+<p>(3) Alice想授权Facebook.com查看她的联系人列表(<a href="https://www.google.com/m8/feeds)。" target="_blank" rel="external">https://www.google.com/m8/feeds)。</a></p>
+<p>下图展示了Alice、Facebook.com、Google资源服务器、以及Google OAuth授权服务器之间的协议运行过程。<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/Fh0ekDKjb6.png" alt="mark"></p>
+<p>协议所涉及到的细节都已经在图上了，所以不打算再做详细介绍了。若看懂了此图，OAuth2.0就理解了。</p>
+<p>读者请注意，在步骤(4)中，Client需要拿“授权码”去换“授权令牌”时，Client需要向AS证明自己的身份，即证明自己就是步骤(2)中Alice批准授权时的Grantee。这个身份证明的方法主要有两种（图3中使用了第1种）：</p>
+<p>(1) 通过https直接将client_secret发送给AS，因为client_secret是由Client与AS所共享，所以只要传送client_secret的信道安全即可。</p>
+<p>(2) 通过消息认证码来认证Client身份，典型的算法有HMAC-SHA1。在这种方式下，Client无需传送client_secret，只需发送消息请求的signature即可。由于不需要向AS传递敏感数据，所以它只需要使用http即可。</p>
+<p>此外， 在步骤(2)中，Google授权服务器需要认证Alice的RO身份，并提供授权界面给Alice进行授权审批。今天Google提供的实例如下图所示，仅供读者理解OAuth这种“现场授权”或”在线授权”的含义。<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/fJ61GilAF3.png" alt="mark"></p>
+<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/i3GBmdi6jb.png" alt="mark"></p>
+<h1 id="OAuth2-0授权类型选择"><a href="#OAuth2-0授权类型选择" class="headerlink" title="OAuth2.0授权类型选择"></a>OAuth2.0授权类型选择</h1><p>授权模式实际上就是指获取token的方法，选择授权模式主要取决于最终用户使用的客户端的类型，以及你服务对用户的表现形式。</p>
+<p>具体的选择方式如下图：</p>
+<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/gI3F4IdC32.png" alt="mark"></p>
+<h3 id="First-Party-or-third-party-client"><a href="#First-Party-or-third-party-client" class="headerlink" title="First Party or third party client?"></a>First Party or third party client?</h3><p>First party指的是，你完全信任这个客户端可以管理好最终用户的认证凭据。比如说对于Spotify的开发者和所有者来说，他们完全信任他们的Spotify iphone客户端。而third party客户端是指我们不信任的客户端。</p>
+<h3 id="Access-Token-Owner？"><a href="#Access-Token-Owner？" class="headerlink" title="Access Token Owner？"></a>Access Token Owner？</h3><p>Access Token表示给一个客户端授权访问某些被保护的资源。如果我们只需要给一个机器授权访问某些资源，而不需要给人授权，那么这些资源应该实现client credential grant。</p>
+<p>如果我们需要给人授权访问资源，那么需要视客户端的类型做决定。</p>
+<h3 id="Client-type"><a href="#Client-type" class="headerlink" title="Client type?"></a>Client type?</h3><p>客户端类型主要是指客户端是否有能力保存秘钥。</p>
+<p>如果客户端是个web app，并且有服务器侧的组件，那么我们应该选择authorization code grant</p>
+<p>如果客户端是一个纯前端的web app（如：单页面应用）,如果客户端可信，我们可以选择password grant，如果客户端不可信可以选择implicit grant</p>
+<p>如果客户端是一个本地应用，比如一个手机app，应该选择password grant。</p>
+<p>第三方本地应用应该用authorization code grant（通过本地浏览器，不要用嵌入式浏览器，比如iOS强制用户用Safari或者SFSafariViewController，而不用 WKWebView）。</p>
+<h1 id="OAuth设计上的安全性考虑"><a href="#OAuth设计上的安全性考虑" class="headerlink" title="OAuth设计上的安全性考虑"></a>OAuth设计上的安全性考虑</h1><h3 id="为何引入authorization-code？"><a href="#为何引入authorization-code？" class="headerlink" title="为何引入authorization_code？"></a>为何引入authorization_code？</h3><p>协议设计中，为什么要使用authorization_code来交换access_token？这是读者容易想到的一个问题。也就是说，在协议的第3步，为什么不直接将access_token通过重定向方式返回给Client呢？比如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 302</div><div class="line"></div><div class="line">Location:</div><div class="line"></div><div class="line">https://www.facebook.com/?access_token=ya29.AHES6ZSXVKYTW2VAGZtnMjD&amp;token_type=Bearer&amp;expires_in=3600</div></pre></td></tr></table></figure>
+<p>如果直接返回access_token，协议将变得更加简洁，而且少一次Client与AS之间的交互，性能也更优。那为何不这么设计呢？协议文档[1]中并没有给出这样设计的理由，但也不难分析：</p>
+<p>(1) 浏览器的redirect_uri是一个不安全信道，此方式不适合于传递敏感数据（如access_token）。因为uri可能通过HTTP referrer被传递给其它恶意站点，也可能存在于浏览器cacher或log文件中，这就给攻击者盗取access_token带来了很多机会。另外，此协议也不应该假设RO用户代理的行为是可信赖的，因为RO的浏览器可能早已被攻击者植入了跨站脚本用来监听access_token。因此，access_token通过RO的用户代理传递给Client，会显著扩大access_token被泄露的风险。 但authorization_code可以通过redirect_uri方式来传递，是因为authorization_code并不像access_token一样敏感。即使authorization_code被泄露，攻击者也无法直接拿到access_token，因为拿authorization_code去交换access_token是需要验证Client的真实身份。也就是说，除了Client之外，其他人拿authorization_code是没有用的。 此外，access_token应该只颁发给Client使用，其他任何主体（包括RO）都不应该获取access_token。协议的设计应能保证Client是唯一有能力获取access_token的主体。引入authorization_code之后，便可以保证Client是access_token的唯一持有人。当然，Client也是唯一的有义务需要保护access_token不被泄露。</p>
+<p>(2) 引入authorization_code还会带来如下的好处。由于协议需要验证Client的身份，如果不引入authorization_code，这个Client的身份认证只能通过第1步的redirect_uri来传递。同样由于redirect_uri是一个不安全信道，这就额外要求Client必须使用数字签名技术</p>
+<p>来进行身份认证，而不能用简单的密码或口令认证方式。引入authorization_code之后，AS可以直接对Client进行身份认证（见步骤4和5），而且可以支持任意的Client认证方式（比如，简单地直接将Client端密钥发送给AS）。</p>
+<p>在我们理解了上述安全性考虑之后，读者也许会有豁然开朗的感觉，懂得了引入authorization_code的妙处。那么，是不是一定要引入authorization_code才能解决这些安全问题呢？当然不是。笔者将会在另一篇博文给出一个直接返回access_token的扩展授权类型解决方案，它在满足相同安全性的条件下，使协议更简洁，交互次数更少。</p>
+<h3 id="一切只是看上去很美好，但其实很多坑"><a href="#一切只是看上去很美好，但其实很多坑" class="headerlink" title="一切只是看上去很美好，但其实很多坑"></a>一切只是看上去很美好，但其实很多坑</h3><p>OAuth2看上去很美好，但是细心观察其实还是有一些漏洞的。</p>
+<p>对于授权码和access_token的篡改，在OAuth1中是反复的对Code和Token进行签名，来保证Token不会被篡改，但是OAuth2中却没有，因为OAuth2是基于Https的，所以如果没有Https的支持OAuth2可能还不如OAuth1.</p>
+<p>对于redirect_uri的校验，OAuth1中没有提到redirect_uri的校验，那么OAuth2中要求进行redirect_uri的校验。但是如果校验规则过松，也会导致跳转的安全问题。 例如：校验的时候只校验根域名，或者二级域名，但是第三方App对自己的域名保护的不好，导致二级域名被hack那么此时授权码和Token会被窃取。 校验规则不严谨，例如www.baidu.com 但是redirect_uri为：www.a.com.\www.baidu.com，这样授权就被a.com钓走了。</p>
+<p>对于CSRF攻击（跨站请求伪造）：由于这个授权过程服务器和Client和用户之间有几次交互，但是在得到授权码的时候需要一次回跳，但是这次回跳是可以被阻塞的。</p>
+<h3 id="攻击者使用自己的账户申请第三方授权登陆"><a href="#攻击者使用自己的账户申请第三方授权登陆" class="headerlink" title="攻击者使用自己的账户申请第三方授权登陆"></a>攻击者使用自己的账户申请第三方授权登陆</h3><p>授权后服务端返回授权码，但是此时组织授权回跳，此时Client并没有接到授权码，也就是阻断了授权流程</p>
+<p>攻击者将此跳转链接发给一个正在处于在Client登陆状态的账户</p>
+<p>诱骗正常用户点击，那么此时攻击者第三方账户和被攻击账户进行绑定（相当于账户绑定了第三方的账户）</p>
+<p>攻击者再次进行第三方授权登陆。这样就劫持了诱骗的账户。转账？删好友？等等就所以搞了。</p>
+<h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>在进行授权码申请或者是Token申请的时候带上state参数，服务器返回请求时要求携带state参数，在Client处理授权的时候校验此参数。参数可以是当前账户的SessionId，或Cookie的签名串。在Client申请accessToken会验证相关state和当前用户的关系，这样就防止了篡改。</p>
+<p>OAuth的校验流程为什么这么复杂，直接授权之后redirect回accessToken不就结了吗？为什么还要返回auth_code之后请求accessToken？</p>
+<p>首先，redirect是不安全的，随时可以暂停回调而拿到accessToken，拿到了accessToken也就意味着拿到了授权，但是auth_code是和client相对应的，那么即使拿到了auth_code还需要再次申请accessToken，申请accessToken时需要校验Client和state。同时协议设计的原则就是只有Client能拿到accessToken而用户是拿不到的。</p>
+<h3 id="最后，切记HTTPS"><a href="#最后，切记HTTPS" class="headerlink" title="最后，切记HTTPS"></a>最后，切记HTTPS</h3><p>参考资料：<br><a href="http://blog.csdn.net/seccloud/article/details/8192707" target="_blank" rel="external">http://blog.csdn.net/seccloud/article/details/8192707</a><br><a href="http://www.justwinit.cn/post/8138/" target="_blank" rel="external">http://www.justwinit.cn/post/8138/</a><br><a href="https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction" target="_blank" rel="external">https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction</a><br>人人网OAuth历程:<a href="http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/" target="_blank" rel="external">http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OAuth2-0/" rel="tag"><i class="fa fa-tag"></i> OAuth2.0</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/14/基于Docker-Seafile搭建私人云存储/" rel="next" title="基于Docker+Seafile搭建私人云存储">
+                <i class="fa fa-chevron-left"></i> 基于Docker+Seafile搭建私人云存储
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/" rel="prev" title="基于Spring Security OAuth2.0实现单点登录SSO">
+                基于Spring Security OAuth2.0实现单点登录SSO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/8390209.jpg"
+               alt="Charles Liu" />
+          <p class="site-author-name" itemprop="name">Charles Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dickens88" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#协议的参与者"><span class="nav-number">1.</span> <span class="nav-text">协议的参与者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授权类型"><span class="nav-number">2.</span> <span class="nav-text">授权类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-授权码模式"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 授权码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-隐授权模式（implicit-grant-type）"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2 隐授权模式（implicit grant type）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-密码模式"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3 密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-客户端模式"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4 客户端模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授权码模式的实例化描述"><span class="nav-number">3.</span> <span class="nav-text">授权码模式的实例化描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-0授权类型选择"><span class="nav-number">4.</span> <span class="nav-text">OAuth2.0授权类型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#First-Party-or-third-party-client"><span class="nav-number">4.0.1.</span> <span class="nav-text">First Party or third party client?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Token-Owner？"><span class="nav-number">4.0.2.</span> <span class="nav-text">Access Token Owner？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-type"><span class="nav-number">4.0.3.</span> <span class="nav-text">Client type?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth设计上的安全性考虑"><span class="nav-number">5.</span> <span class="nav-text">OAuth设计上的安全性考虑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何引入authorization-code？"><span class="nav-number">5.0.1.</span> <span class="nav-text">为何引入authorization_code？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一切只是看上去很美好，但其实很多坑"><span class="nav-number">5.0.2.</span> <span class="nav-text">一切只是看上去很美好，但其实很多坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击者使用自己的账户申请第三方授权登陆"><span class="nav-number">5.0.3.</span> <span class="nav-text">攻击者使用自己的账户申请第三方授权登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法："><span class="nav-number">5.0.4.</span> <span class="nav-text">解决办法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后，切记HTTPS"><span class="nav-number">5.0.5.</span> <span class="nav-text">最后，切记HTTPS</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148423"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("sxE5gByY0QdSqioeI722jJaQ-gzGzoHsz", "8vD9MgcP5NLuNa9HWnRTqpc7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

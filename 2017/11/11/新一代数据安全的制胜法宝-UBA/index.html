@@ -1,0 +1,898 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="大数据,网络安全,机器学习,行为分析," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在入侵防御领域，运用数据分析的方法保护数据的技术其实没有什么新的东西，比如防火墙-分析数据包的内容以及其他的元数据，如IP地址，从增长的数据条目中检测和阻断攻击者；防病毒软件不断的扫描文件系统，通过检查比特流代码和其他一些特征来标记文件是否被感染。 与防火墙和防病毒软件不同，用户行为检测或者UBA聚焦于用户正在发生的行为：应用启动、网络连接活动、最关键的文件访问（当文件或邮件被访问的时候，谁访问的">
+<meta name="keywords" content="大数据,网络安全,机器学习,行为分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新一代数据安全的制胜法宝-UBA">
+<meta property="og:url" content="http://www.dearcharles.cn/2017/11/11/新一代数据安全的制胜法宝-UBA/index.html">
+<meta property="og:site_name" content="Charles&#39; Big Plan">
+<meta property="og:description" content="在入侵防御领域，运用数据分析的方法保护数据的技术其实没有什么新的东西，比如防火墙-分析数据包的内容以及其他的元数据，如IP地址，从增长的数据条目中检测和阻断攻击者；防病毒软件不断的扫描文件系统，通过检查比特流代码和其他一些特征来标记文件是否被感染。 与防火墙和防病毒软件不同，用户行为检测或者UBA聚焦于用户正在发生的行为：应用启动、网络连接活动、最关键的文件访问（当文件或邮件被访问的时候，谁访问的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-014533a889416d1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-11T10:28:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="新一代数据安全的制胜法宝-UBA">
+<meta name="twitter:description" content="在入侵防御领域，运用数据分析的方法保护数据的技术其实没有什么新的东西，比如防火墙-分析数据包的内容以及其他的元数据，如IP地址，从增长的数据条目中检测和阻断攻击者；防病毒软件不断的扫描文件系统，通过检查比特流代码和其他一些特征来标记文件是否被感染。 与防火墙和防病毒软件不同，用户行为检测或者UBA聚焦于用户正在发生的行为：应用启动、网络连接活动、最关键的文件访问（当文件或邮件被访问的时候，谁访问的">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8818451-014533a889416d1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/11/新一代数据安全的制胜法宝-UBA/"/>
+
+
+
+
+
+  <title> 新一代数据安全的制胜法宝-UBA | Charles' Big Plan </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4f115866ae087276fb78c5184bd75863";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Charles' Big Plan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Tell some stories about Charles daily work</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-echart">
+          <a href="/echart" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            词云
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/11/新一代数据安全的制胜法宝-UBA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/8390209.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Big Plan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                新一代数据安全的制胜法宝-UBA
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T00:17:00+05:30">
+                2017-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据与智能/" itemprop="url" rel="index">
+                    <span itemprop="name">数据与智能</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/11/新一代数据安全的制胜法宝-UBA/" class="leancloud_visitors" data-flag-title="新一代数据安全的制胜法宝-UBA">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在入侵防御领域，运用数据分析的方法保护数据的技术其实没有什么新的东西，比如防火墙-分析数据包的内容以及其他的元数据，如IP地址，从增长的数据条目中检测和阻断攻击者；防病毒软件不断的扫描文件系统，通过检查比特流代码和其他一些特征来标记文件是否被感染。</p>
+<p>与防火墙和防病毒软件不同，用户行为检测或者UBA聚焦于用户正在发生的行为：应用启动、网络连接活动、最关键的文件访问（当文件或邮件被访问的时候，谁访问的，在文件上做了什么以及操作的频率）。</p>
+<p>UBA技术检索那些可以表征不常见或者异常动作的行为模式，不管这些操作具体是来自黑客、内部人员、甚至是恶意软件或其他进程，<strong>UBA并不阻止黑客或者内部威胁进入你的系统，但它可以迅速标记这些行为，让损失最小化。</strong></p>
+<p>UBA是SIEM的近亲（Security and Information Event Management），SIEM历来专注于分析防火墙捕获的事件、OS和其他系统的日志，从而发现并标记一些有趣的关联的目的，通常是通过一些预定义的规则来发现，举个例子，几个登录失败的事件可能会匹配到另一个网络日志中流量的增加，SIEM可能会认为这是一个黑客入侵系统并删除数据的信号。<br><a id="more"></a><br>我们很快就会看到，如果把注意力全部放在边界系统和OS日志上而不是目标数据本身，就非常容易漏掉内部人员滥用访问权限的情况，同时也容易漏掉黑客活动，因为一旦黑客进入到系统内，他们便非常善于伪装成普通用户，。这就是UBA的由来，对系统事件关注相对少，而对特定用户活动关注较多，<strong>UBA可以学习用户的行为模式，当黑客的行为与合法用户出现不同时立即标记目标。</strong></p>
+<p>Garter对UBA有一个更加传统的定义：</p>
+<blockquote>
+<p>User Behavior Analytics (UBA) [is] where the sources are variable (often logs feature prominently, of course), but the analysis is focused on users, user accounts, user identities — and not on, say, IP addresses or hosts. Some form of SIEM and DLP post-processing where the primary source data is SIEM and/or DLP outputs and enhanced user identity data as well as algorithms characterize these tools. So, these tools may collect logs and context data themselves or from a SIEM and utilize various analytic algorithms to create new insight from that data.</p>
+</blockquote>
+<p>#为什么需要UBA<br>要理解UBA的产生根源，你需要先想一想当前数据安全分析方法的短板，对于任何一个过去两年内在入侵防御一线的人员来说，黑客好像总是能拿到前门的钥匙。</p>
+<p>在斯诺登或者维基解密的案例中，黑客貌似可以逐字获取到前门钥匙，这是因为他们早就已经潜伏在内部了。在目标的突破上，黑客通过远程登录盗取或推测用户密码，在近期一些安全事件中，攻击者通过<em>*</em> 邮件诱骗员工下载恶意软件。</p>
+<p>防御来自合法用户的攻击并不是基于边界的安全防御的一部分，黑客很容易到达边界然后进入到内部系统，他们通过合法的公共端口（email, web, 登录），然后像正常用户一样访问，一旦进入，黑客会熟练的应用那些还没有被防病毒软件标记的恶意软件，有时候他们还会使用合法的系统管理软件来连接他们自己的网络。</p>
+<p>事实上，对于一个只监控系统活动的IT管理员来说，通过检查应用的访问，登录的名字等-黑客看起来也只像是另一个普通用户罢了。这就是为什么你需要UBA！</p>
+<p>面向边界的网络安全技术通常是寻找在错误的地点进行的不寻常的活动，而新一代的黑客总能想办法绕开这一点，通过访问未授权网络端口或者通过可信的软件等。</p>
+<p>#边界防御的硬伤</p>
+<p>###攻其不备：弱口令，<em>*</em> ，SQL注入</p>
+<p>口令爆破依然是黑客最有效的入侵方式，因为人们总是倾向于选择简答的密码，比如名字的一部分或者一串简单的数字序列，或者甚至使用安装软件时的初始口令。近些年来黑客已经很擅长通过发送一封邮件诱导用户点击从而邀请他们进入系统，完全不需要破解口令，也即<strong><em> 邮件攻击。</em></strong> 邮件是一种经过伪装的电子邮件，通常看起来是从一个合法的源头发出的，黑客也会使用一些公司官方的logo以让<em>*</em> 邮件看起来更加真实。黑客们清楚大部分企业的员工对于URL底层的技术支持并不是非常了解，所以很容易让他们相信伪造的发件人地址。举个列子，很多用户都会相信jon@fed3x.com来自FedEx的员工，因为这个地址看起来很像是那个合法的域名fedex.com。一旦上钩，员工会点击邮件中的链接或者附件，之后恶意软件就启动了，任务完成，黑客就这么进来了。</p>
+<p>第三种黑客的常用手段是SQL注入，它和<em>*</em> 的相似之处再用他们都是使用公共的接入点，这里就是web网站，在SQL注入过程中，攻击者利用网站对用户输入内容校验缺失的漏洞进行攻击，原理很简单，当一个用户输入一些文档到网页表单时，往往会触发一个到SQL服务器查询相应记录的请求，但是如果输入的内容没有经过合适的校验，黑客就有可能会插入一些恶意的SQL代码，这些恶意代码会给他们提供落脚点，让黑客可以一步一步启动shell或者进入os命令行。</p>
+<p>###神不知鬼不觉：APT 与C&amp;C</p>
+<p>一旦黑客进来，下一步便是安装可以提供基础管理能力的恶意软件，通常至少包含文件上传下载，简单的命令行和目录搜索功能，比如我们熟知的RATs(remote administration tool)或者应用更广泛的C&amp;C，这些恶意软件可以让黑客从他们自己的网络直接访问到。上述过程其实没什么新意，这种做法从第一代僵尸</p>
+<p>网络出现时就有，真正的创新在于黑客已经可以把C&amp;C恶意软件与整体隐蔽性相结合，其结果就是所谓的高级持续性威胁或者APT。</p>
+<p>黑客将RAT的逻辑插入Windows的必备DLL中，此时他们依然保持隐蔽，一旦DLL被激活，黑客就可以发送命令并接受结果，不仅如此，RAT可以与中央控制服务器通信，通常都是通过合法的域名标准的HTTP或者HTTPS协议进行的。黑客甚至可以连接一个仿冒的DNS服务器，用以将RAT命令隐藏在特殊的DNS协议中-也就是Anthem公司入侵的案例。</p>
+<p>###黑客入侵事件统计</p>
+<p>数据入侵调查报告(Verizon Data Breach Investigation Report, DBIR)是一个统计黑客事件的重要来源，下图是他们做过的其中一个统计，统计近几年来被黑客入侵的那些组织发现他们被入侵所用的时间长度。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-014533a889416d1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="untitled.png"><br>第一个坏消息是，上图的时间单位是月，第二个是整体趋势在变得更坏而不是更好。在Verizon的报告中，2012年大约70%的入侵事件要耗费数月才能被发现。</p>
+<p>###UBA的分析策略<br>Gartner将UBA软件划分为两个大类：依赖罐式分析规则标记异常行为的产品，和基于动态规则或自定义模型分析的产品。举个例子，在罐式规则的产品中，管理员可能会定义，如果一个敏感文件在周末的凌晨0点到5点被访问则强制弹出一个告警；而在纯动态规则的场景下，潜层的UBA引擎会决定什么样的行为是正常的，并且检测到落到正常范围之外的活动，换句话说，UBA引擎在构建他自己的内部规则。</p>
+<p>很显然，在UBA产品中，上述两种策略都占有一席之地，但还是注意一点，单纯依靠罐式规则分析的UBA软件还需要一支对黑客行为有着强大直觉的IT全安管理员队伍，然而没有多少IT安全人员有这种巫师一样的能力。</p>
+<p>UBA软件的另一个差别在于对潜层数据源头的选择，有些UBA解决方案主要关注网络连接和边界系统的行为（登录、app、事件），另一些UBA则是更关注内部系统中颗粒更细的活动，比如用户在文件和邮件上的操作。</p>
+<p>纯粹利用网络连接或者基于系统日志的分析方法有很多缺点，如上文所说，它很难发现那些利用邮件或者注入的方式盗取正常账号进行入侵的行为，除非你有更高级的智能UBA，因为在这种情况下黑客登录或者使用APP的行为不会与普通用户有任何不同。</p>
+<p>而那些关注用户在文件和邮件操作行为的UBA软件则会有更高的几率发现攻击者，关键点在于，想要伪装成正常用户的黑客一定会尝试搜索和拷贝带有敏感信息的文件，而这正是抓住他们的关键。</p>
+<p>###如何判断正常行为<br>UBA是基于这样一个想法提出来的，即系统上的用户到底在做什么？他们的活动和访问文件的模式是什么样的。最终，UBA软件起源于一个profile，用来描述每个行为对于一个用户的意义，所以当黑客偷了一个用户的凭证并且访问了他几乎从不访问的资源时，他的行为就会与之前的profile有所不同。为了实现上述想法，UBA就必须可以记录用户的行为，并量化检测到的用户行为。UBA软件必须可以通过训练来定义出用户的正常行为，通常来讲需要考虑一段时间内用户的活动日志，比如文件访问、登录、网络连接等。</p>
+<p>UBA可以使用通用的基于大数据的挖掘算法，如KNN、线性回归、贝叶斯等，但是不管你用的哪种具体算法，目的都是要建立一个行为基线，从而可以预测什么是正常什么是异常。</p>
+<p>###UBA关注什么<br>并非所有UBA都采用相同的解决方案，正如上文提到的，仅依赖罐式分析规则和纯粹的基于边界系统的分析引擎对于一个聪明的黑客来说没什么卵用，关注于细粒度的文件和邮件访问的UBA一定会有更好的效果。要牢记一点，文件和邮件一定是这些网络大盗梦寐以求的，在某些情况下这些数据也可以让他们付出代价。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"><i class="fa fa-tag"></i> 大数据</a>
+          
+            <a href="/tags/网络安全/" rel="tag"><i class="fa fa-tag"></i> 网络安全</a>
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/行为分析/" rel="tag"><i class="fa fa-tag"></i> 行为分析</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/11/基于Docker快速搭建ELK/" rel="next" title="基于Docker快速搭建ELK">
+                <i class="fa fa-chevron-left"></i> 基于Docker快速搭建ELK
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/11/机器学习算法在用户行为检测-UBA-领域的应用/" rel="prev" title="机器学习算法在用户行为检测(UBA)领域的应用">
+                机器学习算法在用户行为检测(UBA)领域的应用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/8390209.jpg"
+               alt="Charles Liu" />
+          <p class="site-author-name" itemprop="name">Charles Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dickens88" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148423"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("sxE5gByY0QdSqioeI722jJaQ-gzGzoHsz", "8vD9MgcP5NLuNa9HWnRTqpc7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

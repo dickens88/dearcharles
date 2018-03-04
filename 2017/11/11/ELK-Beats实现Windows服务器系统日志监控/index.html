@@ -1,0 +1,936 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ELK," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="ELK在运维监控领域使用非常广泛，日志采集通常依靠Logstash，但是通常来讲Logstash架构比较重载，一个安装包由几百MB，相比之下Elastic还提供另一种更轻量的采集工具Beats。Beats 平台集合了多种单一用途数据采集器。这些采集器安装后可用作轻量型代理，从成百上千或成千上万台机器向 Logstash 或 Elasticsearch 发送数据。本文简要介绍一下使用Winlogbe">
+<meta name="keywords" content="ELK">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ELK+Beats实现Windows服务器系统日志监控">
+<meta property="og:url" content="http://www.dearcharles.cn/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/index.html">
+<meta property="og:site_name" content="Charles&#39; Big Plan">
+<meta property="og:description" content="ELK在运维监控领域使用非常广泛，日志采集通常依靠Logstash，但是通常来讲Logstash架构比较重载，一个安装包由几百MB，相比之下Elastic还提供另一种更轻量的采集工具Beats。Beats 平台集合了多种单一用途数据采集器。这些采集器安装后可用作轻量型代理，从成百上千或成千上万台机器向 Logstash 或 Elasticsearch 发送数据。本文简要介绍一下使用Winlogbe">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/0k6Adg83kK.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Dmb0B5HEjK.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Hm6lmH8ec6.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/F1Hi0JGL25.png">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/LkfK8fI9H7.png">
+<meta property="og:updated_time" content="2017-11-11T11:30:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ELK+Beats实现Windows服务器系统日志监控">
+<meta name="twitter:description" content="ELK在运维监控领域使用非常广泛，日志采集通常依靠Logstash，但是通常来讲Logstash架构比较重载，一个安装包由几百MB，相比之下Elastic还提供另一种更轻量的采集工具Beats。Beats 平台集合了多种单一用途数据采集器。这些采集器安装后可用作轻量型代理，从成百上千或成千上万台机器向 Logstash 或 Elasticsearch 发送数据。本文简要介绍一下使用Winlogbe">
+<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/0k6Adg83kK.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/"/>
+
+
+
+
+
+  <title> ELK+Beats实现Windows服务器系统日志监控 | Charles' Big Plan </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4f115866ae087276fb78c5184bd75863";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Charles' Big Plan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Tell some stories about Charles daily work</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-echart">
+          <a href="/echart" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            词云
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/8390209.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Big Plan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ELK+Beats实现Windows服务器系统日志监控
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T19:11:00+05:30">
+                2017-11-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/" class="leancloud_visitors" data-flag-title="ELK+Beats实现Windows服务器系统日志监控">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ELK在运维监控领域使用非常广泛，日志采集通常依靠Logstash，但是通常来讲Logstash架构比较重载，一个安装包由几百MB，相比之下Elastic还提供另一种更轻量的采集工具Beats。Beats 平台集合了多种单一用途数据采集器。这些采集器安装后可用作轻量型代理，从成百上千或成千上万台机器向 Logstash 或 Elasticsearch 发送数据。本文简要介绍一下使用Winlogbeat收集Windows日志，并用ES + Kibana检索的配置方法。<br><a id="more"></a></p>
+<h1 id="步骤一：安装Winlogbeat"><a href="#步骤一：安装Winlogbeat" class="headerlink" title="步骤一：安装Winlogbeat"></a>步骤一：安装Winlogbeat</h1><ol>
+<li>下载Winlogbeat安装包downloads page.</li>
+<li>解压到C:\Program Files.</li>
+<li>重名名解压文件winlogbeat-<version>目录为Winlogbeat</version></li>
+<li>打开PowerShell，以管理员身份运行（右键点击Powershell并选择以管理员身份运行）。如果你使用XP，可能需要自行下载安装PowerShell</li>
+<li>在PowerShell中运行如下命令安装服务<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/0k6Adg83kK.png" alt="mark"></li>
+</ol>
+<p>在运行Winlogbeat前，还需要检查一下配置文件中的选项，比如C:\Program Files\Winlogbeat\winlogbeat.yml，安装包里提供一个完整的配置文件样例winlogbeat.full.yml，<a href="https://www.elastic.co/guide/en/beats/winlogbeat/current/winlogbeat-configuration-details.html" target="_blank" rel="external">更多资料请参考</a>.</p>
+<p>配置Winlogbeat</p>
+<p>编辑winlogbeat.yml来修改配置，熟悉yaml语法的同学一定不会陌生，不熟悉的请自行熟悉。<br>举例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">winlogbeat.event_logs:</div><div class="line">  - name: Application</div><div class="line">  - name: Security</div><div class="line">  - name: System</div><div class="line"> </div><div class="line">output.elasticsearch:</div><div class="line">  hosts:</div><div class="line">    - localhost:9200</div><div class="line"> </div><div class="line">logging.to_files: true</div><div class="line">logging.files:</div><div class="line">  path: C:/ProgramData/winlogbeat/Logs</div><div class="line">logging.level: info</div></pre></td></tr></table></figure></p>
+<h1 id="步骤二：配置Winlogbeat"><a href="#步骤二：配置Winlogbeat" class="headerlink" title="步骤二：配置Winlogbeat"></a>步骤二：配置Winlogbeat</h1><ol>
+<li>在event_logs章节，指定你要监控的event log类型，Winlogbeat默认监控application, security, and system这三种<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">winlogbeat.event_logs:</div><div class="line">  - name: Application</div><div class="line">  - name: Security</div><div class="line">  - name: System</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>要查看全部类型，在PowerShell中运行Get-EventLog *，更多信息请参考event_logs.name.</p>
+<ol>
+<li>如果需要把日志发送到Elasticsearch，这里把IP端口写进去：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">output.elasticsearch:</div><div class="line">  hosts:</div><div class="line">    - localhost:9200</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果要把日志写到Logstash，请继续往下看</p>
+<ol>
+<li>修改完配置文件以后运行下面的命令测试一下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS C:\Program Files\Winlogbeat&gt; .\winlogbeat.exe -c .\winlogbeat.yml -configtest -e</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="步骤三：配置Winlogbeat使用Logstash"><a href="#步骤三：配置Winlogbeat使用Logstash" class="headerlink" title="步骤三：配置Winlogbeat使用Logstash"></a>步骤三：配置Winlogbeat使用Logstash</h1><p>如果你想把日志直接写到Elasticsearch那么这一步可以跳过。</p>
+<p>要将日志通过Logstash写到ES，需要先配置Logstash的转发规则，举例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">input&#123;</div><div class="line">    beats&#123;</div><div class="line">        port=&gt;5044type=&gt;&quot;wineventlog&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">output&#123;</div><div class="line">    stdout&#123;</div><div class="line">        </div><div class="line">    &#125;if[</div><div class="line">        type</div><div class="line">    ]==&quot;wineventlog&quot;&#123;</div><div class="line">        elasticsearch&#123;</div><div class="line">            hosts=&gt;&quot;100.100.16.231&quot;index=&gt;&quot;winlogbeat-%&#123;+yyyy.MM.dd&#125;&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;else&#123;</div><div class="line">        elasticsearch&#123;</div><div class="line">            hosts=&gt;&quot;100.100.16.231&quot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>配置好以后确保Logstash已经启动且运行正常。接下来要配置Winlogbeat将日志发送到Logstash的5044端口</p>
+<p>#—————————– Logstash output ——————————–<br>output.logstash:<br>  hosts: [“127.0.0.1:5044”]</p>
+<p>这里还需要额外做一个步骤，让Elasticsearch加载索引模板，因为这里我们是用Logstash往ES上转日志，所以必须手动加载索引模板，如果直接往ES发日志，这一步可以省略</p>
+<h1 id="步骤四：加载索引模板"><a href="#步骤四：加载索引模板" class="headerlink" title="步骤四：加载索引模板"></a>步骤四：加载索引模板</h1><p>在Elasticsearch里面，索引模板(Index templates)用来定义字段的设置和映射关系，推荐的Winlogbeat索引模板配置文件在Winlogbeat的安装包里winlogbeat.yml，下面我们通过ES的API接口把模板推送过去，其实就是构造一个HTTP的PUT请求把数据发出去，工具和方法很多这里介绍两种，</p>
+<p>使用PowerShell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS C:\Program Files\Winlogbeat&gt; Invoke-WebRequest -Method Put -InFile winlogbeat.template.json -Uri  http://localhost:9200/_template/winlogbeat?pretty -ContentType application/json</div></pre></td></tr></table></figure></p>
+<p>使用Postman<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Dmb0B5HEjK.png" alt="mark"></p>
+<p>这里localhost:9200是Elasticsearch的监听端口。另外删除已有的索引模板执行如下命令：<br>curl -XDELETE ‘<a href="http://localhost:9200/winlogbeat-*" target="_blank" rel="external">http://localhost:9200/winlogbeat-*</a>‘</p>
+<h1 id="第五步：启动Winlogbeat"><a href="#第五步：启动Winlogbeat" class="headerlink" title="第五步：启动Winlogbeat"></a>第五步：启动Winlogbeat</h1><p>用PowerShell启动:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS C:\Program Files\Winlogbeat&gt; Start-Service winlogbeat</div></pre></td></tr></table></figure></p>
+<p>执行以后Winlogbeat就开始执行了，如果使用上面的配置文件，日志会输出到C:\ProgramData\winlogbeat\Logs\winlogbeat。<br>我们可以通过Services management控制这个任务的状态，启动控制台<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS C:\Program Files\Winlogbeat&gt; services.msc</div></pre></td></tr></table></figure></p>
+<p>停止任务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS C:\Program Files\Winlogbeat&gt; Stop-Service winlogbeat</div></pre></td></tr></table></figure></p>
+<h1 id="步骤六：加载Kibana仪表盘样例"><a href="#步骤六：加载Kibana仪表盘样例" class="headerlink" title="步骤六：加载Kibana仪表盘样例"></a>步骤六：加载Kibana仪表盘样例</h1><p>为方便用户监控收到的数据，官方还提供了一个Winlogbeat的Kibana仪表盘样例，当然我们可以基于这个样例自己定制仪表盘。<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Hm6lmH8ec6.png" alt="mark"></p>
+<p>导入仪表盘</p>
+<p>Winlogbeat安装包里有个scripts/import_dashboards程序，操作步骤非常简单，打开PowerShell命名行，执行该程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS &gt; scripts\import_dashboards.exe</div></pre></td></tr></table></figure></p>
+<p>脚本默认假设你的Elasticsearch在127.0.0.1:9200，如果你的环境不在本地，可以执行下面的命令指定服务器位置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS &gt; scripts\import_dashboards.exe -es http://192.168.33.60:9200</div></pre></td></tr></table></figure></p>
+<p>如果ES开启了账号密码认证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">PS &gt; scripts\import_dashboards.exe -es https://xyz.found.io -user user -pass password</div></pre></td></tr></table></figure></p>
+<p>查看仪表板</p>
+<p>导入完成以后，用浏览器访问Kibana页面，如：<a href="http://127.0.0.1:5601" target="_blank" rel="external">http://127.0.0.1:5601</a>.</p>
+<p>在Discover 页面，可以看到之前定义好的索引winlogbeat-*</p>
+<p>同时，打开Dashboard页面，可以选择对应的仪表盘查看<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/F1Hi0JGL25.png" alt="mark"><br>同时，打开Dashboard页面，可以选择对应的仪表盘查看<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/LkfK8fI9H7.png" alt="mark"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ELK/" rel="tag"><i class="fa fa-tag"></i> ELK</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/11/Java-依赖注入总结/" rel="next" title="Java 依赖注入总结">
+                <i class="fa fa-chevron-left"></i> Java 依赖注入总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/14/基于Docker-Seafile搭建私人云存储/" rel="prev" title="基于Docker+Seafile搭建私人云存储">
+                基于Docker+Seafile搭建私人云存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/8390209.jpg"
+               alt="Charles Liu" />
+          <p class="site-author-name" itemprop="name">Charles Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dickens88" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤一：安装Winlogbeat"><span class="nav-number">1.</span> <span class="nav-text">步骤一：安装Winlogbeat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤二：配置Winlogbeat"><span class="nav-number">2.</span> <span class="nav-text">步骤二：配置Winlogbeat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤三：配置Winlogbeat使用Logstash"><span class="nav-number">3.</span> <span class="nav-text">步骤三：配置Winlogbeat使用Logstash</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤四：加载索引模板"><span class="nav-number">4.</span> <span class="nav-text">步骤四：加载索引模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五步：启动Winlogbeat"><span class="nav-number">5.</span> <span class="nav-text">第五步：启动Winlogbeat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#步骤六：加载Kibana仪表盘样例"><span class="nav-number">6.</span> <span class="nav-text">步骤六：加载Kibana仪表盘样例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148423"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("sxE5gByY0QdSqioeI722jJaQ-gzGzoHsz", "8vD9MgcP5NLuNa9HWnRTqpc7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

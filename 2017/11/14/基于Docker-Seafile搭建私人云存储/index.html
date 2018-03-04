@@ -1,0 +1,907 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Docker,Seafile," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。 开通华为云服务工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见官网介绍，总">
+<meta name="keywords" content="Docker,Seafile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Docker+Seafile搭建私人云存储">
+<meta property="og:url" content="http://www.dearcharles.cn/2017/11/14/基于Docker-Seafile搭建私人云存储/index.html">
+<meta property="og:site_name" content="Charles&#39; Big Plan">
+<meta property="og:description" content="在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。 开通华为云服务工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见官网介绍，总">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-d166887ad2b31f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-94abb6ec1a330e85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-de4e27c18e3b9d08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-64c56c0d44c3eeae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-e5f486a3b892294d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-1a1bf314ebe45f2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-12-10T07:45:24.055Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Docker+Seafile搭建私人云存储">
+<meta name="twitter:description" content="在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。 开通华为云服务工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见官网介绍，总">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8818451-d166887ad2b31f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/14/基于Docker-Seafile搭建私人云存储/"/>
+
+
+
+
+
+  <title> 基于Docker+Seafile搭建私人云存储 | Charles' Big Plan </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4f115866ae087276fb78c5184bd75863";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Charles' Big Plan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Tell some stories about Charles daily work</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-echart">
+          <a href="/echart" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            词云
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/14/基于Docker-Seafile搭建私人云存储/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/8390209.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Big Plan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                基于Docker+Seafile搭建私人云存储
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T23:55:00+05:30">
+                2017-11-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/11/14/基于Docker-Seafile搭建私人云存储/" class="leancloud_visitors" data-flag-title="基于Docker+Seafile搭建私人云存储">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。</p>
+<h1 id="开通华为云服务"><a href="#开通华为云服务" class="headerlink" title="开通华为云服务"></a>开通华为云服务</h1><p>工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见<a href="http://www.huaweicloud.com/" target="_blank" rel="external">官网</a>介绍，总之乖乖按照官方指引轻松几步就搞定。笔者双11把手打折了，索性只买了1C1G的弹性云服务器（首月只要30+元），预装了Centos7.2操作系统。通过“管理控制台”进入弹性云服务器界面，可以远程登录主机，如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-d166887ad2b31f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114225111.png"><br><a id="more"></a></p>
+<h1 id="安装Docker平台"><a href="#安装Docker平台" class="headerlink" title="安装Docker平台"></a>安装Docker平台</h1><p>使用共有云的一个好处就是OS创建好了以后什么都不需要配置就可以连接公网，比在自家电脑上搭VM方便千百倍。弹性云服务器已经配置好了国内的yum源，通过yum安装docker只需要一个命令即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install -y docker</div></pre></td></tr></table></figure></p>
+<p>安装完成后，执行如下命令启动docker平台，并查看执行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">service docker start</div><div class="line">docker ps</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/8818451-94abb6ec1a330e85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114230514.png"></p>
+<h1 id="部署Seafile容器"><a href="#部署Seafile容器" class="headerlink" title="部署Seafile容器"></a>部署Seafile容器</h1><p>Seafile是业界比较有名的开源云存储应用服务，Docker Hub上有现成的镜像，<a href="https://hub.docker.com/r/jenserat/seafile/" target="_blank" rel="external">详情参见</a>。<br>执行pull拉取镜像：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull docker.io/jenserat/seafile</div></pre></td></tr></table></figure></p>
+<p>不到一分钟镜像就拉取到本地了。基于这个镜像首次创建容器需要让容器从网关拉取一些额外的配置文件，运行如下命令创建容器，并开启交互模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker run -t -i \</div><div class="line">  -p 10001:10001 \</div><div class="line">  -p 12001:12001 \</div><div class="line">  -p 8000:8000 \</div><div class="line">  -p 8080:8080 \</div><div class="line">  -p 8082:8082 \</div><div class="line">  -v /srv/seafile:/opt/seafile \</div><div class="line">  jenserat/seafile -- /bin/bash</div></pre></td></tr></table></figure></p>
+<p>此命令将容器内的/opt/seafile映射到宿主机的/srv/seafile目录，用于保存后续步骤下载的配置，另外映射了几个端口到宿主机，其中8000是访问UI用的，8082是上传下载文件用的，其他端口不知道干嘛的。</p>
+<ul>
+<li>容器启动后，在命令行执行<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- 下载完成后，执行```/opt/seafile/seafile-server-5.*/setup-seafile.sh```执行安装向导，记住不要修改默认的存储位置，其他看情况改。</div><div class="line">- 执行```/opt/seafile/seafile-server-latest/seafile.sh start```来启动Seafile主进程</div><div class="line">- 执行```/opt/seafile/seafile-server-latest/seahub.sh```启动WEB UI</div><div class="line">- 配置完成后执行```exit```退出。</div><div class="line">以上是首次启动容器的步骤，接下来就不需要这么麻烦了，执行如下命令启动终极容器，不需要交互式命令，用-d参数让他在后台安静的跑。</div></pre></td></tr></table></figure></li>
+</ul>
+<p>docker run -d \<br>  –name seafile \<br>  -p 10001:10001 \<br>  -p 12001:12001 \<br>  -p 8000:8000 \<br>  -p 8080:8080 \<br>  -p 8082:8082 \<br>  -v /srv/seafile:/opt/seafile \<br>  -e autostart=true \<br>  jenserat/seafile<br>```</p>
+<h1 id="设置安全组"><a href="#设置安全组" class="headerlink" title="设置安全组"></a>设置安全组</h1><p>到这里我们就已经在弹性云服务器上部署好了一个Seafile私有云存储，这时候我们尝试访问这台机器的8000端口，你会发现端口没有响应。这是因为云主机为了安全考虑自动设置了VPC（虚拟子网）和安全组，也就相当于我们说的防火墙，接下来需要在安全组里加上相应的规则，让云主机放通我们的服务端口。<br>打开“管理控制台”页面，选择“网络”-&gt;“私有云”，选择“安全组”，如下图<br>选择“新建安全组”，添加规则，将我们要用到的端口都添加到“入方向”<br><img src="http://upload-images.jianshu.io/upload_images/8818451-de4e27c18e3b9d08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114233641.png"><br>此时我们再尝试访问服务器的8000端口，如：<a href="http://122.112.204.xxx:8000，就能看到Seafile的登录界面了，用我们前面初始化的管理账号即可登录" target="_blank" rel="external">http://122.112.204.xxx:8000，就能看到Seafile的登录界面了，用我们前面初始化的管理账号即可登录</a><br><img src="http://upload-images.jianshu.io/upload_images/8818451-64c56c0d44c3eeae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234141.png"><br><img src="http://upload-images.jianshu.io/upload_images/8818451-e5f486a3b892294d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234502.png"><br>之后我们就可以尽情的享受私有云存储带来的便利了，从Seafile官网上可以下载到Windows、Mac等的客户端，轻松实现本地文件自动同步，一点不逊色百度云盘。</p>
+<h1 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h1><p>如果觉得通过IP访问不够便利，还可以自己申请一个域名，然后通过配置DNS解析直接通过域名访问，这类教程网上一搜一大把，租个域名一年不过也就几十块钱。绑好域名后的效果类似于<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1a1bf314ebe45f2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234914.png"><br>大功告成</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+          
+            <a href="/tags/Seafile/" rel="tag"><i class="fa fa-tag"></i> Seafile</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/" rel="next" title="ELK+Beats实现Windows服务器系统日志监控">
+                <i class="fa fa-chevron-left"></i> ELK+Beats实现Windows服务器系统日志监控
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/15/OAuth2-0协议原理详解/" rel="prev" title="OAuth2.0协议原理详解">
+                OAuth2.0协议原理详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/8390209.jpg"
+               alt="Charles Liu" />
+          <p class="site-author-name" itemprop="name">Charles Liu</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dickens88" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开通华为云服务"><span class="nav-number">1.</span> <span class="nav-text">开通华为云服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Docker平台"><span class="nav-number">2.</span> <span class="nav-text">安装Docker平台</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#部署Seafile容器"><span class="nav-number">3.</span> <span class="nav-text">部署Seafile容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置安全组"><span class="nav-number">4.</span> <span class="nav-text">设置安全组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#绑定域名"><span class="nav-number">5.</span> <span class="nav-text">绑定域名</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148423"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("sxE5gByY0QdSqioeI722jJaQ-gzGzoHsz", "8vD9MgcP5NLuNa9HWnRTqpc7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
