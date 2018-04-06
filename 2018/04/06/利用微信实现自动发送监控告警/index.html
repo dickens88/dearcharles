@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Splunk,Kafka," />
+  <meta name="keywords" content="python,自动化," />
 
 
 
@@ -87,23 +87,24 @@
 
 
 
-<meta name="description" content="Splunk是业界赫赫有名的数据分析工具，比较擅长BI和安全日志分析，我司很多部门都有购买其产品和服务。最近有个需求要把Splunk和分布式消息队列Kafka做个集成，Splunk官方提供的一个Kafka的插件，可以很容易的做到与开源Kafka集成，本文简单描述一下集成的配置方法。 这里假设你的环境里已经搭建好了Splunk和Kafka（Splunk搭建请参考，Kafka搭建请参考）。 概述Spl">
-<meta name="keywords" content="Splunk,Kafka">
+<meta name="description" content="最近笔者的项目需要找到一种方法能自动将Python爬虫产生的一些结果用告警的信息的方式发送到手机上，以往我们用来发送告警的方式往往是短信或者邮件，但是这两种方式要么不够灵活要么实时性不够。现在越来越多的互联网应用选择用微信作为平台发送告警信息，这种方式的前提就是你的应用需要能够访问到微信的服务器。根据笔者的了解，目前集成微信告警主要有两种方式：  用个人号发送告警 用公众号（企业号）发送告警  个">
+<meta name="keywords" content="python,自动化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Splunk集成Kafka配置方法">
-<meta property="og:url" content="http://www.dearcharles.cn/2017/11/24/Splunk集成Kafka配置方法/index.html">
+<meta property="og:title" content="利用微信实现自动发送监控告警">
+<meta property="og:url" content="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/index.html">
 <meta property="og:site_name" content="Charles&#39; Big Plan">
-<meta property="og:description" content="Splunk是业界赫赫有名的数据分析工具，比较擅长BI和安全日志分析，我司很多部门都有购买其产品和服务。最近有个需求要把Splunk和分布式消息队列Kafka做个集成，Splunk官方提供的一个Kafka的插件，可以很容易的做到与开源Kafka集成，本文简单描述一下集成的配置方法。 这里假设你的环境里已经搭建好了Splunk和Kafka（Splunk搭建请参考，Kafka搭建请参考）。 概述Spl">
+<meta property="og:description" content="最近笔者的项目需要找到一种方法能自动将Python爬虫产生的一些结果用告警的信息的方式发送到手机上，以往我们用来发送告警的方式往往是短信或者邮件，但是这两种方式要么不够灵活要么实时性不够。现在越来越多的互联网应用选择用微信作为平台发送告警信息，这种方式的前提就是你的应用需要能够访问到微信的服务器。根据笔者的了解，目前集成微信告警主要有两种方式：  用个人号发送告警 用公众号（企业号）发送告警  个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-43a657617e0d6551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-29ec23d9f8dc3ce8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-5c62c6d7e0ee4883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-aeae9fadfb0c52c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-10T07:42:14.503Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-db006aacb9111c48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-10ab2bf6a919a607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-32fba94c8ccd8984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-1c18a4f09c6e252b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-9ffaf3d7552464df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-06T13:44:02.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Splunk集成Kafka配置方法">
-<meta name="twitter:description" content="Splunk是业界赫赫有名的数据分析工具，比较擅长BI和安全日志分析，我司很多部门都有购买其产品和服务。最近有个需求要把Splunk和分布式消息队列Kafka做个集成，Splunk官方提供的一个Kafka的插件，可以很容易的做到与开源Kafka集成，本文简单描述一下集成的配置方法。 这里假设你的环境里已经搭建好了Splunk和Kafka（Splunk搭建请参考，Kafka搭建请参考）。 概述Spl">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8818451-43a657617e0d6551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="利用微信实现自动发送监控告警">
+<meta name="twitter:description" content="最近笔者的项目需要找到一种方法能自动将Python爬虫产生的一些结果用告警的信息的方式发送到手机上，以往我们用来发送告警的方式往往是短信或者邮件，但是这两种方式要么不够灵活要么实时性不够。现在越来越多的互联网应用选择用微信作为平台发送告警信息，这种方式的前提就是你的应用需要能够访问到微信的服务器。根据笔者的了解，目前集成微信告警主要有两种方式：  用个人号发送告警 用公众号（企业号）发送告警  个">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8818451-db006aacb9111c48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -131,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/24/Splunk集成Kafka配置方法/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/"/>
 
 
 
 
 
-  <title> Splunk集成Kafka配置方法 | Charles' Big Plan </title>
+  <title> 利用微信实现自动发送监控告警 | Charles' Big Plan </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +297,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/24/Splunk集成Kafka配置方法/">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
@@ -317,7 +318,7 @@
             
             
               
-                Splunk集成Kafka配置方法
+                利用微信实现自动发送监控告警
               
             
           </h1>
@@ -332,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T21:21:00+02:00">
-                2017-11-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T16:41:00+03:00">
+                2018-04-06
               </time>
             
 
@@ -343,28 +344,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Splunk/" itemprop="url" rel="index">
-                    <span itemprop="name">Splunk</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -372,7 +351,7 @@
 
           
           
-             <span id="/2017/11/24/Splunk集成Kafka配置方法/" class="leancloud_visitors" data-flag-title="Splunk集成Kafka配置方法">
+             <span id="/2018/04/06/利用微信实现自动发送监控告警/" class="leancloud_visitors" data-flag-title="利用微信实现自动发送监控告警">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,48 +380,24 @@
       
 
       
-        <p>Splunk是业界赫赫有名的数据分析工具，比较擅长BI和安全日志分析，我司很多部门都有购买其产品和服务。最近有个需求要把Splunk和分布式消息队列Kafka做个集成，Splunk官方提供的一个Kafka的插件，可以很容易的做到与开源Kafka集成，本文简单描述一下集成的配置方法。</p>
-<p>这里假设你的环境里已经搭建好了Splunk和Kafka（Splunk搭建<a href="http://dearcharles.cn/2017/11/20/Splunk-Forwarder-%E6%94%B6%E9%9B%86%E5%88%86%E6%9E%90Windows%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97/" target="_blank" rel="external">请参考</a>，Kafka搭建<a href="http://dearcharles.cn/2017/11/23/%E5%9F%BA%E4%BA%8EDocker%E6%90%AD%E5%BB%BA%E5%88%86%E5%B8%83%E5%BC%8F%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97Kafka/" target="_blank" rel="external">请参考</a>）。</p>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Splunk Add-on for kafka<br>支持三种输入</p>
+        <p>最近笔者的项目需要找到一种方法能自动将Python爬虫产生的一些结果用告警的信息的方式发送到手机上，以往我们用来发送告警的方式往往是短信或者邮件，但是这两种方式要么不够灵活要么实时性不够。现在越来越多的互联网应用选择用微信作为平台发送告警信息，这种方式的前提就是你的应用需要能够访问到微信的服务器。<br>根据笔者的了解，目前集成微信告警主要有两种方式：</p>
 <ul>
-<li>监控Kafka本身的日志，需要在Kafka的机器上部署Forward</li>
-<li>用JMX输入来收集kafka集群的性能指标，这还需要额外安装一个Splunk Add-on for JMX来跟Kafka的JMX对接</li>
-<li>与Kafka的topic对接直接消费数据，通常会把插件装在heavy forwarder上，通过他与Kafka对接一个完整的部署架构和数据流向如下图所示，实际上前两种输入都是可选的，根据实际需求选择即可：<a id="more"></a>
-<img src="http://upload-images.jianshu.io/upload_images/8818451-43a657617e0d6551.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="1511517099227260.png"></li>
+<li>用个人号发送告警</li>
+<li>用公众号（企业号）发送告警</li>
 </ul>
-<h1 id="安装Splunk-Add-on-for-Kafka"><a href="#安装Splunk-Add-on-for-Kafka" class="headerlink" title="安装Splunk Add-on for Kafka"></a>安装Splunk Add-on for Kafka</h1><p>1.下载插件：<a href="https://splunkbase.splunk.com/app/2935/#/overview" target="_blank" rel="external">https://splunkbase.splunk.com/app/2935/#/overview</a><br>2.安装插件，在Splunk主界面上点“Apps”后面的图标<br><img src="http://upload-images.jianshu.io/upload_images/8818451-29ec23d9f8dc3ce8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="1511517109810819.png"><br>在弹出界面上点“Install app from file”，在弹出界面上选择前一步下载的Splunk Add-on for kafka，然后点“upload”安装完后会提示重启。</p>
-<h1 id="配置Splunk集成Kafka"><a href="#配置Splunk集成Kafka" class="headerlink" title="配置Splunk集成Kafka"></a>配置Splunk集成Kafka</h1><p>官方推荐把接收Kafka消息的集成点放在Heavy Forwarder上，但是直接在Splunk实例上配置订阅Kafka主题也是可以的。</p>
-<ol>
-<li>在Splunk Web上点Apps-&gt;Manage Apps<br><img src="http://upload-images.jianshu.io/upload_images/8818451-5c62c6d7e0ee4883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="1511517114161388.png"></li>
-<li>在弹出页面中找到Splunk Add-on for Kafka，点击“Set up”</li>
-<li>（可选）配置“Logging level”</li>
-<li>在下面的“Credential Settings ”中，点击“Add Kafka Cluster”，在弹出窗口中只需配置前两项即可，其他都可以留白</li>
-</ol>
+<h1 id="个人号发送告警"><a href="#个人号发送告警" class="headerlink" title="个人号发送告警"></a>个人号发送告警</h1><p>顾名思义，虽然也是调用微信的API实现发送信息，但是这种方式需要使用个人账号扫描登录以后脚本才能运行，另外从接受告警的形式上看起来也就像是跟一个人在聊天。当前已经有很多热心的大神将微信的接口封装成了更加易于调用的接口SDK，如<a href="http://wxpy.readthedocs.io/zh/latest/bot.html" target="_blank" rel="external">wxpy</a>和<a href="http://wechat-sender.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">wechat sender</a>可以大大简化接口调用的复杂度，感兴趣的读者可以自行研究，上述两个项目的文档已经写的非常详细了</p>
+<h1 id="公众号发送告警"><a href="#公众号发送告警" class="headerlink" title="公众号发送告警"></a>公众号发送告警</h1><p>使用公众号发送告警，从形式上看起来更加正式，并且不需要扫码登录，更适合部署在服务器上长期运行。因为近期微信的企业号和公众号做了合并，因此申请的流程有了一些变化，但是总体来说更加简单了，即使没有真正的公司注册信息也同样可以申请到，只是未验证主体信息的账号只能有200个成员，发送次数的限制为：帐号上限数*30人次/天<br><a id="more"></a></p>
+<h2 id="注册公众号（企业号）"><a href="#注册公众号（企业号）" class="headerlink" title="注册公众号（企业号）"></a>注册公众号（企业号）</h2><p>现在申请的过程非常简单，申请入口：<a href="https://work.weixin.qq.com/" target="_blank" rel="external">https://work.weixin.qq.com/</a></p>
+<h2 id="查看公众号"><a href="#查看公众号" class="headerlink" title="查看公众号"></a>查看公众号</h2><p>注册完成后可以进入到后台管理页面，点击微信插件，可以看到我们企业号的二维码，并可以进行添加成员等操作<br><img src="http://upload-images.jianshu.io/upload_images/8818451-db006aacb9111c48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信插件"></p>
+<h2 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h2><p>在开始调用公众号的API之前，我们要先创建一个应用，告警可以发送到指定的应用中，同时我们还可以对应用授权，以限制可以看到告警的人员范围<br><img src="http://upload-images.jianshu.io/upload_images/8818451-10ab2bf6a919a607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建应用"><br>创建完成后，点击应用图标可以看到以下页面<br><img src="http://upload-images.jianshu.io/upload_images/8818451-32fba94c8ccd8984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="应用信息"><br>其中AgentId和Secret两个字段在后面的代码中要用到</p>
+<h2 id="微信API"><a href="#微信API" class="headerlink" title="微信API"></a>微信API</h2><p>要实现简单的消息发送，我们只需要用到两个微信的API接口</p>
 <ul>
-<li>Kafka Cluster 定义kafka集群的名字</li>
-<li>Kafka Brokers kafka实例的IP和端口，如果有多个实例，格式为 (<host:port>[,<host:port>][,…]).</host:port></host:port></li>
+<li>获取token：<a href="https://work.weixin.qq.com/api/doc#10013" target="_blank" rel="external">https://work.weixin.qq.com/api/doc#10013</a></li>
+<li>发送消息：<a href="https://work.weixin.qq.com/api/doc#10167" target="_blank" rel="external">https://work.weixin.qq.com/api/doc#10167</a></li>
 </ul>
-<ol>
-<li>点“save”</li>
-<li>点击“Settings-&gt;Data inputs”</li>
-<li>找到“Splunk Add-on for kafka”那一行，点击“Add new”</li>
-<li>填写表格</li>
-</ol>
-<ul>
-<li>Kafka data input name 给这个输入定个名字</li>
-<li>Kafka cluster kafka 集群的名字，见上面4、5两步</li>
-<li>Kafka topic 收集数据的kafka 主题</li>
-<li>Kafka partitions （选填）</li>
-<li>Kafka partition offset 指定是从头开始还是从尾开始</li>
-<li>Topic group （选填）订阅者的group标识</li>
-<li>Index （选填）</li>
-</ul>
-<ol>
-<li>点“Next”<br>通过上述步骤，Splunk就和kafka集成好了，通过producer往kafka发一些数据，然后在Splunk里搜索：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sourcetype=kafka:topicEvent</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/8818451-aeae9fadfb0c52c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png" title="1511517123301392.png"></p>
-<p>官方参考：<a href="http://docs.splunk.com/Documentation/AddOns/released/Kafka/Configuremodularinputs#Manage_inputs_manually_from_each_forwarder" target="_blank" rel="external">Splunk Add-on for Kafka</a></p>
+<h2 id="Python调用微信API"><a href="#Python调用微信API" class="headerlink" title="Python调用微信API"></a>Python调用微信API</h2><p>废话不多说，直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">import requests</div><div class="line"></div><div class="line"></div><div class="line">class WeChatPub:</div><div class="line">    s = requests.session()</div><div class="line">    token = None</div><div class="line"></div><div class="line">    def __init__(self):</div><div class="line">        self.token = self.get_token(&quot;&lt;corpid&gt;&quot;, &quot;&lt;secret&gt;&quot;)</div><div class="line">        print(&quot;token is &quot; + self.token)</div><div class="line"></div><div class="line">    def get_token(self, corpid, secret):</div><div class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=&#123;0&#125;&amp;corpsecret=&#123;1&#125;&quot;.format(corpid, secret)</div><div class="line">        rep = self.s.get(url)</div><div class="line">        if rep.status_code == 200:</div><div class="line">            return json.loads(rep.content)[&apos;access_token&apos;]</div><div class="line">        else:</div><div class="line">            print(&quot;request failed.&quot;)</div><div class="line">            return None</div><div class="line"></div><div class="line">    def send_msg(self, content):</div><div class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=&quot; + self.token</div><div class="line">        header = &#123;</div><div class="line">            &quot;Content-Type&quot;: &quot;application/json&quot;</div><div class="line">        &#125;</div><div class="line">        form_data = &#123;</div><div class="line">            &quot;touser&quot;: &quot;@all&quot;,</div><div class="line">            &quot;toparty&quot;: &quot; PartyID1 | PartyID2 &quot;,</div><div class="line">            &quot;totag&quot;: &quot; TagID1 | TagID2 &quot;,</div><div class="line">            &quot;msgtype&quot;: &quot;textcard&quot;,</div><div class="line">            &quot;agentid&quot;: 1000002,</div><div class="line">            &quot;textcard&quot;: &#123;</div><div class="line">                &quot;title&quot;: &quot;领奖通知&quot;,</div><div class="line">                &quot;description&quot;: content,</div><div class="line">                &quot;url&quot;: &quot;URL&quot;,</div><div class="line">                &quot;btntxt&quot;: &quot;更多&quot;</div><div class="line">            &#125;,</div><div class="line">            &quot;safe&quot;: 0</div><div class="line">        &#125;</div><div class="line">        rep = self.s.post(url, data=json.dumps(form_data).encode(&apos;utf-8&apos;), headers=header)</div><div class="line">        if rep.status_code == 200:</div><div class="line">            return json.loads(rep.content)</div><div class="line">        else:</div><div class="line">            print(&quot;request failed.&quot;)</div><div class="line">            return None</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    wechat = WeChatPub()</div><div class="line">    wechat.send_msg(&quot;&lt;div class=\&quot;gray\&quot;&gt;2016年9月26日&lt;/div&gt; &lt;div class=\&quot;normal\&quot;&gt;恭喜你抽中iPhone 7一台，领奖码：xxxx&lt;/div&gt;&lt;div class=\&quot;highlight\&quot;&gt;请于2016年10月10日前联系行政同事领取&lt;/div&gt;&quot;)</div></pre></td></tr></table></figure></p>
+<p>CorpID在我的企业-&gt;企业信息 页面的最下面<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1c18a4f09c6e252b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mark"><br>执行以后在目标群里会收到以下信息：<br><img src="http://upload-images.jianshu.io/upload_images/8818451-9ffaf3d7552464df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mark"></p>
+<p>接下来的事情就简单了，我们在已经准备好的爬虫脚本中需要告警的位置加上 wechat.send_msg()即可将相关的信息发送到我们的企业号上，实现自动发送告警。</p>
 
       
     </div>
@@ -466,9 +421,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Splunk/" rel="tag"><i class="fa fa-tag"></i> Splunk</a>
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
           
-            <a href="/tags/Kafka/" rel="tag"><i class="fa fa-tag"></i> Kafka</a>
+            <a href="/tags/自动化/" rel="tag"><i class="fa fa-tag"></i> 自动化</a>
           
         </div>
       
@@ -481,8 +436,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/23/基于Docker搭建分布式消息队列Kafka/" rel="next" title="基于Docker搭建分布式消息队列Kafka">
-                <i class="fa fa-chevron-left"></i> 基于Docker搭建分布式消息队列Kafka
+              <a href="/2018/03/04/使用Python自动登录SSO爬取动态页面/" rel="next" title="使用Python自动登录SSO爬取动态页面">
+                <i class="fa fa-chevron-left"></i> 使用Python自动登录SSO爬取动态页面
               </a>
             
           </div>
@@ -490,10 +445,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/" rel="prev" title="Scrapy+eChart自动爬取生成网络安全词云">
-                Scrapy+eChart自动爬取生成网络安全词云 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -631,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Splunk-Add-on-for-Kafka"><span class="nav-number">2.</span> <span class="nav-text">安装Splunk Add-on for Kafka</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Splunk集成Kafka"><span class="nav-number">3.</span> <span class="nav-text">配置Splunk集成Kafka</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#个人号发送告警"><span class="nav-number">1.</span> <span class="nav-text">个人号发送告警</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公众号发送告警"><span class="nav-number">2.</span> <span class="nav-text">公众号发送告警</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注册公众号（企业号）"><span class="nav-number">2.1.</span> <span class="nav-text">注册公众号（企业号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看公众号"><span class="nav-number">2.2.</span> <span class="nav-text">查看公众号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建应用"><span class="nav-number">2.3.</span> <span class="nav-text">创建应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#微信API"><span class="nav-number">2.4.</span> <span class="nav-text">微信API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python调用微信API"><span class="nav-number">2.5.</span> <span class="nav-text">Python调用微信API</span></a></li></ol></li></ol></div>
             
 
           </div>

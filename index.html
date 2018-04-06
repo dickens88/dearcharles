@@ -288,6 +288,145 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/8390209.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Charles' Big Plan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/06/利用微信实现自动发送监控告警/" itemprop="url">
+                  利用微信实现自动发送监控告警
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T16:41:00+03:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/04/06/利用微信实现自动发送监控告警/" class="leancloud_visitors" data-flag-title="利用微信实现自动发送监控告警">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近笔者的项目需要找到一种方法能自动将Python爬虫产生的一些结果用告警的信息的方式发送到手机上，以往我们用来发送告警的方式往往是短信或者邮件，但是这两种方式要么不够灵活要么实时性不够。现在越来越多的互联网应用选择用微信作为平台发送告警信息，这种方式的前提就是你的应用需要能够访问到微信的服务器。<br>根据笔者的了解，目前集成微信告警主要有两种方式：</p>
+<ul>
+<li>用个人号发送告警</li>
+<li>用公众号（企业号）发送告警</li>
+</ul>
+<h1 id="个人号发送告警"><a href="#个人号发送告警" class="headerlink" title="个人号发送告警"></a>个人号发送告警</h1><p>顾名思义，虽然也是调用微信的API实现发送信息，但是这种方式需要使用个人账号扫描登录以后脚本才能运行，另外从接受告警的形式上看起来也就像是跟一个人在聊天。当前已经有很多热心的大神将微信的接口封装成了更加易于调用的接口SDK，如<a href="http://wxpy.readthedocs.io/zh/latest/bot.html" target="_blank" rel="external">wxpy</a>和<a href="http://wechat-sender.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">wechat sender</a>可以大大简化接口调用的复杂度，感兴趣的读者可以自行研究，上述两个项目的文档已经写的非常详细了</p>
+<h1 id="公众号发送告警"><a href="#公众号发送告警" class="headerlink" title="公众号发送告警"></a>公众号发送告警</h1><p>使用公众号发送告警，从形式上看起来更加正式，并且不需要扫码登录，更适合部署在服务器上长期运行。因为近期微信的企业号和公众号做了合并，因此申请的流程有了一些变化，但是总体来说更加简单了，即使没有真正的公司注册信息也同样可以申请到，只是未验证主体信息的账号只能有200个成员，发送次数的限制为：帐号上限数*30人次/天<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/06/利用微信实现自动发送监控告警/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2018/03/04/使用Python自动登录SSO爬取动态页面/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -327,7 +466,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T17:24:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T17:24:00+02:00">
                 2018-03-04
               </time>
             
@@ -397,23 +536,21 @@
 
       
         
-          
-            <p>最近的项目在做一些数据方面的集成，五花八门的系统对应的接口更是千奇百怪，数据集成的过程总结成八个字就是：逢山开路，遇水架桥。</p>
+          <p>最近的项目在做一些数据方面的集成，五花八门的系统对应的接口更是千奇百怪，数据集成的过程总结成八个字就是：逢山开路，遇水架桥。</p>
 <p>恰好这两天碰到一个问题，我们要集成的WEB系统没有提供专门的数据集成接口，没有API可以调，数据库更是不让访问，万般无奈之下，我在想是否可以用python自动爬取页面。web页面有SSO，用的应该是开源的CAS框架，并且后面的页面全都是由动态JS、AJAX异步加载进去的，这显然不像普通的静态页面那样直接用Scrapy上去就是一顿干，要完美的模拟登陆动作并且还要爬取后面的动态内容，对页面结构和爬取内容的分析是必不可少的。</p>
 <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
 <li>Chrome<br>页面分析工具非常简单，只需要最新版本的Chrome浏览器即可</li>
 <li>python3</li>
 <li>requests</li>
 </ul>
-<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。</p>
-<p>接下来我们在页面上输入账号密码，点登录按钮，通过页面追踪分析并模拟整个登录过程，这个过程要尤其仔细，因为很多CAS在登录页面上埋了很多隐藏的标记，一个地方模仿的不对可能就会登录失败然后又被重定向到开始的地方。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析登录过程"><br>从分析可以看到，登录按钮提交的时候会用POST方式提交一个表格，而表格里面的除了账号密码等显眼的字段以外还有一个lt，经验告诉我们这个字段应该隐藏在之前的登录页面上，用来校验登录页面的合法性，所以我们要从登录页面上找到并提取这个信息。同时还要注意http的消息头，最好按照浏览器抓取的消息头去构造，因为网站同样会校验这里面的信息。<br>下面是登录的主要代码，我们基于python3和requests包来处理https访问请求，模拟浏览器的行为将认证需要的信息构造出来发给网站。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">import urllib3</div><div class="line">from lxml import etree</div><div class="line"></div><div class="line">from ows_scrapy.ows_spider.write_csv import write_list_to_csv</div><div class="line"></div><div class="line">urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)</div><div class="line"></div><div class="line"></div><div class="line">s = requests.session()</div><div class="line">s.trust_env = False     # faster</div><div class="line">cookie = None</div><div class="line"></div><div class="line">username = &apos;username&apos;</div><div class="line">password = &apos;pwd&apos;</div><div class="line"></div><div class="line"></div><div class="line">def login():</div><div class="line">    header = &#123;</div><div class="line">        &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&apos;,</div><div class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</div><div class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</div><div class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</div><div class="line">        &apos;Cookie&apos;: &apos;JSESSIONID=73E10849812940333A4AD2A2ABAEFB7D8CFF3E76A45340FFB687FD587D2EB97A49FC5F156D09DB1E17F129465AB8D8EBACEC&apos;,</div><div class="line">        &apos;Host&apos;: &apos;&lt;your web url&gt;&apos;,</div><div class="line">        &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,</div><div class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    form_data = &#123;</div><div class="line">        &apos;username&apos;: username,</div><div class="line">        &apos;password&apos;: password,</div><div class="line">        &apos;_eventId&apos;: &apos;submit&apos;,</div><div class="line">        &apos;pwdfirst&apos;:  password[0:2],</div><div class="line">        &apos;pwdsecond&apos;: password[2:5],</div><div class="line">        &apos;pwdthird&apos;: password[5:]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    login_url = &apos;https://&lt;your web url&gt;.com/app/&apos;</div><div class="line">    print(&apos;login...&apos;)</div><div class="line"></div><div class="line">    res = s.get(login_url, headers=header, verify=False)</div><div class="line">    global cookie</div><div class="line">    cookie = res.cookies	# 注意要保存cookie</div><div class="line">    print(&quot;get response from ows &#123;0&#125;, http status &#123;1&#125;&quot;.format(login_url, res.status_code))</div><div class="line"></div><div class="line">    login_url = res.url</div><div class="line">    header[&apos;Referer&apos;] = login_url</div><div class="line">    header[&apos;Cookie&apos;] = &apos;JSESSIONID=&apos; + cookie[&apos;JSESSIONID&apos;]</div><div class="line">    form_data[&apos;lt&apos;] = str(etree.HTML(res.content).xpath(&apos;//input[@name=&quot;lt&quot;]/@value&apos;)[0])	#用xpath从页面上提取lt</div><div class="line"></div><div class="line">    res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</div><div class="line">    cookie = res.cookies</div><div class="line">    print(&quot;post login params to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</div><div class="line"></div><div class="line">    res = s.send(res.next, allow_redirects=False, verify=False)</div><div class="line">    cookie = res.cookies</div><div class="line">    print(&quot;redirect to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</div><div class="line"></div><div class="line">    if res.status_code == 200 or res.status_code == 302:</div><div class="line">        if cookie is not None and cookie.get(name=&apos;JSESSIONID&apos;, path=&apos;/app&apos;) is not None :</div><div class="line">            print(&apos;Successful login.&apos;)</div><div class="line">        else:</div><div class="line">            print(&apos;WRONG w3id/password!&apos;)</div><div class="line">            sys.exit(0)</div></pre></td></tr></table></figure></p>
-<p>这里要特别注意一点，因为http是无状态的，web页面要保存登录状态需要用到cookie，等成成功以后页面的response里面会包含一个带有有效标记的cookie，登录最终的目标就是获取并保存这个有效的cookie，这样后续的访问就不会被重定向到登录页。<br>在requests的方法里面只要向这样吧cookie带到请求里即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</div></pre></td></tr></table></figure></p>
-<h1 id="分析动态内容页面"><a href="#分析动态内容页面" class="headerlink" title="分析动态内容页面"></a>分析动态内容页面</h1><p>在动态页面里，页面上显示出来的内容往往都是js或者AJAX异步获取到的，跟静态html页面的分析过程有明显的不同。用Chrome的分析工具也可以很容易的获取到该信息。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-45460f0bfe01e03c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析动态页面"><br>在动态页面加载完成后，我们从所有的请求中过滤XHR类型，从中找到我们要的那一次请求，然后在该请求的Preview里面就可以看到完整的相应信息，同时该请求的URL也可以从Headers选卡中得到。</p>
-<p>接下来要做的事情跟上面类似，构造报文模拟浏览器向该网站发送请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">def get_content(order_id):</div><div class="line">    form_data = &#123;</div><div class="line">        &apos;roarand&apos;: &apos;BW09el5W3mW2sfbGbtWe7mWlwBsWqXg6znppnqkW3woJ5fcz5DnhfWXGonqkLsd0&apos;,</div><div class="line">        &apos;start&apos;: &apos;0&apos;,</div><div class="line">        &apos;limit&apos;: &apos;20&apos;,</div><div class="line">        &apos;orderid&apos;: order_id,</div><div class="line">        &apos;serviceId&apos;: &apos;test_gscsocsecurityincidentmanage_log_getList2&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    header = &#123;</div><div class="line">        &apos;Accept&apos;: &apos;text/plain, */*; q=0.01&apos;,</div><div class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</div><div class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</div><div class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</div><div class="line">        &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded;charset=UTF-8&apos;,</div><div class="line">        &apos;Host&apos;: &apos;&lt;your web&gt;.com&apos;,</div><div class="line">        &apos;Origin&apos;: &apos;https://&lt;your web&gt;.com&apos;,</div><div class="line">        &apos;Referer&apos;: &apos;https://&lt;your web&gt;.com/app/104h/spl/test/ID_480_1511441539904_workflowdetail.spl?orderid=SOC-20180220-00000003&apos;,</div><div class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;,</div><div class="line">        &apos;X-Requested-With&apos;: &apos;XMLHttpRequest&apos;</div><div class="line">    &#125;</div><div class="line">    print(&apos;Start to scan order id &apos; + order_id)</div><div class="line"></div><div class="line">    url = &apos;https://&lt;your web&gt;.com/app/pageservices/service.do?forAccessLog=&#123;serviceName:test_gscsocsecurityincidentmanage_log_getList2,userId:571bdd42-10ca-4ce1-b41c-8a3f6632141f,tenantId:104h&#125;&amp;trackId=fec68f8e-f30a-4fa1-a8b1-41d3dd11fa4c&apos;</div><div class="line">    res = s.post(url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False) #要加载上面登录成功的cookie</div><div class="line">    print(res.content)</div><div class="line">    return res</div></pre></td></tr></table></figure></p>
-<p>要点其实就是从XHR里找到请求的URI，构造请求报文头和提交表格，最后务必要加上登录成功的cookie，否则会被重定向到登录页面。</p>
-<p>抓取动态页面的方法还有很多，这种方法依赖的包相对较少，代码比较灵活，在爬取复杂的登录页面的时候效果比较好，只是在分析页面登录机制的时候要尤其细心。</p>
-
-          
+<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/04/使用Python自动登录SSO爬取动态页面/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -491,7 +628,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T22:02:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T22:02:00+02:00">
                 2018-01-21
               </time>
             
@@ -630,7 +767,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T15:36:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T15:36:00+02:00">
                 2017-12-10
               </time>
             
@@ -792,7 +929,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T21:21:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-24T21:21:00+02:00">
                 2017-11-24
               </time>
             
@@ -953,7 +1090,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T22:43:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T22:43:00+02:00">
                 2017-11-23
               </time>
             
@@ -1109,7 +1246,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T23:51:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-20T23:51:00+02:00">
                 2017-11-20
               </time>
             
@@ -1265,7 +1402,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T15:19:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-19T15:19:00+02:00">
                 2017-11-19
               </time>
             
@@ -1420,7 +1557,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:25:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:25:00+02:00">
                 2017-11-16
               </time>
             
@@ -1576,7 +1713,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:03:00+05:30">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:03:00+02:00">
                 2017-11-15
               </time>
             
@@ -1689,162 +1826,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/14/基于Docker-Seafile搭建私人云存储/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/8390209.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Big Plan">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/14/基于Docker-Seafile搭建私人云存储/" itemprop="url">
-                  基于Docker+Seafile搭建私人云存储
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-14T23:55:00+05:30">
-                2017-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/11/14/基于Docker-Seafile搭建私人云存储/" class="leancloud_visitors" data-flag-title="基于Docker+Seafile搭建私人云存储">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。</p>
-<h1 id="开通华为云服务"><a href="#开通华为云服务" class="headerlink" title="开通华为云服务"></a>开通华为云服务</h1><p>工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见<a href="http://www.huaweicloud.com/" target="_blank" rel="external">官网</a>介绍，总之乖乖按照官方指引轻松几步就搞定。笔者双11把手打折了，索性只买了1C1G的弹性云服务器（首月只要30+元），预装了Centos7.2操作系统。通过“管理控制台”进入弹性云服务器界面，可以远程登录主机，如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-d166887ad2b31f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114225111.png"><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/14/基于Docker-Seafile搭建私人云存储/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1894,7 +1875,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1912,7 +1893,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
