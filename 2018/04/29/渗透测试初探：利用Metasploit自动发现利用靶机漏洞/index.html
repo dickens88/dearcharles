@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Docker,Kafka," />
+  <meta name="keywords" content="Metaspliot,渗透测试," />
 
 
 
@@ -87,25 +87,34 @@
 
 
 
-<meta name="description" content="本文基于Docker搭建一套单节点的Kafka消息队列，Kafka依赖Zookeeper为其管理集群信息，虽然本例不涉及集群，但是该有的组件都还是会有，典型的kafka分布式架构如下图所示。本例搭建的示例包含Zookeeper + Kafka + Kafka-manger">
-<meta name="keywords" content="Docker,Kafka">
+<meta name="description" content="网络安全的攻和守一直以来都是安全建设的两个方面，笔者最近也在研究一些渗透测试的技术，以丰富网络安全建设的知识储备。本文简要介绍一下，如何在虚拟环境下利用Metasploit pro自动对靶机完成漏洞发现和漏洞利用，最终通过漏洞实现控制对方主机的目的。使用的工具包括：  Virtualbox for windows Kali Linux Metasploit pro Metasploitable 靶">
+<meta name="keywords" content="Metaspliot,渗透测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于Docker搭建分布式消息队列Kafka">
-<meta property="og:url" content="http://www.dearcharles.cn/2017/11/23/基于Docker搭建分布式消息队列Kafka/index.html">
+<meta property="og:title" content="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">
+<meta property="og:url" content="http://www.dearcharles.cn/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/index.html">
 <meta property="og:site_name" content="Charles&#39; Big Plan">
-<meta property="og:description" content="本文基于Docker搭建一套单节点的Kafka消息队列，Kafka依赖Zookeeper为其管理集群信息，虽然本例不涉及集群，但是该有的组件都还是会有，典型的kafka分布式架构如下图所示。本例搭建的示例包含Zookeeper + Kafka + Kafka-manger">
+<meta property="og:description" content="网络安全的攻和守一直以来都是安全建设的两个方面，笔者最近也在研究一些渗透测试的技术，以丰富网络安全建设的知识储备。本文简要介绍一下，如何在虚拟环境下利用Metasploit pro自动对靶机完成漏洞发现和漏洞利用，最终通过漏洞实现控制对方主机的目的。使用的工具包括：  Virtualbox for windows Kali Linux Metasploit pro Metasploitable 靶">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/Ijm03gKG0L.png">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/1C94hjJAGe.png">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/G93eg87K1d.png">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/bfGgbiif4H.png">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/ga7HdICjjl.png">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/jfHEk4lIaD.png">
-<meta property="og:updated_time" content="2017-11-23T14:52:13.000Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-1f3d407aedc4e3a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-4d9bfea360e9a8f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-dee83d7089e801b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-8fb4f5ff957650ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-ef9a95789bb366e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-3549190d78f11227.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-613f9fecd7ac2e5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-1bf0175878af046e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-3d4fb10837efd781.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-e64bfc24afc401aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-4bbb3535e2ff3710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-5638d50e7fa5131d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-7a06871a7655fbd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-6e733d7d4ad00ffd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-ae07fdee28baedd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-29T15:36:41.159Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于Docker搭建分布式消息队列Kafka">
-<meta name="twitter:description" content="本文基于Docker搭建一套单节点的Kafka消息队列，Kafka依赖Zookeeper为其管理集群信息，虽然本例不涉及集群，但是该有的组件都还是会有，典型的kafka分布式架构如下图所示。本例搭建的示例包含Zookeeper + Kafka + Kafka-manger">
-<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171123/Ijm03gKG0L.png">
+<meta name="twitter:title" content="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">
+<meta name="twitter:description" content="网络安全的攻和守一直以来都是安全建设的两个方面，笔者最近也在研究一些渗透测试的技术，以丰富网络安全建设的知识储备。本文简要介绍一下，如何在虚拟环境下利用Metasploit pro自动对靶机完成漏洞发现和漏洞利用，最终通过漏洞实现控制对方主机的目的。使用的工具包括：  Virtualbox for windows Kali Linux Metasploit pro Metasploitable 靶">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/8818451-1f3d407aedc4e3a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -133,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/23/基于Docker搭建分布式消息队列Kafka/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/"/>
 
 
 
 
 
-  <title> 基于Docker搭建分布式消息队列Kafka | Charles' Big Plan </title>
+  <title> 渗透测试初探：利用Metasploit自动发现利用靶机漏洞 | Charles' Big Plan </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -298,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/23/基于Docker搭建分布式消息队列Kafka/">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
@@ -319,7 +328,7 @@
             
             
               
-                基于Docker搭建分布式消息队列Kafka
+                渗透测试初探：利用Metasploit自动发现利用靶机漏洞
               
             
           </h1>
@@ -334,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T22:43:00+02:00">
-                2017-11-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-29T18:35:00+03:00">
+                2018-04-29
               </time>
             
 
@@ -345,28 +354,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -374,7 +361,7 @@
 
           
           
-             <span id="/2017/11/23/基于Docker搭建分布式消息队列Kafka/" class="leancloud_visitors" data-flag-title="基于Docker搭建分布式消息队列Kafka">
+             <span id="/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/" class="leancloud_visitors" data-flag-title="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,46 +390,29 @@
       
 
       
-        <p>本文基于Docker搭建一套单节点的Kafka消息队列，Kafka依赖Zookeeper为其管理集群信息，虽然本例不涉及集群，但是该有的组件都还是会有，典型的kafka分布式架构如下图所示。本例搭建的示例包含Zookeeper + Kafka + Kafka-manger</p>
-<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/Ijm03gKG0L.png" alt="mark"><br><a id="more"></a></p>
-<p>#获取镜像</p>
+        <p>网络安全的攻和守一直以来都是安全建设的两个方面，笔者最近也在研究一些渗透测试的技术，以丰富网络安全建设的知识储备。本文简要介绍一下，如何在虚拟环境下利用Metasploit pro自动对靶机完成漏洞发现和漏洞利用，最终通过漏洞实现控制对方主机的目的。使用的工具包括：</p>
 <ul>
-<li>zookeeper镜像：zookeeper:3.4.9</li>
-<li>kafka镜像：wurstmeister/kafka:0.10.2.0</li>
-<li>kafka-manager镜像：kafka-manager:latest</li>
+<li><a href="https://www.virtualbox.org/" target="_blank" rel="external">Virtualbox</a> for windows</li>
+<li><a href="https://www.kali.org/downloads/" target="_blank" rel="external">Kali Linux</a></li>
+<li><a href="https://www.rapid7.com/products/metasploit/download" target="_blank" rel="external">Metasploit pro</a></li>
+<li><a href="https://www.rapid7.com/resources/test-metasploit-with-metasploitable/" target="_blank" rel="external">Metasploitable</a> 靶机<br>下文假设你已经在windows上安装了Virtualbox虚拟机平台，并且在virtualbox里面已经创建好了Kali Linux的虚拟机</li>
 </ul>
-<h1 id="建立Zookeeper容器"><a href="#建立Zookeeper容器" class="headerlink" title="建立Zookeeper容器"></a>建立Zookeeper容器</h1><p>这里我们用最简单的方式创建一个独立的Zookeeper节点，如果要考虑zookeeper的高可用，可以将其做成一个集群，最好是能有多台机器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker run --name some-zookeeper \</div><div class="line">--restart always \</div><div class="line">-p 2181:2181 \</div><div class="line">-d zookeeper</div></pre></td></tr></table></figure></p>
-<p>默认的，容器内配置文件在，/conf/zoo.cfg，数据和日志目录默认在/data 和 /datalog，需要的话可以将上述目录映射到宿主机的可靠文件目录下。详情参考<a href="https://hub.docker.com/_/zookeeper/" target="_blank" rel="external">Zookeeper官方镜像</a></p>
-<h1 id="建立kafka节点"><a href="#建立kafka节点" class="headerlink" title="建立kafka节点"></a>建立kafka节点</h1><p>这里同样只做一个简单的单点kafka<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker run --name kafka \</div><div class="line">-p 9092:9092 \</div><div class="line">-e KAFKA_ADVERTISED_HOST_NAME=kafka01 \</div><div class="line">-e KAFKA_CREATE_TOPICS=&quot;test:1:1&quot; \</div><div class="line">-e KAFKA_ZOOKEEPER_CONNECT=100.100.16.231:2181 \</div><div class="line">-d  wurstmeister/kafka</div></pre></td></tr></table></figure></p>
-<p>详情参考<a href="https://hub.docker.com/r/wurstmeister/kafka/" target="_blank" rel="external">Kafka官方镜像</a> </p>
-<h1 id="创建Kafka管理节点"><a href="#创建Kafka管理节点" class="headerlink" title="创建Kafka管理节点"></a>创建Kafka管理节点</h1><p>kafka-manager有图形化UI，可以方便的监控集群状态，调整队列配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker run -itd \</div><div class="line">--restart=always \</div><div class="line">--name=kafka-manager \</div><div class="line">-p 9000:9000 \</div><div class="line">-e ZK_HOSTS=&quot;100.100.16.231:2181&quot; \</div><div class="line">sheepkiller/kafka-manager</div></pre></td></tr></table></figure>
-<p>容器启动以后访问主机的9000端口，<a href="http://xxx:9000" target="_blank" rel="external">http://xxx:9000</a></p>
-<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/1C94hjJAGe.png" alt="mark"></p>
-<p>首次进入需要添加一个集群标识，如下图所示</p>
-<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/G93eg87K1d.png" alt="mark"></p>
-<p>配置好以后，通过Zookeeper该管理节点可以读取到整个Kafka集群的信息，并且我们可以通过JMX直接看到集群的健康状态<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/bfGgbiif4H.png" alt="mark"></p>
-<p>也可以看到主题的读写速度，偏移量等信息，如下图所示：<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/ga7HdICjjl.png" alt="mark"></p>
-<h1 id="读写验证"><a href="#读写验证" class="headerlink" title="读写验证"></a>读写验证</h1><p>读写验证的方法有很多，这里我们用kafka容器自带的工具来验证，首先进入到kafka容器的交互模式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it kafka /bin/bash</div></pre></td></tr></table></figure></p>
-<ul>
-<li><p>创建一个主题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-topics.sh --create --zookeeper 100.100.16.231:2181 --replication-factor 1 --partitions 1 --topic my-test</div></pre></td></tr></table></figure>
-</li>
-<li><p>查看刚创建的主题：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-topics.sh --list --zookeeper 100.100.16.231:2181</div></pre></td></tr></table></figure>
+<h1 id="0x01-Kali-配置"><a href="#0x01-Kali-配置" class="headerlink" title="0x01 Kali 配置"></a>0x01 Kali 配置</h1><ul>
+<li>安装增强功能<br>因为后续环境准备工作要频繁用到诸如共享文件，复制黏贴等功能，更重要的是，没有增强工具Kali的图形界面也没法适配窗口的大小，所以建议还是先安装增强功能，在virtualbox界面点击[设备]-&gt;[安装增强功能]，如下图<br><img src="https://upload-images.jianshu.io/upload_images/8818451-1f3d407aedc4e3a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><a id="more"></a>
+然后打开命令行工具，我们需要手动将cdrom挂载到系统<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /mnt/cdrom</div><div class="line">mount /dev/cdrom /mnt/cdrom</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171123/jfHEk4lIaD.png" alt="mark"></p>
-<ul>
-<li>发送消息：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-console-producer.sh --broker-list  100.100.16.231:9092 --topic my-test</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>This is a message<br>This is another message</p>
-<ul>
-<li>读取消息：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server 100.100.16.231:9092 --topic my-test --from-beginning</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>参考：<a href="https://kafka.apache.org/quickstart" target="_blank" rel="external">https://kafka.apache.org/quickstart</a></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8818451-4d9bfea360e9a8f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>接下来执行以下命令安装增强工具<br>/mnt/cdrom/VBoxLinuxAdditions.run<br>此时可能会遇到以下报错：<br><img src="https://upload-images.jianshu.io/upload_images/8818451-dee83d7089e801b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>根据提示我们需要先安装内核头文件，具体方法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update </div><div class="line">apt-get upgrade</div></pre></td></tr></table></figure></p>
+<p>国内的朋友可能有可能会出现连不到kali apt源的问题，据说阿里云有提供apt源，需要的同学请自行百度。<br>升级完成后，开始安装内核头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install linux-headers-amd64</div></pre></td></tr></table></figure></p>
+<p>升级完成后重启操作系统：<code>init 6</code><br>如果上述命令执行后还是无法安装增强工具，可以尝试如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-cache search linux-image|grep kali</div></pre></td></tr></table></figure></p>
+<p>找到对应的image版本以后安装，然后重启，如下图：<br><img src="https://upload-images.jianshu.io/upload_images/8818451-8fb4f5ff957650ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>安装好增强工具，便可以让kali的图形界面自动适应virtualbox的窗口大小，同时也可以开启双向复制粘贴等功能。</p>
+<h1 id="0x02-安装Metasploit-pro"><a href="#0x02-安装Metasploit-pro" class="headerlink" title="0x02 安装Metasploit pro"></a>0x02 安装Metasploit pro</h1><p>接下来我们要在Kali里面安装Metasploit。Metasploit 由rapid7提供，免费版本Metasploit framework已经集成在Kali里面，这里要介绍的是收费的版本Metasploit pro，这个版本提供了UI界面，对新手更友好，新用户有14天的免费试用期。<br>在Kali linux中，用Firefox打开<a href="https://www.rapid7.com/products/metasploit/download" target="_blank" rel="external">rapid7官网</a>，注册并登录下载pro版本。<br>下载完成后，在图形界面给该文件加上执行权限，然后双击安装即可，进度条走到100%以后仍然要等几分钟，稍安勿躁。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-ef9a95789bb366e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>安装完成以后，默认会打开3790端口提供web界面，用浏览器访问<a href="https://localhost:3790，打开配置页面" target="_blank" rel="external">https://localhost:3790，打开配置页面</a><br><img src="https://upload-images.jianshu.io/upload_images/8818451-3549190d78f11227.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>根据提示信息完成账号创建和license输入以后就可以看到主界面了：<br><img src="https://upload-images.jianshu.io/upload_images/8818451-613f9fecd7ac2e5b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0x"></p>
+<h1 id="0x03-Metasploitable-靶机准备"><a href="#0x03-Metasploitable-靶机准备" class="headerlink" title="0x03 Metasploitable 靶机准备"></a>0x03 Metasploitable 靶机准备</h1><p>靶机是一个包含一系列安全漏洞的虚拟机，用于检测我们的渗透技能。rapid7官方提供了供渗透测试使用的Linux靶机，包含各种系统层和应用层的漏洞，在<a href="https://www.rapid7.com/resources/test-metasploit-with-metasploitable/" target="_blank" rel="external">rapid7官网</a>可以免费下载。<br>基于Virtualbox安装Metasploitable2靶机的教程可以参考：<a href="http://book.51cto.com/art/201412/460268.htm" target="_blank" rel="external">http://book.51cto.com/art/201412/460268.htm</a><br>虚拟机启动后，初始账号口令是 msfadmin/masadmin<br><img src="https://upload-images.jianshu.io/upload_images/8818451-1bf0175878af046e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="0x03-漏洞利用"><a href="#0x03-漏洞利用" class="headerlink" title="0x03 漏洞利用"></a>0x03 漏洞利用</h1><p>在开始漏洞利用前，需要注意Virtualbox的虚拟机默认是用NAT方式组网，这种方式下虚拟机之间、虚拟机和宿主机之间没法通信，为了让kali能够扫描靶机，我们需要将两个虚拟机的网络模式改成桥接<br><img src="https://upload-images.jianshu.io/upload_images/8818451-3d4fb10837efd781.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>修改后重启VM，确保两个VM可以相互通信。<br>在Kali中开启metasploit pro的web界面，点击首页顶部的菜单栏[Project] -&gt; [New project] ，192.168.0.103是靶机的IP<br><img src="https://upload-images.jianshu.io/upload_images/8818451-e64bfc24afc401aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>在新建的项目中，我们先用自带的nmap做一次漏洞扫描，这里我们也可以用Nexpose这种更专业的漏扫工具，不过他也是收费的。或者，还可以将Nessus的漏扫结果文件.nessus直接导入系统</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8818451-4bbb3535e2ff3710.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>这里我们直接点[Scan]，确认目标以后可以看到扫描的进度条。等扫描完成以后，可以看到简单的结果报告<br><img src="https://upload-images.jianshu.io/upload_images/8818451-5638d50e7fa5131d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>接下来开始尝试漏洞爆破，点击右上角的[Exploit]，之后Metasploit会利用框架下已有的攻击向量对目标漏洞进行尝试，完成以后如果目标漏洞利用成功点上面的Session菜单可以看不到可以利用的session<br><img src="https://upload-images.jianshu.io/upload_images/8818451-7a06871a7655fbd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>这里我们点击session1，PostgreSQL for Linux Payload Execution漏洞，可以看到我们能利用的操作。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-6e733d7d4ad00ffd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>接下来我们用[Command Shell]直接利用该漏洞<br><img src="https://upload-images.jianshu.io/upload_images/8818451-ae07fdee28baedd2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>利用该远程代码执行漏洞，我们可以获取到对方的shell，远程在该机器上插旗，接下来我们可以通过其他的漏洞对该账号进行提权，从而完全控制该机器，也可以悄悄的偷取该数据库里的信息。</p>
+<p>以上就是使用Metasploit pro完成对靶机的漏洞扫描已经自动爆破的全工程，非常初级适合渗透测试的初学者对该技术建立初步感性认识。</p>
 
       
     </div>
@@ -466,9 +436,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+            <a href="/tags/Metaspliot/" rel="tag"><i class="fa fa-tag"></i> Metaspliot</a>
           
-            <a href="/tags/Kafka/" rel="tag"><i class="fa fa-tag"></i> Kafka</a>
+            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
           
         </div>
       
@@ -481,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/20/Splunk-Forwarder-收集分析Windows系统日志/" rel="next" title="Splunk + Forwarder 收集分析Windows系统日志">
-                <i class="fa fa-chevron-left"></i> Splunk + Forwarder 收集分析Windows系统日志
+              <a href="/2018/04/06/利用微信实现自动发送监控告警/" rel="next" title="利用微信实现自动发送监控告警">
+                <i class="fa fa-chevron-left"></i> 利用微信实现自动发送监控告警
               </a>
             
           </div>
@@ -490,10 +460,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/24/Splunk集成Kafka配置方法/" rel="prev" title="Splunk集成Kafka配置方法">
-                Splunk集成Kafka配置方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -631,7 +597,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#建立Zookeeper容器"><span class="nav-number">1.</span> <span class="nav-text">建立Zookeeper容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立kafka节点"><span class="nav-number">2.</span> <span class="nav-text">建立kafka节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建Kafka管理节点"><span class="nav-number">3.</span> <span class="nav-text">创建Kafka管理节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写验证"><span class="nav-number">4.</span> <span class="nav-text">读写验证</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-Kali-配置"><span class="nav-number">1.</span> <span class="nav-text">0x01 Kali 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-安装Metasploit-pro"><span class="nav-number">2.</span> <span class="nav-text">0x02 安装Metasploit pro</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-Metasploitable-靶机准备"><span class="nav-number">3.</span> <span class="nav-text">0x03 Metasploitable 靶机准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-漏洞利用"><span class="nav-number">4.</span> <span class="nav-text">0x03 漏洞利用</span></a></li></ol></div>
             
 
           </div>
