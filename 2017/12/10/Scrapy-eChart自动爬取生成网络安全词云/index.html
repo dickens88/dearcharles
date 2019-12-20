@@ -1,408 +1,558 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<!DOCTYPE html>
+<html>
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
-
-
-  <meta name="keywords" content="Python,可视化,">
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
-
-
-
-
-
-
-<meta name="description" content="因为工作的原因，近期笔者开始持续关注一些安全咨询网站，一来是多了解业界安全咨询提升自身安全知识，二来也是需要从各类安全网站上收集漏洞情报。作为安全情报领域的新手，面对大量的安全咨询，多少还是会感觉无从下手力不从心。周末闲来无事，突发奇想，如果搞个爬虫，先把网络安全类文章爬下来，然后用机器学习先对文章进行分析，自动提取文章主成分关键词，然后再根据实际需求有选择的阅读相关文章，岂不是可以节省很多时间。">
-<meta name="keywords" content="Python,可视化">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Scrapy+eChart自动爬取生成网络安全词云">
-<meta property="og:url" content="http://www.dearcharles.cn/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/index.html">
+  <meta charset="utf-8">
+  <title>Scrapy+eChart自动爬取生成网络安全词云 | Charles&#39; Big Plan</title>
+  <meta name="keywords" content=" Python , 可视化 ">
+  <meta name="description" content="Scrapy+eChart自动爬取生成网络安全词云 | Charles&#39; Big Plan">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="HelloIt’s really nice to post my first post in my own blog.  IntroductionMy name is Charles, and for now, I work in Huawei company. My work is mainly about Cyber Security, we use varity of Tools, like">
+<meta property="og:type" content="website">
+<meta property="og:title" content="About">
+<meta property="og:url" content="http://www.dearcharles.cn/about/index.html">
 <meta property="og:site_name" content="Charles&#39; Big Plan">
-<meta property="og:description" content="因为工作的原因，近期笔者开始持续关注一些安全咨询网站，一来是多了解业界安全咨询提升自身安全知识，二来也是需要从各类安全网站上收集漏洞情报。作为安全情报领域的新手，面对大量的安全咨询，多少还是会感觉无从下手力不从心。周末闲来无事，突发奇想，如果搞个爬虫，先把网络安全类文章爬下来，然后用机器学习先对文章进行分析，自动提取文章主成分关键词，然后再根据实际需求有选择的阅读相关文章，岂不是可以节省很多时间。">
+<meta property="og:description" content="HelloIt’s really nice to post my first post in my own blog.  IntroductionMy name is Charles, and for now, I work in Huawei company. My work is mainly about Cyber Security, we use varity of Tools, like">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-0eec179c841d0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-69c3f57935151797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-d92d50e3995e4c71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-7f2b5070a2866d94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-8733222cca241c5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-23844b9653c4ef3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-1a0b6e200454f8b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-12-10T07:40:20.495Z">
+<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/bDAgdFc0jh.jpg">
+<meta property="og:updated_time" content="2017-11-11T10:41:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Scrapy+eChart自动爬取生成网络安全词云">
-<meta name="twitter:description" content="因为工作的原因，近期笔者开始持续关注一些安全咨询网站，一来是多了解业界安全咨询提升自身安全知识，二来也是需要从各类安全网站上收集漏洞情报。作为安全情报领域的新手，面对大量的安全咨询，多少还是会感觉无从下手力不从心。周末闲来无事，突发奇想，如果搞个爬虫，先把网络安全类文章爬下来，然后用机器学习先对文章进行分析，自动提取文章主成分关键词，然后再根据实际需求有选择的阅读相关文章，岂不是可以节省很多时间。">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/8818451-0eec179c841d0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="About">
+<meta name="twitter:description" content="HelloIt’s really nice to post my first post in my own blog.  IntroductionMy name is Charles, and for now, I work in Huawei company. My work is mainly about Cyber Security, we use varity of Tools, like">
+<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171111/bDAgdFc0jh.jpg">
 
 
+<link rel="icon" href="/img/avatar.jpg">
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
 </script>
 
-
-
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/">
-
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
 
 
 
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
-  <title> Scrapy+eChart自动爬取生成网络安全词云 | Charles' Big Plan </title>
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?4f115866ae087276fb78c5184bd75863";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Charles' Big Plan</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">Tell some stories about Charles daily work</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="false">
+  <input class="theme_blog_path" value>
 </div>
 
-<nav class="site-nav">
-  
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Charles Liu</span>
+</div>
 
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-echart">
-          <a href="/echart" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
-            
-            词云
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+<div class="icon">
     
+        
+        <a title="github" href="https://github.com/dickens88" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/charlesliu4j/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/d8765fe339d7" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:370716264@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=370716264&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
 
-  
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/">
+<a class="more-menus">更多菜单</a>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/8390209.jpg">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Charles' Big Plan">
-    </span>
+<ul>
+    <li><div class="all active">全部文章<small>(18)</small></div></li>
+    
+        
+            
+            <li><div data-rel="大数据">大数据<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Java技术">Java技术<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="WEB技术">WEB技术<small>(1)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="网络安全">网络安全<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="数据与智能">数据与智能<small>(4)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Splunk">Splunk<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Docker">Docker<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    <a class="dynamic-menu " target="_blank"  href="https://github.com/dickens88">github</a>
+    
+    </div>
+    <div><a class="about  site_url"  href="/about">关于</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="18">
+<input type="hidden" id="yelog_site_word_count" value="24k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELK</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">hexo</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">OAuth2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">可视化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Splunk</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ProGuard</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">混淆</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">数据与智能</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SSO</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">自动化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Seafile</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">网络安全</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">机器学习</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">行为分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Metaspliot</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">渗透测试</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大数据</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
 
     
-      <header class="post-header">
-
+    <nav id="title-list-nav">
         
+        <a  class="大数据 "
+           href="/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/"
+           data-tag="ELK"
+           data-author="" >
+            <span class="post-title" title="ELK+Beats实现Windows服务器系统日志监控">ELK+Beats实现Windows服务器系统日志监控</span>
+            <span class="post-date" title="2017-11-11 19:11:00">2017/11/11</span>
+        </a>
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Scrapy+eChart自动爬取生成网络安全词云
-              
-            
-          </h1>
+        <a  class="Java技术 "
+           href="/2017/11/11/Java-依赖注入总结/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java 依赖注入总结">Java 依赖注入总结</span>
+            <span class="post-date" title="2017-11-11 00:21:00">2017/11/11</span>
+        </a>
         
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T15:36:00+05:30">
-                2017-12-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据与智能/" itemprop="url" rel="index">
-                    <span itemprop="name">数据与智能</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/" class="leancloud_visitors" data-flag-title="Scrapy+eChart自动爬取生成网络安全词云">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
+        <a  class="WEB技术 "
+           href="/2017/11/08/Post-with-a-image/"
+           data-tag="hexo"
+           data-author="" >
+            <span class="post-title" title="用MPic快速上传七牛图床">用MPic快速上传七牛图床</span>
+            <span class="post-date" title="2017-11-08 22:51:00">2017/11/08</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/01/21/Logstash集成Kafka配置方法-基于Docker/"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="Logstash集成Kafka配置方法(基于Docker)">Logstash集成Kafka配置方法(基于Docker)</span>
+            <span class="post-date" title="2018-01-21 22:02:00">2018/01/21</span>
+        </a>
+        
+        <a  class="网络安全 "
+           href="/2017/11/15/OAuth2-0协议原理详解/"
+           data-tag="OAuth2.0"
+           data-author="" >
+            <span class="post-title" title="OAuth2.0协议原理详解">OAuth2.0协议原理详解</span>
+            <span class="post-date" title="2017-11-15 22:03:00">2017/11/15</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/"
+           data-tag="Python,可视化"
+           data-author="" >
+            <span class="post-title" title="Scrapy+eChart自动爬取生成网络安全词云">Scrapy+eChart自动爬取生成网络安全词云</span>
+            <span class="post-date" title="2017-12-10 15:36:00">2017/12/10</span>
+        </a>
+        
+        <a  class="Splunk "
+           href="/2017/11/24/Splunk集成Kafka配置方法/"
+           data-tag="Splunk,Kafka"
+           data-author="" >
+            <span class="post-title" title="Splunk集成Kafka配置方法">Splunk集成Kafka配置方法</span>
+            <span class="post-date" title="2017-11-24 21:21:00">2017/11/24</span>
+        </a>
+        
+        <a  class="Splunk "
+           href="/2017/11/20/Splunk-Forwarder-收集分析Windows系统日志/"
+           data-tag="ELK,Splunk"
+           data-author="" >
+            <span class="post-title" title="Splunk + Forwarder 收集分析Windows系统日志">Splunk + Forwarder 收集分析Windows系统日志</span>
+            <span class="post-date" title="2017-11-20 23:51:00">2017/11/20</span>
+        </a>
+        
+        <a  class="Java技术 "
+           href="/2017/11/19/Spring-Boot-Java应用代码混淆介绍/"
+           data-tag="Java,ProGuard,混淆"
+           data-author="" >
+            <span class="post-title" title="Spring Boot Java应用代码混淆介绍">Spring Boot Java应用代码混淆介绍</span>
+            <span class="post-date" title="2017-11-19 15:19:00">2017/11/19</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2018/03/04/使用Python自动登录SSO爬取动态页面/"
+           data-tag="数据与智能,SSO,python"
+           data-author="" >
+            <span class="post-title" title="使用Python自动登录SSO爬取动态页面">使用Python自动登录SSO爬取动态页面</span>
+            <span class="post-date" title="2018-03-04 17:24:00">2018/03/04</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/04/06/利用微信实现自动发送监控告警/"
+           data-tag="python,自动化"
+           data-author="" >
+            <span class="post-title" title="利用微信实现自动发送监控告警">利用微信实现自动发送监控告警</span>
+            <span class="post-date" title="2018-04-06 16:41:00">2018/04/06</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/11/基于Docker快速搭建ELK/"
+           data-tag="ELK"
+           data-author="" >
+            <span class="post-title" title="基于Docker快速搭建ELK">基于Docker快速搭建ELK</span>
+            <span class="post-date" title="2017-11-11 00:13:00">2017/11/11</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/14/基于Docker-Seafile搭建私人云存储/"
+           data-tag="Docker,Seafile"
+           data-author="" >
+            <span class="post-title" title="基于Docker+Seafile搭建私人云存储">基于Docker+Seafile搭建私人云存储</span>
+            <span class="post-date" title="2017-11-14 23:55:00">2017/11/14</span>
+        </a>
+        
+        <a  class="网络安全 "
+           href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/"
+           data-tag="Java,OAuth2.0,SSO"
+           data-author="" >
+            <span class="post-title" title="基于Spring Security OAuth2.0实现单点登录SSO">基于Spring Security OAuth2.0实现单点登录SSO</span>
+            <span class="post-date" title="2017-11-16 22:25:00">2017/11/16</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/11/机器学习算法在用户行为检测-UBA-领域的应用/"
+           data-tag="网络安全,机器学习,行为分析"
+           data-author="" >
+            <span class="post-title" title="机器学习算法在用户行为检测(UBA)领域的应用">机器学习算法在用户行为检测(UBA)领域的应用</span>
+            <span class="post-date" title="2017-11-11 00:19:00">2017/11/11</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/23/基于Docker搭建分布式消息队列Kafka/"
+           data-tag="Docker,Kafka"
+           data-author="" >
+            <span class="post-title" title="基于Docker搭建分布式消息队列Kafka">基于Docker搭建分布式消息队列Kafka</span>
+            <span class="post-date" title="2017-11-23 22:43:00">2017/11/23</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/"
+           data-tag="Metaspliot,渗透测试"
+           data-author="" >
+            <span class="post-title" title="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">渗透测试初探：利用Metasploit自动发现利用靶机漏洞</span>
+            <span class="post-date" title="2018-04-29 18:35:00">2018/04/29</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/11/新一代数据安全的制胜法宝-UBA/"
+           data-tag="网络安全,机器学习,行为分析,大数据"
+           data-author="" >
+            <span class="post-title" title="新一代数据安全的制胜法宝-UBA">新一代数据安全的制胜法宝-UBA</span>
+            <span class="post-date" title="2017-11-11 00:17:00">2017/11/11</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
         </div>
-      </header>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-Scrapy-eChart自动爬取生成网络安全词云" class="article article-type-post" itemscope itemprop="blogPost">
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+        <h1 class="article-title">Scrapy+eChart自动爬取生成网络安全词云</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="数据与智能">数据与智能</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color2">Python</a>
+            
+            <a class="color4">可视化</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2017-12-10 13:10:20'>2017-12-10 15:36</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#整体思路"><span class="toc-text">整体思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Scrapy爬虫"><span class="toc-text">Scrapy爬虫</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Scrapy"><span class="toc-text">安装Scrapy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析网页"><span class="toc-text">分析网页</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬取网页"><span class="toc-text">爬取网页</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#调试技巧"><span class="toc-text">调试技巧</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
       
         <p>因为工作的原因，近期笔者开始持续关注一些安全咨询网站，一来是多了解业界安全咨询提升自身安全知识，二来也是需要从各类安全网站上收集漏洞情报。<br>作为安全情报领域的新手，面对大量的安全咨询，多少还是会感觉无从下手力不从心。周末闲来无事，突发奇想，如果搞个爬虫，先把网络安全类文章爬下来，然后用机器学习先对文章进行分析，自动提取文章主成分关键词，然后再根据实际需求有选择的阅读相关文章，岂不是可以节省很多时间。<br>如果能提取文章的关键词，还可以根据近期文章的关键词汇总了解总体的安全态势和舆情，感觉挺靠谱。</p>
 <h1 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h1><p>如前文所述，思路其实很简单：</p>
@@ -412,514 +562,381 @@
 <li>使用TF-IDF算法提取关键词</li>
 <li>将关键词保存到数据库</li>
 <li>最后可以用可视化将近期出现的比较频繁的关键词做个展示<br>看起来也不会很难，文末有代码的链接。<a id="more"></a>
-<h1 id="Scrapy爬虫"><a href="#Scrapy爬虫" class="headerlink" title="Scrapy爬虫"></a>Scrapy爬虫</h1>Scrapy是非常常用的python爬虫框架，基于scrapy写爬虫可以节省大量的代码和时间，原理这里就不赘述了，感兴趣的同学自行科普<a href="https://doc.scrapy.org/en/latest/intro/tutorial.html" target="_blank" rel="noopener">Scrapy教程</a>，这里只贴一张图。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-0eec179c841d0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Scrapy架构"><h2 id="安装Scrapy"><a href="#安装Scrapy" class="headerlink" title="安装Scrapy"></a>安装Scrapy</h2>笔者基于python3.6来安装Scrapy，所以前提是你的机器已经安装好python3的环境。scrapy安装办法非常简单，使用pip可以一键安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install scrapy</span><br></pre></td></tr></table></figure>
-</li>
+<h1 id="Scrapy爬虫"><a href="#Scrapy爬虫" class="headerlink" title="Scrapy爬虫"></a>Scrapy爬虫</h1>Scrapy是非常常用的python爬虫框架，基于scrapy写爬虫可以节省大量的代码和时间，原理这里就不赘述了，感兴趣的同学自行科普<a href="https://doc.scrapy.org/en/latest/intro/tutorial.html" target="_blank" rel="noopener">Scrapy教程</a>，这里只贴一张图。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-0eec179c841d0ef5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Scrapy架构"><h2 id="安装Scrapy"><a href="#安装Scrapy" class="headerlink" title="安装Scrapy"></a>安装Scrapy</h2>笔者基于python3.6来安装Scrapy，所以前提是你的机器已经安装好python3的环境。scrapy安装办法非常简单，使用pip可以一键安装<pre><code>pip3 install scrapy
+</code></pre>装好以后，不熟悉scrapy的同学可以先看看官方示例程序熟悉一下，在cmd里执行下面的命令生成示例程序<pre><code>scrapy startproject tutorial
+</code></pre>即可在当前目录自动创建一个完整的示例教程，这里我们可以看到整个爬虫的目录结构如下：<pre><code>tutorial/
+ scrapy.cfg            # deploy configuration file
+ tutorial/             # project&#39;s Python module, you&#39;ll import your code from here
+     __init__.py
+     items.py          # project items definition file
+     pipelines.py      # project pipelines file
+     settings.py       # project settings file
+     spiders/          # a directory where you&#39;ll later put your spiders
+         __init__.py
+</code></pre><h2 id="分析网页"><a href="#分析网页" class="headerlink" title="分析网页"></a>分析网页</h2>本例以“<a href="https://www.easyaq.com/" target="_blank" rel="noopener">E安全</a>”网站为例，他们提供的安全咨询质量还是不错的，每天都有更新。大致看一眼网站的结构，会发现这个站点导航栏上有十多个安全咨询分类，点进去发现每个分类的url大致为 <a href="https://www.easyaq.com/type/*.shtml" target="_blank" rel="noopener">https://www.easyaq.com/type/*.shtml</a> ，而每个分类下面又有相关的文章和链接若干。到这里思路就很清楚了，先遍历这几个文章分类，然后动态获取每个分类下的文章链接，之后挨个访问文章链接并把内容保存下来，下面分析一下主要的代码。<h2 id="爬取网页"><a href="#爬取网页" class="headerlink" title="爬取网页"></a>爬取网页</h2>爬虫主体代码如下，使用scrapy的框架开发的爬虫实际的代码是非常精简的<br><code>`</code><br>import scrapy<br>from scrapy import Request, Selector<br>from sec_news_scrapy.items import SecNewsItem</li>
 </ol>
-<p>装好以后，不熟悉scrapy的同学可以先看看官方示例程序熟悉一下，在cmd里执行下面的命令生成示例程序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject tutorial</span><br></pre></td></tr></table></figure></p>
-<p>即可在当前目录自动创建一个完整的示例教程，这里我们可以看到整个爬虫的目录结构如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tutorial/</span><br><span class="line">    scrapy.cfg            # deploy configuration file</span><br><span class="line">    tutorial/             # project&apos;s Python module, you&apos;ll import your code from here</span><br><span class="line">        __init__.py</span><br><span class="line">        items.py          # project items definition file</span><br><span class="line">        pipelines.py      # project pipelines file</span><br><span class="line">        settings.py       # project settings file</span><br><span class="line">        spiders/          # a directory where you&apos;ll later put your spiders</span><br><span class="line">            __init__.py</span><br></pre></td></tr></table></figure></p>
-<h2 id="分析网页"><a href="#分析网页" class="headerlink" title="分析网页"></a>分析网页</h2><p>本例以“<a href="https://www.easyaq.com/" target="_blank" rel="noopener">E安全</a>”网站为例，他们提供的安全咨询质量还是不错的，每天都有更新。大致看一眼网站的结构，会发现这个站点导航栏上有十多个安全咨询分类，点进去发现每个分类的url大致为 <a href="https://www.easyaq.com/type/*.shtml" target="_blank" rel="noopener">https://www.easyaq.com/type/*.shtml</a> ，而每个分类下面又有相关的文章和链接若干。到这里思路就很清楚了，先遍历这几个文章分类，然后动态获取每个分类下的文章链接，之后挨个访问文章链接并把内容保存下来，下面分析一下主要的代码。</p>
-<h2 id="爬取网页"><a href="#爬取网页" class="headerlink" title="爬取网页"></a>爬取网页</h2><p>爬虫主体代码如下，使用scrapy的框架开发的爬虫实际的代码是非常精简的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line">from scrapy import Request, Selector</span><br><span class="line">from sec_news_scrapy.items import SecNewsItem</span><br><span class="line"></span><br><span class="line">class SecNewsSpider(scrapy.Spider):</span><br><span class="line">    name = &quot;security&quot;</span><br><span class="line">    allowed_domains = [&quot;easyaq.com&quot;]</span><br><span class="line">    start_urls = []</span><br><span class="line">    for i in range(2, 17):</span><br><span class="line">        req_url = &apos;https://www.easyaq.com/type/%s.shtml&apos; % i</span><br><span class="line">        start_urls.append(req_url)</span><br><span class="line"></span><br><span class="line">    def parse(self, response):</span><br><span class="line">        topics = []</span><br><span class="line">        for sel in response.xpath(&apos;//*[@id=&quot;infocat&quot;]/div[@class=&quot;listnews bt&quot;]/div[@class=&quot;listdeteal&quot;]/h3/a&apos;):</span><br><span class="line">            topic = &#123;&apos;title&apos;: sel.xpath(&apos;text()&apos;).extract(), &apos;link&apos;: sel.xpath(&apos;@href&apos;).extract()&#125;</span><br><span class="line">            topics.append(topic)</span><br><span class="line"></span><br><span class="line">        for topic in topics:</span><br><span class="line">            yield Request(url=topic[&apos;link&apos;][0], meta=&#123;&apos;topic&apos;: topic&#125;, dont_filter=False, callback=self.parse_page)</span><br><span class="line"></span><br><span class="line">    def parse_page(self, response):</span><br><span class="line">        topic = response.meta[&apos;topic&apos;]</span><br><span class="line">        selector = Selector(response)</span><br><span class="line"></span><br><span class="line">        item = SecNewsItem()</span><br><span class="line">        item[&apos;title&apos;] = selector.xpath(&quot;//div[@class=&apos;article_tittle&apos;]/div[@class=&apos;inner&apos;]/h1/text()&quot;).extract()</span><br><span class="line">        item[&apos;content&apos;] = &quot;&quot;.join(selector.xpath(&apos;//div[@class=&quot;content-text&quot;]/p/text()&apos;).extract())</span><br><span class="line">        item[&apos;uri&apos;] = topic[&apos;link&apos;][0]</span><br><span class="line">        print(&apos;Finish scan title:&apos; + item[&apos;title&apos;][0])</span><br><span class="line">        yield item</span><br></pre></td></tr></table></figure></p>
-<p>我们把网站上所有分类的url枚举出来放在start_url里面，parse是框架执行爬虫任务的入口，框架会自动访问前面start_url设置的页面，返回一个response对象，从这个对象中可以通过xpath提取有用的信息。<br>这里我们要从每一个类型页面的html中分析出文章的标题和访问uri，谷歌的chrome提供了很好的xpath生成工具，可以快速提取目标的xpath，在浏览器中按F12可以看到网页的html源码，找到需要提取的内容，右键可以提取xpath。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-69c3f57935151797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>获取到文章内容的uri还没有完，我们还需要进一步访问该uri，并且把文章的内容记录下来供下一步分析，这里的parse_page函数就是用来做内容抽取的，方法同上，借助chrome的xpath分析工具很快就能提取到文章内容。<br>内容提取到以后，这里将内容存到Item中，Item是Scrapy框架的另一个组成部分，类似于字典类型，主要是用来定义传递数据的格式，而传递是为了下一步数据持久化。</p>
-<h2 id="数据持久化"><a href="#数据持久化" class="headerlink" title="数据持久化"></a>数据持久化</h2><p>Item.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class SecNewsItem(scrapy.Item):</span><br><span class="line">    title = scrapy.Field()</span><br><span class="line">    content = scrapy.Field()</span><br><span class="line">    uri = scrapy.Field()</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure></p>
-<p>pipeline.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import jieba</span><br><span class="line">import jieba.analyse</span><br><span class="line">import pymysql</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">def dbHandle():</span><br><span class="line">    conn = pymysql.connect(</span><br><span class="line">        host=&quot;localhost&quot;,</span><br><span class="line">        user=&quot;root&quot;,</span><br><span class="line">        passwd=&quot;1234&quot;,</span><br><span class="line">        charset=&quot;utf8&quot;,</span><br><span class="line">        db=&apos;secnews&apos;,</span><br><span class="line">        port=3306)</span><br><span class="line">    return conn</span><br><span class="line"></span><br><span class="line">def is_figure(str):</span><br><span class="line">    value = re.compile(r&apos;^\d+$&apos;)</span><br><span class="line">    if value.match(str):</span><br><span class="line">        return True</span><br><span class="line">    else:</span><br><span class="line">        return False</span><br><span class="line"></span><br><span class="line">def save_key_word(item):</span><br><span class="line">    words = jieba.analyse.extract_tags(item[&apos;content&apos;], topK=50, withWeight=True)</span><br><span class="line"></span><br><span class="line">    conn = dbHandle()</span><br><span class="line">    cursor = conn.cursor()</span><br><span class="line">    sql = &quot;insert ignore into t_security_news_words(title, `key`, val) values (%s,%s,%s)&quot;</span><br><span class="line">    try:</span><br><span class="line">        for word in words:</span><br><span class="line">            if is_figure(word[0]):</span><br><span class="line">                continue</span><br><span class="line">            cursor.execute(sql, (item[&apos;title&apos;][0], word[0], int(word[1] * 1000)))</span><br><span class="line">        cursor.connection.commit()</span><br><span class="line">    except BaseException as e:</span><br><span class="line">        print(&quot;存储错误&quot;, e, &quot;&lt;&lt;&lt;&lt;&lt;&lt;原因在这里&quot;)</span><br><span class="line">        conn.rollback()</span><br><span class="line"></span><br><span class="line">def save_article(item):</span><br><span class="line">    conn = dbHandle()</span><br><span class="line">    cursor = conn.cursor()</span><br><span class="line">    sql = &quot;insert ignore into t_security_news_article(title, content, uri) values (%s,%s,%s)&quot;</span><br><span class="line">    try:</span><br><span class="line">        cursor.execute(sql, (item[&apos;title&apos;][0], item[&apos;content&apos;], item[&apos;uri&apos;]))</span><br><span class="line">        cursor.connection.commit()</span><br><span class="line">    except BaseException as e:</span><br><span class="line">        print(&quot;存储错误&quot;, e, &quot;&lt;&lt;&lt;&lt;&lt;&lt;原因在这里&quot;)</span><br><span class="line">        conn.rollback()</span><br><span class="line"></span><br><span class="line">class TutorialPipeline(object):</span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        save_key_word(item)</span><br><span class="line">        save_article(item)</span><br><span class="line">        return item</span><br></pre></td></tr></table></figure></p>
-<p>settings.py<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">    &apos;sec_news_scrapy.pipelines.TutorialPipeline&apos;: 300,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>爬虫主程序中收集到的Item会传入到这里，这里有两个步骤save_key_word和save_article，后者将文章的标题、内容、uri存入到MySQL表里；这里着重介绍前者save_key_word函数。<br>我们的目标是自动分析文章里面跟主题相关的关键字，并且分析出每个词的权重，具体来说包含以下步骤：</p>
-<ol>
-<li><strong><em>切词</em></strong>：中文切词工具有很多，这里我选择用<a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">jieba</a>实现</li>
-<li><strong><em>提取关键字</em></strong>：jieba里面已经实现好了TF/IDF的算法，我们利用该算法从每篇文章里选择top50的词汇，并且带上权重。用这种方式提取关键字还可以直接把常见的提用词过滤掉，当然jieba也支持自定义停用词<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">words = jieba.analyse.extract_tags(item[&apos;content&apos;], topK=50, withWeight=True)</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><img src="http://upload-images.jianshu.io/upload_images/8818451-d92d50e3995e4c71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提取关键词"></p>
-<ol start="3">
-<li><strong><em>数据存储</em></strong>：提取到需要的信息，下一步需要把信息保存到MySQL，在python3下面可以用pymysql来操作MySQL<br><img src="http://upload-images.jianshu.io/upload_images/8818451-7f2b5070a2866d94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文章列表"><br><img src="http://upload-images.jianshu.io/upload_images/8818451-8733222cca241c5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="关键字列表"><h1 id="关键词可视化-词云"><a href="#关键词可视化-词云" class="headerlink" title="关键词可视化-词云"></a>关键词可视化-词云</h1>通过上面的程序，我们已经可以把网站上的安全咨询文章全部爬取到数据库，并且从每篇文章里面提取50个关键字。接下来我们希望把这些关键词用可视化的方式展示出来，出现频度高的关键词做高亮显示，所以很自然的想到用词云展示。<br>这里我们用eChart提供的<a href="https://github.com/ecomfe/echarts-wordcloud" target="_blank" rel="noopener">echarts-wordcloud</a>组件来做。做法非常简单，从MySQL的关键词表里统计数据，生成k-v字串用正则直接替换到html页面，当然这里更优雅的做法应该是用ajax从DB里取数据，我这里就先取个巧了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def get_key_word_from_db():</span><br><span class="line">    words = &#123;&#125;</span><br><span class="line">    conn = dbHandle()</span><br><span class="line">    try:</span><br><span class="line">        with conn.cursor() as cursor:</span><br><span class="line">            cursor.execute(</span><br><span class="line">                &quot;select `key`, sum(val) as s from t_security_news_words group by `key` order by s desc limit 300&quot;)</span><br><span class="line">            for res in cursor.fetchall():</span><br><span class="line">                words[res[0]] = int(res[1])</span><br><span class="line">        return words</span><br><span class="line">    except BaseException as e:</span><br><span class="line">        print(&quot;存储错误&quot;, e, &quot;&lt;&lt;&lt;&lt;&lt;&lt;原因在这里&quot;)</span><br><span class="line">        conn.rollback()</span><br><span class="line">        return &#123;&#125;</span><br><span class="line">    finally:</span><br><span class="line">        conn.close()</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>查看动态效果<a href="http://dearcharles.cn/echart/" target="_blank" rel="noopener">点这里</a>，词云将词汇按照出现的频度或者权重与字体大小做关联，频度越高字体越大，从中我们可以大致感知到当前业界一些安全趋势，当然这也仅仅是一个例子。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-23844b9653c4ef3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="词云可视化效果"></p>
+<p>class SecNewsSpider(scrapy.Spider):<br>    name = “security”<br>    allowed_domains = [“easyaq.com”]<br>    start_urls = []<br>    for i in range(2, 17):<br>        req_url = ‘<a href="https://www.easyaq.com/type/%s.shtml&#39;" target="_blank" rel="noopener">https://www.easyaq.com/type/%s.shtml&#39;</a> % i<br>        start_urls.append(req_url)</p>
+<pre><code>def parse(self, response):
+    topics = []
+    for sel in response.xpath(&#39;//*[@id=&quot;infocat&quot;]/div[@class=&quot;listnews bt&quot;]/div[@class=&quot;listdeteal&quot;]/h3/a&#39;):
+        topic = {&#39;title&#39;: sel.xpath(&#39;text()&#39;).extract(), &#39;link&#39;: sel.xpath(&#39;@href&#39;).extract()}
+        topics.append(topic)
+
+    for topic in topics:
+        yield Request(url=topic[&#39;link&#39;][0], meta={&#39;topic&#39;: topic}, dont_filter=False, callback=self.parse_page)
+
+def parse_page(self, response):
+    topic = response.meta[&#39;topic&#39;]
+    selector = Selector(response)
+
+    item = SecNewsItem()
+    item[&#39;title&#39;] = selector.xpath(&quot;//div[@class=&#39;article_tittle&#39;]/div[@class=&#39;inner&#39;]/h1/text()&quot;).extract()
+    item[&#39;content&#39;] = &quot;&quot;.join(selector.xpath(&#39;//div[@class=&quot;content-text&quot;]/p/text()&#39;).extract())
+    item[&#39;uri&#39;] = topic[&#39;link&#39;][0]
+    print(&#39;Finish scan title:&#39; + item[&#39;title&#39;][0])
+    yield item
+</code></pre><pre><code>我们把网站上所有分类的url枚举出来放在start_url里面，parse是框架执行爬虫任务的入口，框架会自动访问前面start_url设置的页面，返回一个response对象，从这个对象中可以通过xpath提取有用的信息。
+这里我们要从每一个类型页面的html中分析出文章的标题和访问uri，谷歌的chrome提供了很好的xpath生成工具，可以快速提取目标的xpath，在浏览器中按F12可以看到网页的html源码，找到需要提取的内容，右键可以提取xpath。
+![image.png](http://upload-images.jianshu.io/upload_images/8818451-69c3f57935151797.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+获取到文章内容的uri还没有完，我们还需要进一步访问该uri，并且把文章的内容记录下来供下一步分析，这里的parse_page函数就是用来做内容抽取的，方法同上，借助chrome的xpath分析工具很快就能提取到文章内容。
+内容提取到以后，这里将内容存到Item中，Item是Scrapy框架的另一个组成部分，类似于字典类型，主要是用来定义传递数据的格式，而传递是为了下一步数据持久化。
+## 数据持久化
+Item.py
+</code></pre><p>class SecNewsItem(scrapy.Item):<br>    title = scrapy.Field()<br>    content = scrapy.Field()<br>    uri = scrapy.Field()<br>    pass</p>
+<pre><code>pipeline.py
+</code></pre><p>import jieba<br>import jieba.analyse<br>import pymysql<br>import re</p>
+<p>def dbHandle():<br>    conn = pymysql.connect(<br>        host=”localhost”,<br>        user=”root”,<br>        passwd=”1234”,<br>        charset=”utf8”,<br>        db=’secnews’,<br>        port=3306)<br>    return conn</p>
+<p>def is_figure(str):<br>    value = re.compile(r’^\d+$’)<br>    if value.match(str):<br>        return True<br>    else:<br>        return False</p>
+<p>def save_key_word(item):<br>    words = jieba.analyse.extract_tags(item[‘content’], topK=50, withWeight=True)</p>
+<pre><code>conn = dbHandle()
+cursor = conn.cursor()
+sql = &quot;insert ignore into t_security_news_words(title, `key`, val) values (%s,%s,%s)&quot;
+try:
+    for word in words:
+        if is_figure(word[0]):
+            continue
+        cursor.execute(sql, (item[&#39;title&#39;][0], word[0], int(word[1] * 1000)))
+    cursor.connection.commit()
+except BaseException as e:
+    print(&quot;存储错误&quot;, e, &quot;&lt;&lt;&lt;&lt;&lt;&lt;原因在这里&quot;)
+    conn.rollback()
+</code></pre><p>def save_article(item):<br>    conn = dbHandle()<br>    cursor = conn.cursor()<br>    sql = “insert ignore into t_security_news_article(title, content, uri) values (%s,%s,%s)”<br>    try:<br>        cursor.execute(sql, (item[‘title’][0], item[‘content’], item[‘uri’]))<br>        cursor.connection.commit()<br>    except BaseException as e:<br>        print(“存储错误”, e, “&lt;&lt;&lt;&lt;&lt;&lt;原因在这里”)<br>        conn.rollback()</p>
+<p>class TutorialPipeline(object):<br>    def process_item(self, item, spider):<br>        save_key_word(item)<br>        save_article(item)<br>        return item</p>
+<pre><code>settings.py
+</code></pre><p>ITEM_PIPELINES = {<br>    ‘sec_news_scrapy.pipelines.TutorialPipeline’: 300,<br>}</p>
+<pre><code>爬虫主程序中收集到的Item会传入到这里，这里有两个步骤save_key_word和save_article，后者将文章的标题、内容、uri存入到MySQL表里；这里着重介绍前者save_key_word函数。
+我们的目标是自动分析文章里面跟主题相关的关键字，并且分析出每个词的权重，具体来说包含以下步骤：
+1. ***切词***：中文切词工具有很多，这里我选择用[jieba](https://github.com/fxsjy/jieba)实现
+2. ***提取关键字***：jieba里面已经实现好了TF/IDF的算法，我们利用该算法从每篇文章里选择top50的词汇，并且带上权重。用这种方式提取关键字还可以直接把常见的提用词过滤掉，当然jieba也支持自定义停用词
+</code></pre><p>words = jieba.analyse.extract_tags(item[‘content’], topK=50, withWeight=True)</p>
+<pre><code>![提取关键词](http://upload-images.jianshu.io/upload_images/8818451-d92d50e3995e4c71.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+3. ***数据存储***：提取到需要的信息，下一步需要把信息保存到MySQL，在python3下面可以用pymysql来操作MySQL
+![文章列表](http://upload-images.jianshu.io/upload_images/8818451-7f2b5070a2866d94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![关键字列表](http://upload-images.jianshu.io/upload_images/8818451-8733222cca241c5f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+# 关键词可视化-词云
+通过上面的程序，我们已经可以把网站上的安全咨询文章全部爬取到数据库，并且从每篇文章里面提取50个关键字。接下来我们希望把这些关键词用可视化的方式展示出来，出现频度高的关键词做高亮显示，所以很自然的想到用词云展示。
+这里我们用eChart提供的[echarts-wordcloud](https://github.com/ecomfe/echarts-wordcloud)组件来做。做法非常简单，从MySQL的关键词表里统计数据，生成k-v字串用正则直接替换到html页面，当然这里更优雅的做法应该是用ajax从DB里取数据，我这里就先取个巧了。
+</code></pre><p>def get_key_word_from_db():<br>    words = {}<br>    conn = dbHandle()<br>    try:<br>        with conn.cursor() as cursor:<br>            cursor.execute(<br>                “select <code>key</code>, sum(val) as s from t_security_news_words group by <code>key</code> order by s desc limit 300”)<br>            for res in cursor.fetchall():<br>                words[res[0]] = int(res[1])<br>        return words<br>    except BaseException as e:<br>        print(“存储错误”, e, “&lt;&lt;&lt;&lt;&lt;&lt;原因在这里”)<br>        conn.rollback()<br>        return {}<br>    finally:<br>        conn.close()<br><code>`</code><br>查看动态效果<a href="http://dearcharles.cn/echart/" target="_blank" rel="noopener">点这里</a>，词云将词汇按照出现的频度或者权重与字体大小做关联，频度越高字体越大，从中我们可以大致感知到当前业界一些安全趋势，当然这也仅仅是一个例子。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-23844b9653c4ef3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="词云可视化效果"></p>
 <h1 id="调试技巧"><a href="#调试技巧" class="headerlink" title="调试技巧"></a>调试技巧</h1><p>python有很多IDE可选，笔者选择用pycharm，在调试scrapy程序的时候，需要用到scrapy的引擎启动，所以用默认的pycharm没法调试，需要做一些设置，如下图所示<br>run -&gt; Edit Configurations<br>script填写scrapy安装目录里面的cmdline.py的位置；Script parameters是执行scrapy时用的参数，security是我们这个爬虫的名字；Working directory写爬虫的根目录。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1a0b6e200454f8b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>配置好以后就可以直接用pycharm来启动debug了,run -&gt; debug ‘xxx’</p>
 <p>完整的代码示例，包含echart的部分，请见<a href="https://github.com/dickens88/sec_news_scrapy" target="_blank" rel="noopener">github</a></p>
 
       
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 370716264@qq.com </span>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
-          
-            <a href="/tags/可视化/" rel="tag"><i class="fa fa-tag"></i> 可视化</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/24/Splunk集成Kafka配置方法/" rel="next" title="Splunk集成Kafka配置方法">
-                <i class="fa fa-chevron-left"></i> Splunk集成Kafka配置方法
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/21/Logstash集成Kafka配置方法-基于Docker/" rel="prev" title="Logstash集成Kafka配置方法(基于Docker)">
-                Logstash集成Kafka配置方法(基于Docker) <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
+</article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame"></div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
-          <p class="site-author-name" itemprop="name">Charles Liu</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-        
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/dickens88" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#整体思路"><span class="nav-number">1.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy爬虫"><span class="nav-number">2.</span> <span class="nav-text">Scrapy爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Scrapy"><span class="nav-number">2.1.</span> <span class="nav-text">安装Scrapy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析网页"><span class="nav-number">2.2.</span> <span class="nav-text">分析网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爬取网页"><span class="nav-number">2.3.</span> <span class="nav-text">爬取网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据持久化"><span class="nav-number">2.4.</span> <span class="nav-text">数据持久化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关键词可视化-词云"><span class="nav-number">3.</span> <span class="nav-text">关键词可视化-词云</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#调试技巧"><span class="nav-number">4.</span> <span class="nav-text">调试技巧</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">
-  
-  &copy;  2017 - 
-  <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>Scrapy+eChart自动爬取生成网络安全词云</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">2.3k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Charles Liu">Charles Liu</a></p>
+    <p><span class="copy-title">发布时间:</span>2017-12-10, 15:36:00</p>
+    <p><span class="copy-title">最后更新:</span>2017-12-10, 13:10:20</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/" title="Scrapy+eChart自动爬取生成网络安全词云">http://www.dearcharles.cn/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
 </div>
 
 
 
-<div class="powered-by">
-<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
-  本站访客数:<span id="busuanzi_value_site_uv"></span>
-</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
-
-  
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
 
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: [''],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: '',
+            language: '',
+            perPage: parseInt('',10)
+        })
+        gitalk.render('comments')
+    })
 </script>
 
 
 
 
-
-
-
-
-
-  
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
     
 
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148423"></script>
-      <!-- UY END -->
-    
-  
 
 
 
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Charles</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
 
-  
+    </div>
+</div>
+<a class="" id="rocket" ></a>
 
-
-
-  
-  
-
-  
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("sxE5gByY0QdSqioeI722jJaQ-gzGzoHsz", "8vD9MgcP5NLuNa9HWnRTqpc7");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-
-  
+    </div>
+</div>
+<div class="acParent"></div>
 
 </body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#ELK','#Java','#hexo','#Docker','#OAuth2.0','#Python','#可视化','#Splunk','#Kafka','#ProGuard','#混淆','#数据与智能','#SSO','#python','#自动化','#Seafile','#网络安全','#机器学习','#行为分析','#Metaspliot','#渗透测试','#大数据',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+<div class="mobile-menus-out" >
+
+</div>
+<div class="mobile-menus">
+    
+    
+    
+    
+    <a class="dynamic-menu " target="_blank"  href="https://github.com/dickens88">github</a>
+    
+</div>
+
+
 </html>
