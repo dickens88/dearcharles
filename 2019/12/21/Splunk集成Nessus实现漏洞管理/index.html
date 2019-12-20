@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>ELK+Beats实现Windows服务器系统日志监控 | Charles&#39; Big Plan</title>
-  <meta name="keywords" content=" ELK ">
-  <meta name="description" content="ELK+Beats实现Windows服务器系统日志监控 | Charles&#39; Big Plan">
+  <title>Splunk集成Nessus实现漏洞管理 | Charles&#39; Big Plan</title>
+  <meta name="keywords" content>
+  <meta name="description" content="Splunk集成Nessus实现漏洞管理 | Charles&#39; Big Plan">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="HelloIt’s really nice to post my first post in my own blog.  IntroductionMy name is Charles, and for now, I work in Huawei company. My work is mainly about Cyber Security, we use varity of Tools, like">
 <meta property="og:type" content="website">
@@ -481,36 +481,24 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-ELK-Beats实现Windows服务器系统日志监控" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Splunk集成Nessus实现漏洞管理" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ELK+Beats实现Windows服务器系统日志监控</h1>
+        <h1 class="article-title">Splunk集成Nessus实现漏洞管理</h1>
     
     <div class="article-meta">
         
         
         
-        <span class="book">
-            
-                <a  data-rel="大数据">大数据</a>
-            
-        </span>
-        
-        
-        <span class="tag">
-            
-            <a class="color4">ELK</a>
-            
-        </span>
         
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2017-11-11 17:00:50'>2017-11-11 19:11</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-21 00:43:25'>2019-12-21 00:42</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.2k</span>
+        <span>字数:973</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -540,7 +528,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤一：安装Winlogbeat"><span class="toc-text">步骤一：安装Winlogbeat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤二：配置Winlogbeat"><span class="toc-text">步骤二：配置Winlogbeat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤三：配置Winlogbeat使用Logstash"><span class="toc-text">步骤三：配置Winlogbeat使用Logstash</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤四：加载索引模板"><span class="toc-text">步骤四：加载索引模板</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五步：启动Winlogbeat"><span class="toc-text">第五步：启动Winlogbeat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤六：加载Kibana仪表盘样例"><span class="toc-text">步骤六：加载Kibana仪表盘样例</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0x01-准备条件"><span class="toc-text">0x01 准备条件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-安装Splunk插件"><span class="toc-text">0x02  安装Splunk插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x03-预定义报表"><span class="toc-text">0x03 预定义报表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nessus-Map-Destination-IP-by-Severity"><span class="toc-text">Nessus Map - Destination IP by Severity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nessus-Pie-Chart-–-Severity"><span class="toc-text">Nessus Pie Chart – Severity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nessus-Graph-–-Severity-Count-over-Time"><span class="toc-text">Nessus Graph – Severity Count over Time</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结论"><span class="toc-text">结论</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -556,96 +544,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>ELK在运维监控领域使用非常广泛，日志采集通常依靠Logstash，但是通常来讲Logstash架构比较重载，一个安装包由几百MB，相比之下Elastic还提供另一种更轻量的采集工具Beats。Beats 平台集合了多种单一用途数据采集器。这些采集器安装后可用作轻量型代理，从成百上千或成千上万台机器向 Logstash 或 Elasticsearch 发送数据。本文简要介绍一下使用Winlogbeat收集Windows日志，并用ES + Kibana检索的配置方法。<br><a id="more"></a></p>
-<h1 id="步骤一：安装Winlogbeat"><a href="#步骤一：安装Winlogbeat" class="headerlink" title="步骤一：安装Winlogbeat"></a>步骤一：安装Winlogbeat</h1><ol>
-<li>下载Winlogbeat安装包downloads page.</li>
-<li>解压到C:\Program Files.</li>
-<li>重名名解压文件winlogbeat-<version>目录为Winlogbeat</version></li>
-<li>打开PowerShell，以管理员身份运行（右键点击Powershell并选择以管理员身份运行）。如果你使用XP，可能需要自行下载安装PowerShell</li>
-<li>在PowerShell中运行如下命令安装服务<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/0k6Adg83kK.png" alt="mark"></li>
-</ol>
-<p>在运行Winlogbeat前，还需要检查一下配置文件中的选项，比如C:\Program Files\Winlogbeat\winlogbeat.yml，安装包里提供一个完整的配置文件样例winlogbeat.full.yml，<a href="https://www.elastic.co/guide/en/beats/winlogbeat/current/winlogbeat-configuration-details.html" target="_blank" rel="noopener">更多资料请参考</a>.</p>
-<p>配置Winlogbeat</p>
-<p>编辑winlogbeat.yml来修改配置，熟悉yaml语法的同学一定不会陌生，不熟悉的请自行熟悉。<br>举例如下：</p>
-<pre><code>winlogbeat.event_logs:
-  - name: Application
-  - name: Security
-  - name: System
+        <p>系统漏洞管理是SOC安全运营非常重要的环节，通常SOC团队需要定期对公司内部服务器进行漏洞扫描，以确定和评估内部系统是否存在系统漏洞和不合规配置，通过漏洞扫描来进行安全风险检查是一种非常常用的手段。业界比较有名的商用漏扫工具有Nessus和Nexpose等，而漏洞扫描的结果对于后续的风险评估和整改有非常重要的意义，正确合理的做法是由IT人员对相关风险进行跟踪闭环，本文简要介绍一下使用Splunk集成Nessus进行系统漏洞集中跟踪管理的方法。</p>
+<h1 id="0x01-准备条件"><a href="#0x01-准备条件" class="headerlink" title="0x01 准备条件"></a>0x01 准备条件</h1><ul>
+<li>Splunk Enterprise平台</li>
+<li>Nessus 漏洞扫描平台</li>
+</ul>
+<h1 id="0x02-安装Splunk插件"><a href="#0x02-安装Splunk插件" class="headerlink" title="0x02  安装Splunk插件"></a>0x02  安装Splunk插件</h1><p>到Splunk官网免费下载插件<a href="https://splunkbase.splunk.com/app/1710/" target="_blank" rel="noopener">Splunk Add-on for Tenable</a>,完成以后到你的Splunk WEB UI进行安装。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-6c0f476a57c37391.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安装插件"><br>根据提示重新过后，在Splunk WEB UI首页会看到多出一个app图标：<br><img src="https://upload-images.jianshu.io/upload_images/8818451-146f8f7d848d9398.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app"><br>进入到这个app进行Nessus基本设置，点击“Create New Input”，有两个选项Security Center 和 Nessus，因为我的环境是单点的Nessus服务器，所以这里我们选择后者。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-ec3cf824d885d701.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus信息配置"></p>
+<p>Nessus Metrics 下面有两个选项：</p>
+<ul>
+<li>Nessus Plugins 收集Nessus内部已经安装的各种扫描插件和CVE信息</li>
+<li>Nessus Host Scans 收集每次扫描的结果信息<br>Access Key和Secret Key要从Nessus的管理界面上获取<br><img src="https://upload-images.jianshu.io/upload_images/8818451-5c91047df4fd72d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生成Key"><br>这里每个用户每次生成的Key都是不一样的，所以要妥善保存生成的Key，否则就要重新生成再配置了<br>配置好以后点击“add”即可完成配置</li>
+</ul>
+<p>0x03 证书问题<br>根据官方文档的介绍，到这里理论上就应该可以搜索到数据了，然而并非如此，因为大部分人在部署Nessus的时候使用的证书都是自签发的，Splunk在访问Nessus的时候会因为证书校验失败而停止数据访问，结果就是我们什么也搜不到。定位这个问题可以从Splunk的内部日志看到一些报错：</p>
+<pre><code>index=_internal sourcetype=ta:nessus:log error
+</code></pre><p>[SSL: CERTIFICATE_VERIFY_FAILED] certificate verification failed. The certificate validation is enabled for Nessus. You may need to check the certificate and refer to the documentation and add it to the trust list.<br><img src="https://upload-images.jianshu.io/upload_images/8818451-1195e20db0b39bc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这时候有两个种做法，一种是将Nessus的证书导出并加入到Splunk的信任证书库里，但是这种方式笔者一直没成功。另一种做法就是关闭Splunk对证书的校验：</p>
+<pre><code>vi /opt/splunk/etc/apps/Splunk_TA_nessus/local/inputs.conf
+</code></pre><p>在每一段input配置后面加一段<code>disable_ssl_certificate_validation = true</code> 如下文所示：</p>
+<pre><code>[nessus://scan]
+access_key = ********
+batch_size = 100000
+interval = 60
+metric = nessus_scan
+secret_key = ********
+start_date = 1999/01/01
+url = https://&lt;Splunk-ip&gt;:&lt;port&gt;
+disabled = 0
+disable_ssl_certificate_validation = true
 
-output.elasticsearch:
-  hosts:
-    - localhost:9200
-
-logging.to_files: true
-logging.files:
-  path: C:/ProgramData/winlogbeat/Logs
-logging.level: info
-</code></pre><h1 id="步骤二：配置Winlogbeat"><a href="#步骤二：配置Winlogbeat" class="headerlink" title="步骤二：配置Winlogbeat"></a>步骤二：配置Winlogbeat</h1><ol>
-<li><p>在event_logs章节，指定你要监控的event log类型，Winlogbeat默认监控application, security, and system这三种</p>
-<pre><code>winlogbeat.event_logs:
-- name: Application
-- name: Security
-- name: System
-</code></pre><p>要查看全部类型，在PowerShell中运行Get-EventLog *，更多信息请参考event_logs.name.</p>
-</li>
-<li><p>如果需要把日志发送到Elasticsearch，这里把IP端口写进去：</p>
-<pre><code>output.elasticsearch:
-hosts:
- - localhost:9200
-</code></pre><p>如果要把日志写到Logstash，请继续往下看</p>
-</li>
-<li><p>修改完配置文件以后运行下面的命令测试一下：</p>
-<pre><code>PS C:\Program Files\Winlogbeat&gt; .\winlogbeat.exe -c .\winlogbeat.yml -configtest -e
-</code></pre><h1 id="步骤三：配置Winlogbeat使用Logstash"><a href="#步骤三：配置Winlogbeat使用Logstash" class="headerlink" title="步骤三：配置Winlogbeat使用Logstash"></a>步骤三：配置Winlogbeat使用Logstash</h1><p>如果你想把日志直接写到Elasticsearch那么这一步可以跳过。</p>
-</li>
-</ol>
-<p>要将日志通过Logstash写到ES，需要先配置Logstash的转发规则，举例如下：</p>
-<pre><code>input{
-    beats{
-        port=&gt;5044type=&gt;&quot;wineventlog&quot;
-    }
-}
-output{
-    stdout{
-
-    }if[
-        type
-    ]==&quot;wineventlog&quot;{
-        elasticsearch{
-            hosts=&gt;&quot;100.100.16.231&quot;index=&gt;&quot;winlogbeat-%{+yyyy.MM.dd}&quot;
-        }
-    }else{
-        elasticsearch{
-            hosts=&gt;&quot;100.100.16.231&quot;
-        }
-    }
-}
-</code></pre><p>配置好以后确保Logstash已经启动且运行正常。接下来要配置Winlogbeat将日志发送到Logstash的5044端口</p>
-<p>#—————————– Logstash output ——————————–<br>output.logstash:<br>  hosts: [“127.0.0.1:5044”]</p>
-<p>这里还需要额外做一个步骤，让Elasticsearch加载索引模板，因为这里我们是用Logstash往ES上转日志，所以必须手动加载索引模板，如果直接往ES发日志，这一步可以省略</p>
-<h1 id="步骤四：加载索引模板"><a href="#步骤四：加载索引模板" class="headerlink" title="步骤四：加载索引模板"></a>步骤四：加载索引模板</h1><p>在Elasticsearch里面，索引模板(Index templates)用来定义字段的设置和映射关系，推荐的Winlogbeat索引模板配置文件在Winlogbeat的安装包里winlogbeat.yml，下面我们通过ES的API接口把模板推送过去，其实就是构造一个HTTP的PUT请求把数据发出去，工具和方法很多这里介绍两种，</p>
-<p>使用PowerShell</p>
-<pre><code>PS C:\Program Files\Winlogbeat&gt; Invoke-WebRequest -Method Put -InFile winlogbeat.template.json -Uri  http://localhost:9200/_template/winlogbeat?pretty -ContentType application/json
-</code></pre><p>使用Postman<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Dmb0B5HEjK.png" alt="mark"></p>
-<p>这里localhost:9200是Elasticsearch的监听端口。另外删除已有的索引模板执行如下命令：<br>curl -XDELETE ‘<a href="http://localhost:9200/winlogbeat-*&#39;" target="_blank" rel="noopener">http://localhost:9200/winlogbeat-*&#39;</a></p>
-<h1 id="第五步：启动Winlogbeat"><a href="#第五步：启动Winlogbeat" class="headerlink" title="第五步：启动Winlogbeat"></a>第五步：启动Winlogbeat</h1><p>用PowerShell启动:</p>
-<pre><code>PS C:\Program Files\Winlogbeat&gt; Start-Service winlogbeat
-</code></pre><p>执行以后Winlogbeat就开始执行了，如果使用上面的配置文件，日志会输出到C:\ProgramData\winlogbeat\Logs\winlogbeat。<br>我们可以通过Services management控制这个任务的状态，启动控制台</p>
-<pre><code>PS C:\Program Files\Winlogbeat&gt; services.msc
-</code></pre><p>停止任务：</p>
-<pre><code>PS C:\Program Files\Winlogbeat&gt; Stop-Service winlogbeat
-</code></pre><h1 id="步骤六：加载Kibana仪表盘样例"><a href="#步骤六：加载Kibana仪表盘样例" class="headerlink" title="步骤六：加载Kibana仪表盘样例"></a>步骤六：加载Kibana仪表盘样例</h1><p>为方便用户监控收到的数据，官方还提供了一个Winlogbeat的Kibana仪表盘样例，当然我们可以基于这个样例自己定制仪表盘。<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/Hm6lmH8ec6.png" alt="mark"></p>
-<p>导入仪表盘</p>
-<p>Winlogbeat安装包里有个scripts/import_dashboards程序，操作步骤非常简单，打开PowerShell命名行，执行该程序：</p>
-<pre><code>PS &gt; scripts\import_dashboards.exe
-</code></pre><p>脚本默认假设你的Elasticsearch在127.0.0.1:9200，如果你的环境不在本地，可以执行下面的命令指定服务器位置：</p>
-<pre><code>PS &gt; scripts\import_dashboards.exe -es http://192.168.33.60:9200
-</code></pre><p>如果ES开启了账号密码认证：</p>
-<pre><code>PS &gt; scripts\import_dashboards.exe -es https://xyz.found.io -user user -pass password
-</code></pre><p>查看仪表板</p>
-<p>导入完成以后，用浏览器访问Kibana页面，如：<a href="http://127.0.0.1:5601" target="_blank" rel="noopener">http://127.0.0.1:5601</a>.</p>
-<p>在Discover 页面，可以看到之前定义好的索引winlogbeat-*</p>
-<p>同时，打开Dashboard页面，可以选择对应的仪表盘查看<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/F1Hi0JGL25.png" alt="mark"><br>同时，打开Dashboard页面，可以选择对应的仪表盘查看<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171111/LkfK8fI9H7.png" alt="mark"></p>
+[nessus://plugin]
+access_key = ********
+batch_size = 100000
+interval = 43200
+metric = nessus_plugin
+secret_key = ********
+start_date = 1999/01/01
+url = https://&lt;Splunk-ip&gt;:&lt;port&gt;
+disabled = 0
+disable_ssl_certificate_validation = true
+</code></pre><p>加完以后重启Splunk即可。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8818451-f8d9465e90404b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Splunk-nessus"><br>这里我们可以随意对扫描结果以及插件CVE的信息进行组合搜索，跟踪，甚至安全建模，或者也可以配置可视化报表进行跟踪。</p>
+<h1 id="0x03-预定义报表"><a href="#0x03-预定义报表" class="headerlink" title="0x03 预定义报表"></a>0x03 预定义报表</h1><p>Splunk 官方提供了几个对plugin的预定义报表，可以在Saved Search里面找到，同时还有几个预定于的面板，这里简单介绍一下：<br>Setting -&gt; User Interface -&gt; Prebuilt panels 可以找到预定的面板</p>
+<h2 id="Nessus-Map-Destination-IP-by-Severity"><a href="#Nessus-Map-Destination-IP-by-Severity" class="headerlink" title="Nessus Map - Destination IP by Severity"></a>Nessus Map - Destination IP by Severity</h2><p>将漏扫的结果数据根据目的IP显示在地图上<br><img src="https://upload-images.jianshu.io/upload_images/8818451-e68ba6b6a8d1514c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus Map - Destination IP by Severity"></p>
+<h2 id="Nessus-Pie-Chart-–-Severity"><a href="#Nessus-Pie-Chart-–-Severity" class="headerlink" title="Nessus Pie Chart – Severity"></a>Nessus Pie Chart – Severity</h2><p>根据漏洞的风险等级分类统计<br><img src="https://upload-images.jianshu.io/upload_images/8818451-9a686866010da29e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus Pie Chart – Severity"></p>
+<h2 id="Nessus-Graph-–-Severity-Count-over-Time"><a href="#Nessus-Graph-–-Severity-Count-over-Time" class="headerlink" title="Nessus Graph – Severity Count over Time"></a>Nessus Graph – Severity Count over Time</h2><p>根据扫描结果的风险等级以时间维度进行展示<br><img src="https://upload-images.jianshu.io/upload_images/8818451-0956d3c46af38740.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>通过集成漏扫的结果，SOC团队除了对风险进行跟踪闭环，还可以通过定时扫描并配置对结果数据的监控实现实时监控漏洞风险，再多的我就不说了。。。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 370716264@qq.com </span>
@@ -655,12 +597,12 @@ output{
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>ELK+Beats实现Windows服务器系统日志监控</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">1.2k</span></p>
+    <p><span class="copy-title">文章标题:</span>Splunk集成Nessus实现漏洞管理</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">973</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Charles Liu">Charles Liu</a></p>
-    <p><span class="copy-title">发布时间:</span>2017-11-11, 19:11:00</p>
-    <p><span class="copy-title">最后更新:</span>2017-11-11, 17:00:50</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/" title="ELK+Beats实现Windows服务器系统日志监控">http://www.dearcharles.cn/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/</a>
+    <p><span class="copy-title">发布时间:</span>2019-12-21, 00:42:49</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-21, 00:43:25</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/21/Splunk集成Nessus实现漏洞管理/" title="Splunk集成Nessus实现漏洞管理">http://www.dearcharles.cn/2019/12/21/Splunk集成Nessus实现漏洞管理/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
