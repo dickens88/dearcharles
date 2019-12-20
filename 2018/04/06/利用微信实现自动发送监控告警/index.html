@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,21 +66,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="python,自动化," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="python,自动化,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2018/04/06/利用微信实现自动发送监控告警/">
 
 
 
@@ -182,7 +182,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Charles' Big Plan</span>
         <span class="logo-line-after"><i></i></span>
@@ -212,7 +212,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -222,7 +222,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -232,7 +232,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -242,7 +242,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -252,7 +252,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -262,7 +262,7 @@
         <li class="menu-item menu-item-echart">
           <a href="/echart" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             词云
           </a>
@@ -301,7 +301,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/8390209.jpg">
     </span>
 
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T16:41:00+03:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T16:41:00+05:30">
                 2018-04-06
               </time>
             
@@ -385,17 +385,17 @@
 <li>用个人号发送告警</li>
 <li>用公众号（企业号）发送告警</li>
 </ul>
-<h1 id="个人号发送告警"><a href="#个人号发送告警" class="headerlink" title="个人号发送告警"></a>个人号发送告警</h1><p>顾名思义，虽然也是调用微信的API实现发送信息，但是这种方式需要使用个人账号扫描登录以后脚本才能运行，另外从接受告警的形式上看起来也就像是跟一个人在聊天。当前已经有很多热心的大神将微信的接口封装成了更加易于调用的接口SDK，如<a href="http://wxpy.readthedocs.io/zh/latest/bot.html" target="_blank" rel="external">wxpy</a>和<a href="http://wechat-sender.readthedocs.io/zh_CN/latest/" target="_blank" rel="external">wechat sender</a>可以大大简化接口调用的复杂度，感兴趣的读者可以自行研究，上述两个项目的文档已经写的非常详细了</p>
+<h1 id="个人号发送告警"><a href="#个人号发送告警" class="headerlink" title="个人号发送告警"></a>个人号发送告警</h1><p>顾名思义，虽然也是调用微信的API实现发送信息，但是这种方式需要使用个人账号扫描登录以后脚本才能运行，另外从接受告警的形式上看起来也就像是跟一个人在聊天。当前已经有很多热心的大神将微信的接口封装成了更加易于调用的接口SDK，如<a href="http://wxpy.readthedocs.io/zh/latest/bot.html" target="_blank" rel="noopener">wxpy</a>和<a href="http://wechat-sender.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">wechat sender</a>可以大大简化接口调用的复杂度，感兴趣的读者可以自行研究，上述两个项目的文档已经写的非常详细了</p>
 <h1 id="公众号发送告警"><a href="#公众号发送告警" class="headerlink" title="公众号发送告警"></a>公众号发送告警</h1><p>使用公众号发送告警，从形式上看起来更加正式，并且不需要扫码登录，更适合部署在服务器上长期运行。因为近期微信的企业号和公众号做了合并，因此申请的流程有了一些变化，但是总体来说更加简单了，即使没有真正的公司注册信息也同样可以申请到，只是未验证主体信息的账号只能有200个成员，发送次数的限制为：帐号上限数*30人次/天<br><a id="more"></a></p>
-<h2 id="注册公众号（企业号）"><a href="#注册公众号（企业号）" class="headerlink" title="注册公众号（企业号）"></a>注册公众号（企业号）</h2><p>现在申请的过程非常简单，申请入口：<a href="https://work.weixin.qq.com/" target="_blank" rel="external">https://work.weixin.qq.com/</a></p>
+<h2 id="注册公众号（企业号）"><a href="#注册公众号（企业号）" class="headerlink" title="注册公众号（企业号）"></a>注册公众号（企业号）</h2><p>现在申请的过程非常简单，申请入口：<a href="https://work.weixin.qq.com/" target="_blank" rel="noopener">https://work.weixin.qq.com/</a></p>
 <h2 id="查看公众号"><a href="#查看公众号" class="headerlink" title="查看公众号"></a>查看公众号</h2><p>注册完成后可以进入到后台管理页面，点击微信插件，可以看到我们企业号的二维码，并可以进行添加成员等操作<br><img src="http://upload-images.jianshu.io/upload_images/8818451-db006aacb9111c48.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信插件"></p>
 <h2 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h2><p>在开始调用公众号的API之前，我们要先创建一个应用，告警可以发送到指定的应用中，同时我们还可以对应用授权，以限制可以看到告警的人员范围<br><img src="http://upload-images.jianshu.io/upload_images/8818451-10ab2bf6a919a607.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建应用"><br>创建完成后，点击应用图标可以看到以下页面<br><img src="http://upload-images.jianshu.io/upload_images/8818451-32fba94c8ccd8984.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="应用信息"><br>其中AgentId和Secret两个字段在后面的代码中要用到</p>
 <h2 id="微信API"><a href="#微信API" class="headerlink" title="微信API"></a>微信API</h2><p>要实现简单的消息发送，我们只需要用到两个微信的API接口</p>
 <ul>
-<li>获取token：<a href="https://work.weixin.qq.com/api/doc#10013" target="_blank" rel="external">https://work.weixin.qq.com/api/doc#10013</a></li>
-<li>发送消息：<a href="https://work.weixin.qq.com/api/doc#10167" target="_blank" rel="external">https://work.weixin.qq.com/api/doc#10167</a></li>
+<li>获取token：<a href="https://work.weixin.qq.com/api/doc#10013" target="_blank" rel="noopener">https://work.weixin.qq.com/api/doc#10013</a></li>
+<li>发送消息：<a href="https://work.weixin.qq.com/api/doc#10167" target="_blank" rel="noopener">https://work.weixin.qq.com/api/doc#10167</a></li>
 </ul>
-<h2 id="Python调用微信API"><a href="#Python调用微信API" class="headerlink" title="Python调用微信API"></a>Python调用微信API</h2><p>废话不多说，直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">import requests</div><div class="line"></div><div class="line"></div><div class="line">class WeChatPub:</div><div class="line">    s = requests.session()</div><div class="line">    token = None</div><div class="line"></div><div class="line">    def __init__(self):</div><div class="line">        self.token = self.get_token(&quot;&lt;corpid&gt;&quot;, &quot;&lt;secret&gt;&quot;)</div><div class="line">        print(&quot;token is &quot; + self.token)</div><div class="line"></div><div class="line">    def get_token(self, corpid, secret):</div><div class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=&#123;0&#125;&amp;corpsecret=&#123;1&#125;&quot;.format(corpid, secret)</div><div class="line">        rep = self.s.get(url)</div><div class="line">        if rep.status_code == 200:</div><div class="line">            return json.loads(rep.content)[&apos;access_token&apos;]</div><div class="line">        else:</div><div class="line">            print(&quot;request failed.&quot;)</div><div class="line">            return None</div><div class="line"></div><div class="line">    def send_msg(self, content):</div><div class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=&quot; + self.token</div><div class="line">        header = &#123;</div><div class="line">            &quot;Content-Type&quot;: &quot;application/json&quot;</div><div class="line">        &#125;</div><div class="line">        form_data = &#123;</div><div class="line">            &quot;touser&quot;: &quot;@all&quot;,</div><div class="line">            &quot;toparty&quot;: &quot; PartyID1 | PartyID2 &quot;,</div><div class="line">            &quot;totag&quot;: &quot; TagID1 | TagID2 &quot;,</div><div class="line">            &quot;msgtype&quot;: &quot;textcard&quot;,</div><div class="line">            &quot;agentid&quot;: 1000002,</div><div class="line">            &quot;textcard&quot;: &#123;</div><div class="line">                &quot;title&quot;: &quot;领奖通知&quot;,</div><div class="line">                &quot;description&quot;: content,</div><div class="line">                &quot;url&quot;: &quot;URL&quot;,</div><div class="line">                &quot;btntxt&quot;: &quot;更多&quot;</div><div class="line">            &#125;,</div><div class="line">            &quot;safe&quot;: 0</div><div class="line">        &#125;</div><div class="line">        rep = self.s.post(url, data=json.dumps(form_data).encode(&apos;utf-8&apos;), headers=header)</div><div class="line">        if rep.status_code == 200:</div><div class="line">            return json.loads(rep.content)</div><div class="line">        else:</div><div class="line">            print(&quot;request failed.&quot;)</div><div class="line">            return None</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    wechat = WeChatPub()</div><div class="line">    wechat.send_msg(&quot;&lt;div class=\&quot;gray\&quot;&gt;2016年9月26日&lt;/div&gt; &lt;div class=\&quot;normal\&quot;&gt;恭喜你抽中iPhone 7一台，领奖码：xxxx&lt;/div&gt;&lt;div class=\&quot;highlight\&quot;&gt;请于2016年10月10日前联系行政同事领取&lt;/div&gt;&quot;)</div></pre></td></tr></table></figure></p>
+<h2 id="Python调用微信API"><a href="#Python调用微信API" class="headerlink" title="Python调用微信API"></a>Python调用微信API</h2><p>废话不多说，直接上代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class WeChatPub:</span><br><span class="line">    s = requests.session()</span><br><span class="line">    token = None</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        self.token = self.get_token(&quot;&lt;corpid&gt;&quot;, &quot;&lt;secret&gt;&quot;)</span><br><span class="line">        print(&quot;token is &quot; + self.token)</span><br><span class="line"></span><br><span class="line">    def get_token(self, corpid, secret):</span><br><span class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=&#123;0&#125;&amp;corpsecret=&#123;1&#125;&quot;.format(corpid, secret)</span><br><span class="line">        rep = self.s.get(url)</span><br><span class="line">        if rep.status_code == 200:</span><br><span class="line">            return json.loads(rep.content)[&apos;access_token&apos;]</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;request failed.&quot;)</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line">    def send_msg(self, content):</span><br><span class="line">        url = &quot;https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=&quot; + self.token</span><br><span class="line">        header = &#123;</span><br><span class="line">            &quot;Content-Type&quot;: &quot;application/json&quot;</span><br><span class="line">        &#125;</span><br><span class="line">        form_data = &#123;</span><br><span class="line">            &quot;touser&quot;: &quot;@all&quot;,</span><br><span class="line">            &quot;toparty&quot;: &quot; PartyID1 | PartyID2 &quot;,</span><br><span class="line">            &quot;totag&quot;: &quot; TagID1 | TagID2 &quot;,</span><br><span class="line">            &quot;msgtype&quot;: &quot;textcard&quot;,</span><br><span class="line">            &quot;agentid&quot;: 1000002,</span><br><span class="line">            &quot;textcard&quot;: &#123;</span><br><span class="line">                &quot;title&quot;: &quot;领奖通知&quot;,</span><br><span class="line">                &quot;description&quot;: content,</span><br><span class="line">                &quot;url&quot;: &quot;URL&quot;,</span><br><span class="line">                &quot;btntxt&quot;: &quot;更多&quot;</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;safe&quot;: 0</span><br><span class="line">        &#125;</span><br><span class="line">        rep = self.s.post(url, data=json.dumps(form_data).encode(&apos;utf-8&apos;), headers=header)</span><br><span class="line">        if rep.status_code == 200:</span><br><span class="line">            return json.loads(rep.content)</span><br><span class="line">        else:</span><br><span class="line">            print(&quot;request failed.&quot;)</span><br><span class="line">            return None</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    wechat = WeChatPub()</span><br><span class="line">    wechat.send_msg(&quot;&lt;div class=\&quot;gray\&quot;&gt;2016年9月26日&lt;/div&gt; &lt;div class=\&quot;normal\&quot;&gt;恭喜你抽中iPhone 7一台，领奖码：xxxx&lt;/div&gt;&lt;div class=\&quot;highlight\&quot;&gt;请于2016年10月10日前联系行政同事领取&lt;/div&gt;&quot;)</span><br></pre></td></tr></table></figure></p>
 <p>CorpID在我的企业-&gt;企业信息 页面的最下面<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1c18a4f09c6e252b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mark"><br>执行以后在目标群里会收到以下信息：<br><img src="http://upload-images.jianshu.io/upload_images/8818451-9ffaf3d7552464df.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="mark"></p>
 <p>接下来的事情就简单了，我们在已经准备好的爬虫脚本中需要告警的位置加上 wechat.send_msg()即可将相关的信息发送到我们的企业号上，实现自动发送告警。</p>
 
@@ -498,7 +498,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -509,9 +509,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/8390209.jpg"
-               alt="Charles Liu" />
+          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
           <p class="site-author-name" itemprop="name">Charles Liu</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -607,10 +605,10 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright" >
+<div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

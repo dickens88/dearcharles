@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,21 +66,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="ELK," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="ELK,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -132,7 +132,7 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/11/基于Docker快速搭建ELK/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/11/基于Docker快速搭建ELK/">
 
 
 
@@ -182,7 +182,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Charles' Big Plan</span>
         <span class="logo-line-after"><i></i></span>
@@ -212,7 +212,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -222,7 +222,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -232,7 +232,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -242,7 +242,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -252,7 +252,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -262,7 +262,7 @@
         <li class="menu-item menu-item-echart">
           <a href="/echart" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             词云
           </a>
@@ -301,7 +301,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/8390209.jpg">
     </span>
 
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T00:13:00+02:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-11T00:13:00+05:30">
                 2017-11-11
               </time>
             
@@ -344,7 +344,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -412,12 +412,12 @@
 <li><p>获取logstash镜像：docker pull logstash:latest</p>
 </li>
 </ul>
-<p>#启动Elasticsearch<br>官方镜像里面ES的配置文件保存在/usr/share/elasticsearch/config，如果有需要可以将该目录映射到宿主机上；数据文件目录/usr/share/elasticsearch/data，这里我们把数据目录映射出来；容器默认对外提供9200端口，用作API交互。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">docker run --name elasticsearch \</div><div class="line"></div><div class="line">-v &quot;$PWD/esdata&quot;:/usr/share/elasticsearch/data \</div><div class="line"></div><div class="line">-p 9200:9200 \</div><div class="line"></div><div class="line">-d elasticsearch</div></pre></td></tr></table></figure></p>
+<p>#启动Elasticsearch<br>官方镜像里面ES的配置文件保存在/usr/share/elasticsearch/config，如果有需要可以将该目录映射到宿主机上；数据文件目录/usr/share/elasticsearch/data，这里我们把数据目录映射出来；容器默认对外提供9200端口，用作API交互。<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name elasticsearch \</span><br><span class="line"></span><br><span class="line">-v &quot;$PWD/esdata&quot;:/usr/share/elasticsearch/data \</span><br><span class="line"></span><br><span class="line">-p 9200:9200 \</span><br><span class="line"></span><br><span class="line">-d elasticsearch</span><br></pre></td></tr></table></figure></p>
 <p>容器启动以后可以调用一把验证一下:<br><img src="http://upload-images.jianshu.io/upload_images/8818451-868d2c2724646ef0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8818451-ddb2fa227c571982.png"></p>
-<p>#启动Kibana<br>Kibana作为ES操作的UI，需要跟ES容器通信，所以这里要将ES的容器link一下，对外提供5601端口做页面交互。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">docker run --name kibana \</div><div class="line"></div><div class="line">--link elasticsearch:elasticsearch \</div><div class="line"></div><div class="line">-p 5601:5601 \</div><div class="line"></div><div class="line">-d kibana</div></pre></td></tr></table></figure></p>
+<p>#启动Kibana<br>Kibana作为ES操作的UI，需要跟ES容器通信，所以这里要将ES的容器link一下，对外提供5601端口做页面交互。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name kibana \</span><br><span class="line"></span><br><span class="line">--link elasticsearch:elasticsearch \</span><br><span class="line"></span><br><span class="line">-p 5601:5601 \</span><br><span class="line"></span><br><span class="line">-d kibana</span><br></pre></td></tr></table></figure></p>
 <p>容器启动后用浏览器访问5601端口，可以看到kibana页面，首次访问的时候可能会提示没有建立默认索引，这里需要在管理页面上创建一个默认索引。默认索引通常叫做logstash-*，如下图所示创建一个默认索引。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-699a34e5cd07af8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8818451-082cbcc62a2a224b.png"></p>
 <p>#启动Logstash<br>Logstash主要作用是收集日志，这个组件有很多插件，可以支持大部分日志集成方式，如tcp、udp、jdbc、文件、队列等，他的配置非常简单，启动方式也很简单，这里以nginx的访问日志为例，我们配置logstash读取nginx的access.log，然后把日志转发到Elasticsearch。</p>
-<p>首先编译一个logstash配置文件logstash.conf，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">input&#123;</div><div class="line">    file&#123;</div><div class="line">        path=&gt;&quot;/tmp/nginx/logs/access.log&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">output&#123;</div><div class="line">    stdout&#123;</div><div class="line">        </div><div class="line">    &#125;#日志输出到控制台#输出到eselasticsearch&#123;</div><div class="line">        hosts=&gt;&quot;100.100.x.231&quot;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>首先编译一个logstash配置文件logstash.conf，内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">    file&#123;</span><br><span class="line">        path=&gt;&quot;/tmp/nginx/logs/access.log&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">output&#123;</span><br><span class="line">    stdout&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;#日志输出到控制台#输出到eselasticsearch&#123;</span><br><span class="line">        hosts=&gt;&quot;100.100.x.231&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>启动容器，这里我们把nginx的日志放在/tmp/nginx/logs/access.log，为了让容器能读到这个日志，需要把日志目录映射到容器里面。<br><code>docker run –it –rm  -v /tmp/nginx/logs/access.log:/tmp/nginx/logs/access.log -f /config-dir/logstash.conf</code><br>接下来我们可以全流程测试一下日志收集展示的过程。首先在nginx里面造点访问日志，比如直接curl调nginx服务端口，或者直接往access.log里面写数据也行。这时候再logstash容器我们可以看到如下日志输出：<img src="http://upload-images.jianshu.io/upload_images/8818451-6eef9f0a90451dc1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8818451-35431a2ca3e8868b.png"><br>再往后，打开Kibana页面就可以看到实时写入的日志数据了：<br><img src="http://upload-images.jianshu.io/upload_images/8818451-584fe463e77942da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8818451-7ec598fbe6bcb3d8.png"></p>
 <p>#总结<br>Docker容器使ELK搭建变得非常便捷，通过ELK可以快速分析检索日志，发现问题，ELK的几个核心贡献者成立了一家公司叫Elastic，目前跟我司也有一些合作，在开源的基础上该公司也发布了一些商业产品，名为X-Pack，提供了机器学习、图算法以及安全技术上的诸多加强，有兴趣的同学可以自行了解。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-5ec5384fe8e2b1e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="8818451-ede90e57f19e6731.png"></p>
 
@@ -520,9 +520,7 @@
 
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/8390209.jpg"
-               alt="Charles Liu" />
+          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
           <p class="site-author-name" itemprop="name">Charles Liu</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -602,10 +600,10 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright" >
+<div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,21 +66,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="数据与智能,SSO,python," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="数据与智能,SSO,python,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2018/03/04/使用Python自动登录SSO爬取动态页面/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2018/03/04/使用Python自动登录SSO爬取动态页面/">
 
 
 
@@ -180,7 +180,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Charles' Big Plan</span>
         <span class="logo-line-after"><i></i></span>
@@ -210,7 +210,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -220,7 +220,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -230,7 +230,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -240,7 +240,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -250,7 +250,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -260,7 +260,7 @@
         <li class="menu-item menu-item-echart">
           <a href="/echart" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             词云
           </a>
@@ -299,7 +299,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/8390209.jpg">
     </span>
 
@@ -331,7 +331,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T17:24:00+02:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-04T17:24:00+05:30">
                 2018-03-04
               </time>
             
@@ -342,7 +342,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -407,10 +407,10 @@
 <li>python3</li>
 <li>requests</li>
 </ul>
-<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。<br><a id="more"></a><br>接下来我们在页面上输入账号密码，点登录按钮，通过页面追踪分析并模拟整个登录过程，这个过程要尤其仔细，因为很多CAS在登录页面上埋了很多隐藏的标记，一个地方模仿的不对可能就会登录失败然后又被重定向到开始的地方。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析登录过程"><br>从分析可以看到，登录按钮提交的时候会用POST方式提交一个表格，而表格里面的除了账号密码等显眼的字段以外还有一个lt，经验告诉我们这个字段应该隐藏在之前的登录页面上，用来校验登录页面的合法性，所以我们要从登录页面上找到并提取这个信息。同时还要注意http的消息头，最好按照浏览器抓取的消息头去构造，因为网站同样会校验这里面的信息。<br>下面是登录的主要代码，我们基于python3和requests包来处理https访问请求，模拟浏览器的行为将认证需要的信息构造出来发给网站。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">import urllib3</div><div class="line">from lxml import etree</div><div class="line"></div><div class="line">from ows_scrapy.ows_spider.write_csv import write_list_to_csv</div><div class="line"></div><div class="line">urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)</div><div class="line"></div><div class="line"></div><div class="line">s = requests.session()</div><div class="line">s.trust_env = False     # faster</div><div class="line">cookie = None</div><div class="line"></div><div class="line">username = &apos;username&apos;</div><div class="line">password = &apos;pwd&apos;</div><div class="line"></div><div class="line"></div><div class="line">def login():</div><div class="line">    header = &#123;</div><div class="line">        &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&apos;,</div><div class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</div><div class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</div><div class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</div><div class="line">        &apos;Cookie&apos;: &apos;JSESSIONID=73E10849812940333A4AD2A2ABAEFB7D8CFF3E76A45340FFB687FD587D2EB97A49FC5F156D09DB1E17F129465AB8D8EBACEC&apos;,</div><div class="line">        &apos;Host&apos;: &apos;&lt;your web url&gt;&apos;,</div><div class="line">        &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,</div><div class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    form_data = &#123;</div><div class="line">        &apos;username&apos;: username,</div><div class="line">        &apos;password&apos;: password,</div><div class="line">        &apos;_eventId&apos;: &apos;submit&apos;,</div><div class="line">        &apos;pwdfirst&apos;:  password[0:2],</div><div class="line">        &apos;pwdsecond&apos;: password[2:5],</div><div class="line">        &apos;pwdthird&apos;: password[5:]</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    login_url = &apos;https://&lt;your web url&gt;.com/app/&apos;</div><div class="line">    print(&apos;login...&apos;)</div><div class="line"></div><div class="line">    res = s.get(login_url, headers=header, verify=False)</div><div class="line">    global cookie</div><div class="line">    cookie = res.cookies	# 注意要保存cookie</div><div class="line">    print(&quot;get response from ows &#123;0&#125;, http status &#123;1&#125;&quot;.format(login_url, res.status_code))</div><div class="line"></div><div class="line">    login_url = res.url</div><div class="line">    header[&apos;Referer&apos;] = login_url</div><div class="line">    header[&apos;Cookie&apos;] = &apos;JSESSIONID=&apos; + cookie[&apos;JSESSIONID&apos;]</div><div class="line">    form_data[&apos;lt&apos;] = str(etree.HTML(res.content).xpath(&apos;//input[@name=&quot;lt&quot;]/@value&apos;)[0])	#用xpath从页面上提取lt</div><div class="line"></div><div class="line">    res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</div><div class="line">    cookie = res.cookies</div><div class="line">    print(&quot;post login params to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</div><div class="line"></div><div class="line">    res = s.send(res.next, allow_redirects=False, verify=False)</div><div class="line">    cookie = res.cookies</div><div class="line">    print(&quot;redirect to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</div><div class="line"></div><div class="line">    if res.status_code == 200 or res.status_code == 302:</div><div class="line">        if cookie is not None and cookie.get(name=&apos;JSESSIONID&apos;, path=&apos;/app&apos;) is not None :</div><div class="line">            print(&apos;Successful login.&apos;)</div><div class="line">        else:</div><div class="line">            print(&apos;WRONG w3id/password!&apos;)</div><div class="line">            sys.exit(0)</div></pre></td></tr></table></figure></p>
-<p>这里要特别注意一点，因为http是无状态的，web页面要保存登录状态需要用到cookie，等成成功以后页面的response里面会包含一个带有有效标记的cookie，登录最终的目标就是获取并保存这个有效的cookie，这样后续的访问就不会被重定向到登录页。<br>在requests的方法里面只要向这样吧cookie带到请求里即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</div></pre></td></tr></table></figure></p>
+<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。<br><a id="more"></a><br>接下来我们在页面上输入账号密码，点登录按钮，通过页面追踪分析并模拟整个登录过程，这个过程要尤其仔细，因为很多CAS在登录页面上埋了很多隐藏的标记，一个地方模仿的不对可能就会登录失败然后又被重定向到开始的地方。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析登录过程"><br>从分析可以看到，登录按钮提交的时候会用POST方式提交一个表格，而表格里面的除了账号密码等显眼的字段以外还有一个lt，经验告诉我们这个字段应该隐藏在之前的登录页面上，用来校验登录页面的合法性，所以我们要从登录页面上找到并提取这个信息。同时还要注意http的消息头，最好按照浏览器抓取的消息头去构造，因为网站同样会校验这里面的信息。<br>下面是登录的主要代码，我们基于python3和requests包来处理https访问请求，模拟浏览器的行为将认证需要的信息构造出来发给网站。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">import urllib3</span><br><span class="line">from lxml import etree</span><br><span class="line"></span><br><span class="line">from ows_scrapy.ows_spider.write_csv import write_list_to_csv</span><br><span class="line"></span><br><span class="line">urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">s = requests.session()</span><br><span class="line">s.trust_env = False     # faster</span><br><span class="line">cookie = None</span><br><span class="line"></span><br><span class="line">username = &apos;username&apos;</span><br><span class="line">password = &apos;pwd&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def login():</span><br><span class="line">    header = &#123;</span><br><span class="line">        &apos;Accept&apos;: &apos;text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8&apos;,</span><br><span class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</span><br><span class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</span><br><span class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</span><br><span class="line">        &apos;Cookie&apos;: &apos;JSESSIONID=73E10849812940333A4AD2A2ABAEFB7D8CFF3E76A45340FFB687FD587D2EB97A49FC5F156D09DB1E17F129465AB8D8EBACEC&apos;,</span><br><span class="line">        &apos;Host&apos;: &apos;&lt;your web url&gt;&apos;,</span><br><span class="line">        &apos;Upgrade-Insecure-Requests&apos;: &apos;1&apos;,</span><br><span class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    form_data = &#123;</span><br><span class="line">        &apos;username&apos;: username,</span><br><span class="line">        &apos;password&apos;: password,</span><br><span class="line">        &apos;_eventId&apos;: &apos;submit&apos;,</span><br><span class="line">        &apos;pwdfirst&apos;:  password[0:2],</span><br><span class="line">        &apos;pwdsecond&apos;: password[2:5],</span><br><span class="line">        &apos;pwdthird&apos;: password[5:]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    login_url = &apos;https://&lt;your web url&gt;.com/app/&apos;</span><br><span class="line">    print(&apos;login...&apos;)</span><br><span class="line"></span><br><span class="line">    res = s.get(login_url, headers=header, verify=False)</span><br><span class="line">    global cookie</span><br><span class="line">    cookie = res.cookies	# 注意要保存cookie</span><br><span class="line">    print(&quot;get response from ows &#123;0&#125;, http status &#123;1&#125;&quot;.format(login_url, res.status_code))</span><br><span class="line"></span><br><span class="line">    login_url = res.url</span><br><span class="line">    header[&apos;Referer&apos;] = login_url</span><br><span class="line">    header[&apos;Cookie&apos;] = &apos;JSESSIONID=&apos; + cookie[&apos;JSESSIONID&apos;]</span><br><span class="line">    form_data[&apos;lt&apos;] = str(etree.HTML(res.content).xpath(&apos;//input[@name=&quot;lt&quot;]/@value&apos;)[0])	#用xpath从页面上提取lt</span><br><span class="line"></span><br><span class="line">    res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</span><br><span class="line">    cookie = res.cookies</span><br><span class="line">    print(&quot;post login params to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</span><br><span class="line"></span><br><span class="line">    res = s.send(res.next, allow_redirects=False, verify=False)</span><br><span class="line">    cookie = res.cookies</span><br><span class="line">    print(&quot;redirect to &#123;0&#125;, http status &#123;1&#125;, cookie : &#123;2&#125;&quot;.format(login_url, res.status_code, cookie))</span><br><span class="line"></span><br><span class="line">    if res.status_code == 200 or res.status_code == 302:</span><br><span class="line">        if cookie is not None and cookie.get(name=&apos;JSESSIONID&apos;, path=&apos;/app&apos;) is not None :</span><br><span class="line">            print(&apos;Successful login.&apos;)</span><br><span class="line">        else:</span><br><span class="line">            print(&apos;WRONG w3id/password!&apos;)</span><br><span class="line">            sys.exit(0)</span><br></pre></td></tr></table></figure></p>
+<p>这里要特别注意一点，因为http是无状态的，web页面要保存登录状态需要用到cookie，等成成功以后页面的response里面会包含一个带有有效标记的cookie，登录最终的目标就是获取并保存这个有效的cookie，这样后续的访问就不会被重定向到登录页。<br>在requests的方法里面只要向这样吧cookie带到请求里即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = s.post(login_url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False)</span><br></pre></td></tr></table></figure></p>
 <h1 id="分析动态内容页面"><a href="#分析动态内容页面" class="headerlink" title="分析动态内容页面"></a>分析动态内容页面</h1><p>在动态页面里，页面上显示出来的内容往往都是js或者AJAX异步获取到的，跟静态html页面的分析过程有明显的不同。用Chrome的分析工具也可以很容易的获取到该信息。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-45460f0bfe01e03c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析动态页面"><br>在动态页面加载完成后，我们从所有的请求中过滤XHR类型，从中找到我们要的那一次请求，然后在该请求的Preview里面就可以看到完整的相应信息，同时该请求的URL也可以从Headers选卡中得到。</p>
-<p>接下来要做的事情跟上面类似，构造报文模拟浏览器向该网站发送请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">def get_content(order_id):</div><div class="line">    form_data = &#123;</div><div class="line">        &apos;roarand&apos;: &apos;BW09el5W3mW2sfbGbtWe7mWlwBsWqXg6znppnqkW3woJ5fcz5DnhfWXGonqkLsd0&apos;,</div><div class="line">        &apos;start&apos;: &apos;0&apos;,</div><div class="line">        &apos;limit&apos;: &apos;20&apos;,</div><div class="line">        &apos;orderid&apos;: order_id,</div><div class="line">        &apos;serviceId&apos;: &apos;test_gscsocsecurityincidentmanage_log_getList2&apos;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    header = &#123;</div><div class="line">        &apos;Accept&apos;: &apos;text/plain, */*; q=0.01&apos;,</div><div class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</div><div class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</div><div class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</div><div class="line">        &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded;charset=UTF-8&apos;,</div><div class="line">        &apos;Host&apos;: &apos;&lt;your web&gt;.com&apos;,</div><div class="line">        &apos;Origin&apos;: &apos;https://&lt;your web&gt;.com&apos;,</div><div class="line">        &apos;Referer&apos;: &apos;https://&lt;your web&gt;.com/app/104h/spl/test/ID_480_1511441539904_workflowdetail.spl?orderid=SOC-20180220-00000003&apos;,</div><div class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;,</div><div class="line">        &apos;X-Requested-With&apos;: &apos;XMLHttpRequest&apos;</div><div class="line">    &#125;</div><div class="line">    print(&apos;Start to scan order id &apos; + order_id)</div><div class="line"></div><div class="line">    url = &apos;https://&lt;your web&gt;.com/app/pageservices/service.do?forAccessLog=&#123;serviceName:test_gscsocsecurityincidentmanage_log_getList2,userId:571bdd42-10ca-4ce1-b41c-8a3f6632141f,tenantId:104h&#125;&amp;trackId=fec68f8e-f30a-4fa1-a8b1-41d3dd11fa4c&apos;</div><div class="line">    res = s.post(url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False) #要加载上面登录成功的cookie</div><div class="line">    print(res.content)</div><div class="line">    return res</div></pre></td></tr></table></figure></p>
+<p>接下来要做的事情跟上面类似，构造报文模拟浏览器向该网站发送请求：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">def get_content(order_id):</span><br><span class="line">    form_data = &#123;</span><br><span class="line">        &apos;roarand&apos;: &apos;BW09el5W3mW2sfbGbtWe7mWlwBsWqXg6znppnqkW3woJ5fcz5DnhfWXGonqkLsd0&apos;,</span><br><span class="line">        &apos;start&apos;: &apos;0&apos;,</span><br><span class="line">        &apos;limit&apos;: &apos;20&apos;,</span><br><span class="line">        &apos;orderid&apos;: order_id,</span><br><span class="line">        &apos;serviceId&apos;: &apos;test_gscsocsecurityincidentmanage_log_getList2&apos;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    header = &#123;</span><br><span class="line">        &apos;Accept&apos;: &apos;text/plain, */*; q=0.01&apos;,</span><br><span class="line">        &apos;Accept-Encoding&apos;: &apos;gzip, deflate, br&apos;,</span><br><span class="line">        &apos;Accept-Language&apos;: &apos;zh-CN,zh;q=0.9,en;q=0.8&apos;,</span><br><span class="line">        &apos;Connection&apos;: &apos;keep-alive&apos;,</span><br><span class="line">        &apos;Content-Type&apos;: &apos;application/x-www-form-urlencoded;charset=UTF-8&apos;,</span><br><span class="line">        &apos;Host&apos;: &apos;&lt;your web&gt;.com&apos;,</span><br><span class="line">        &apos;Origin&apos;: &apos;https://&lt;your web&gt;.com&apos;,</span><br><span class="line">        &apos;Referer&apos;: &apos;https://&lt;your web&gt;.com/app/104h/spl/test/ID_480_1511441539904_workflowdetail.spl?orderid=SOC-20180220-00000003&apos;,</span><br><span class="line">        &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36&apos;,</span><br><span class="line">        &apos;X-Requested-With&apos;: &apos;XMLHttpRequest&apos;</span><br><span class="line">    &#125;</span><br><span class="line">    print(&apos;Start to scan order id &apos; + order_id)</span><br><span class="line"></span><br><span class="line">    url = &apos;https://&lt;your web&gt;.com/app/pageservices/service.do?forAccessLog=&#123;serviceName:test_gscsocsecurityincidentmanage_log_getList2,userId:571bdd42-10ca-4ce1-b41c-8a3f6632141f,tenantId:104h&#125;&amp;trackId=fec68f8e-f30a-4fa1-a8b1-41d3dd11fa4c&apos;</span><br><span class="line">    res = s.post(url, headers=header, params=form_data, cookies=cookie, allow_redirects=False, verify=False) #要加载上面登录成功的cookie</span><br><span class="line">    print(res.content)</span><br><span class="line">    return res</span><br></pre></td></tr></table></figure></p>
 <p>要点其实就是从XHR里找到请求的URI，构造请求报文头和提交表格，最后务必要加上登录成功的cookie，否则会被重定向到登录页面。</p>
 <p>抓取动态页面的方法还有很多，这种方法依赖的包相对较少，代码比较灵活，在爬取复杂的登录页面的时候效果比较好，只是在分析页面登录机制的时候要尤其细心。</p>
 
@@ -515,7 +515,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -526,9 +526,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/8390209.jpg"
-               alt="Charles Liu" />
+          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
           <p class="site-author-name" itemprop="name">Charles Liu</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -624,10 +622,10 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright" >
+<div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

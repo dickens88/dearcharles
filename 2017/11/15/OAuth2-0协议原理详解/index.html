@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,21 +66,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="OAuth2.0," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="OAuth2.0,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/15/OAuth2-0协议原理详解/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/15/OAuth2-0协议原理详解/">
 
 
 
@@ -185,7 +185,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Charles' Big Plan</span>
         <span class="logo-line-after"><i></i></span>
@@ -215,7 +215,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -225,7 +225,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -235,7 +235,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -245,7 +245,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -255,7 +255,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -265,7 +265,7 @@
         <li class="menu-item menu-item-echart">
           <a href="/echart" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             词云
           </a>
@@ -304,7 +304,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/8390209.jpg">
     </span>
 
@@ -336,7 +336,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:03:00+02:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T22:03:00+05:30">
                 2017-11-15
               </time>
             
@@ -347,7 +347,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -449,7 +449,7 @@
 <h1 id="授权码模式的实例化描述"><a href="#授权码模式的实例化描述" class="headerlink" title="授权码模式的实例化描述"></a>授权码模式的实例化描述</h1><p>面我以实例化方式来帮助读者理解授权码类型的授权协议的运行过程。假设: </p>
 <p>(1) Alice有一个有效的Google帐号；</p>
 <p>(2) Facebook.com已经在Google Authorization Server上注册了Client身份，已经获得(client_id, client_secret)，注意client_secret是Client与AS之间的一个共享密钥。</p>
-<p>(3) Alice想授权Facebook.com查看她的联系人列表(<a href="https://www.google.com/m8/feeds)。" target="_blank" rel="external">https://www.google.com/m8/feeds)。</a></p>
+<p>(3) Alice想授权Facebook.com查看她的联系人列表(<a href="https://www.google.com/m8/feeds)。" target="_blank" rel="noopener">https://www.google.com/m8/feeds)。</a></p>
 <p>下图展示了Alice、Facebook.com、Google资源服务器、以及Google OAuth授权服务器之间的协议运行过程。<br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171115/Fh0ekDKjb6.png" alt="mark"></p>
 <p>协议所涉及到的细节都已经在图上了，所以不打算再做详细介绍了。若看懂了此图，OAuth2.0就理解了。</p>
 <p>读者请注意，在步骤(4)中，Client需要拿“授权码”去换“授权令牌”时，Client需要向AS证明自己的身份，即证明自己就是步骤(2)中Alice批准授权时的Grantee。这个身份证明的方法主要有两种（图3中使用了第1种）：</p>
@@ -469,7 +469,7 @@
 <p>如果客户端是一个本地应用，比如一个手机app，应该选择password grant。</p>
 <p>第三方本地应用应该用authorization code grant（通过本地浏览器，不要用嵌入式浏览器，比如iOS强制用户用Safari或者SFSafariViewController，而不用 WKWebView）。</p>
 <h1 id="OAuth设计上的安全性考虑"><a href="#OAuth设计上的安全性考虑" class="headerlink" title="OAuth设计上的安全性考虑"></a>OAuth设计上的安全性考虑</h1><h3 id="为何引入authorization-code？"><a href="#为何引入authorization-code？" class="headerlink" title="为何引入authorization_code？"></a>为何引入authorization_code？</h3><p>协议设计中，为什么要使用authorization_code来交换access_token？这是读者容易想到的一个问题。也就是说，在协议的第3步，为什么不直接将access_token通过重定向方式返回给Client呢？比如:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 302</div><div class="line"></div><div class="line">Location:</div><div class="line"></div><div class="line">https://www.facebook.com/?access_token=ya29.AHES6ZSXVKYTW2VAGZtnMjD&amp;token_type=Bearer&amp;expires_in=3600</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 302</span><br><span class="line"></span><br><span class="line">Location:</span><br><span class="line"></span><br><span class="line">https://www.facebook.com/?access_token=ya29.AHES6ZSXVKYTW2VAGZtnMjD&amp;token_type=Bearer&amp;expires_in=3600</span><br></pre></td></tr></table></figure>
 <p>如果直接返回access_token，协议将变得更加简洁，而且少一次Client与AS之间的交互，性能也更优。那为何不这么设计呢？协议文档[1]中并没有给出这样设计的理由，但也不难分析：</p>
 <p>(1) 浏览器的redirect_uri是一个不安全信道，此方式不适合于传递敏感数据（如access_token）。因为uri可能通过HTTP referrer被传递给其它恶意站点，也可能存在于浏览器cacher或log文件中，这就给攻击者盗取access_token带来了很多机会。另外，此协议也不应该假设RO用户代理的行为是可信赖的，因为RO的浏览器可能早已被攻击者植入了跨站脚本用来监听access_token。因此，access_token通过RO的用户代理传递给Client，会显著扩大access_token被泄露的风险。 但authorization_code可以通过redirect_uri方式来传递，是因为authorization_code并不像access_token一样敏感。即使authorization_code被泄露，攻击者也无法直接拿到access_token，因为拿authorization_code去交换access_token是需要验证Client的真实身份。也就是说，除了Client之外，其他人拿authorization_code是没有用的。 此外，access_token应该只颁发给Client使用，其他任何主体（包括RO）都不应该获取access_token。协议的设计应能保证Client是唯一有能力获取access_token的主体。引入authorization_code之后，便可以保证Client是access_token的唯一持有人。当然，Client也是唯一的有义务需要保护access_token不被泄露。</p>
 <p>(2) 引入authorization_code还会带来如下的好处。由于协议需要验证Client的身份，如果不引入authorization_code，这个Client的身份认证只能通过第1步的redirect_uri来传递。同样由于redirect_uri是一个不安全信道，这就额外要求Client必须使用数字签名技术</p>
@@ -477,7 +477,7 @@
 <p>在我们理解了上述安全性考虑之后，读者也许会有豁然开朗的感觉，懂得了引入authorization_code的妙处。那么，是不是一定要引入authorization_code才能解决这些安全问题呢？当然不是。笔者将会在另一篇博文给出一个直接返回access_token的扩展授权类型解决方案，它在满足相同安全性的条件下，使协议更简洁，交互次数更少。</p>
 <h3 id="一切只是看上去很美好，但其实很多坑"><a href="#一切只是看上去很美好，但其实很多坑" class="headerlink" title="一切只是看上去很美好，但其实很多坑"></a>一切只是看上去很美好，但其实很多坑</h3><p>OAuth2看上去很美好，但是细心观察其实还是有一些漏洞的。</p>
 <p>对于授权码和access_token的篡改，在OAuth1中是反复的对Code和Token进行签名，来保证Token不会被篡改，但是OAuth2中却没有，因为OAuth2是基于Https的，所以如果没有Https的支持OAuth2可能还不如OAuth1.</p>
-<p>对于redirect_uri的校验，OAuth1中没有提到redirect_uri的校验，那么OAuth2中要求进行redirect_uri的校验。但是如果校验规则过松，也会导致跳转的安全问题。 例如：校验的时候只校验根域名，或者二级域名，但是第三方App对自己的域名保护的不好，导致二级域名被hack那么此时授权码和Token会被窃取。 校验规则不严谨，例如www.baidu.com 但是redirect_uri为：www.a.com.\www.baidu.com，这样授权就被a.com钓走了。</p>
+<p>对于redirect_uri的校验，OAuth1中没有提到redirect_uri的校验，那么OAuth2中要求进行redirect_uri的校验。但是如果校验规则过松，也会导致跳转的安全问题。 例如：校验的时候只校验根域名，或者二级域名，但是第三方App对自己的域名保护的不好，导致二级域名被hack那么此时授权码和Token会被窃取。 校验规则不严谨，例如<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a> 但是redirect_uri为：<a href="http://www.a.com.\www.baidu.com，这样授权就被a.com钓走了。" target="_blank" rel="noopener">www.a.com.\www.baidu.com，这样授权就被a.com钓走了。</a></p>
 <p>对于CSRF攻击（跨站请求伪造）：由于这个授权过程服务器和Client和用户之间有几次交互，但是在得到授权码的时候需要一次回跳，但是这次回跳是可以被阻塞的。</p>
 <h3 id="攻击者使用自己的账户申请第三方授权登陆"><a href="#攻击者使用自己的账户申请第三方授权登陆" class="headerlink" title="攻击者使用自己的账户申请第三方授权登陆"></a>攻击者使用自己的账户申请第三方授权登陆</h3><p>授权后服务端返回授权码，但是此时组织授权回跳，此时Client并没有接到授权码，也就是阻断了授权流程</p>
 <p>攻击者将此跳转链接发给一个正在处于在Client登陆状态的账户</p>
@@ -486,7 +486,7 @@
 <h3 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h3><p>在进行授权码申请或者是Token申请的时候带上state参数，服务器返回请求时要求携带state参数，在Client处理授权的时候校验此参数。参数可以是当前账户的SessionId，或Cookie的签名串。在Client申请accessToken会验证相关state和当前用户的关系，这样就防止了篡改。</p>
 <p>OAuth的校验流程为什么这么复杂，直接授权之后redirect回accessToken不就结了吗？为什么还要返回auth_code之后请求accessToken？</p>
 <p>首先，redirect是不安全的，随时可以暂停回调而拿到accessToken，拿到了accessToken也就意味着拿到了授权，但是auth_code是和client相对应的，那么即使拿到了auth_code还需要再次申请accessToken，申请accessToken时需要校验Client和state。同时协议设计的原则就是只有Client能拿到accessToken而用户是拿不到的。</p>
-<h3 id="最后，切记HTTPS"><a href="#最后，切记HTTPS" class="headerlink" title="最后，切记HTTPS"></a>最后，切记HTTPS</h3><p>参考资料：<br><a href="http://blog.csdn.net/seccloud/article/details/8192707" target="_blank" rel="external">http://blog.csdn.net/seccloud/article/details/8192707</a><br><a href="http://www.justwinit.cn/post/8138/" target="_blank" rel="external">http://www.justwinit.cn/post/8138/</a><br><a href="https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction" target="_blank" rel="external">https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction</a><br>人人网OAuth历程:<a href="http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/" target="_blank" rel="external">http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/</a></p>
+<h3 id="最后，切记HTTPS"><a href="#最后，切记HTTPS" class="headerlink" title="最后，切记HTTPS"></a>最后，切记HTTPS</h3><p>参考资料：<br><a href="http://blog.csdn.net/seccloud/article/details/8192707" target="_blank" rel="noopener">http://blog.csdn.net/seccloud/article/details/8192707</a><br><a href="http://www.justwinit.cn/post/8138/" target="_blank" rel="noopener">http://www.justwinit.cn/post/8138/</a><br><a href="https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction" target="_blank" rel="noopener">https://blog.yorkxin.org/2013/09/30/oauth2-1-introduction</a><br>人人网OAuth历程:<a href="http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/" target="_blank" rel="noopener">http://www.infoq.com/cn/presentations/dx-renren-authentication-authorization/</a></p>
 
       
     </div>
@@ -585,7 +585,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -596,9 +596,7 @@
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/8390209.jpg"
-               alt="Charles Liu" />
+          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
           <p class="site-author-name" itemprop="name">Charles Liu</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -673,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#协议的参与者"><span class="nav-number">1.</span> <span class="nav-text">协议的参与者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授权类型"><span class="nav-number">2.</span> <span class="nav-text">授权类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-授权码模式"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 授权码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-隐授权模式（implicit-grant-type）"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2 隐授权模式（implicit grant type）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-密码模式"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3 密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-客户端模式"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4 客户端模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授权码模式的实例化描述"><span class="nav-number">3.</span> <span class="nav-text">授权码模式的实例化描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-0授权类型选择"><span class="nav-number">4.</span> <span class="nav-text">OAuth2.0授权类型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#First-Party-or-third-party-client"><span class="nav-number">4.0.1.</span> <span class="nav-text">First Party or third party client?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Token-Owner？"><span class="nav-number">4.0.2.</span> <span class="nav-text">Access Token Owner？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-type"><span class="nav-number">4.0.3.</span> <span class="nav-text">Client type?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth设计上的安全性考虑"><span class="nav-number">5.</span> <span class="nav-text">OAuth设计上的安全性考虑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何引入authorization-code？"><span class="nav-number">5.0.1.</span> <span class="nav-text">为何引入authorization_code？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一切只是看上去很美好，但其实很多坑"><span class="nav-number">5.0.2.</span> <span class="nav-text">一切只是看上去很美好，但其实很多坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击者使用自己的账户申请第三方授权登陆"><span class="nav-number">5.0.3.</span> <span class="nav-text">攻击者使用自己的账户申请第三方授权登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法："><span class="nav-number">5.0.4.</span> <span class="nav-text">解决办法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后，切记HTTPS"><span class="nav-number">5.0.5.</span> <span class="nav-text">最后，切记HTTPS</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#协议的参与者"><span class="nav-number">1.</span> <span class="nav-text">协议的参与者</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#授权类型"><span class="nav-number">2.</span> <span class="nav-text">授权类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-授权码模式"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 授权码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-隐授权模式（implicit-grant-type）"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2 隐授权模式（implicit grant type）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-密码模式"><span class="nav-number">2.0.3.</span> <span class="nav-text">2.3 密码模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-客户端模式"><span class="nav-number">2.0.4.</span> <span class="nav-text">2.4 客户端模式</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#授权码模式的实例化描述"><span class="nav-number">3.</span> <span class="nav-text">授权码模式的实例化描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth2-0授权类型选择"><span class="nav-number">4.</span> <span class="nav-text">OAuth2.0授权类型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#First-Party-or-third-party-client"><span class="nav-number">4.0.1.</span> <span class="nav-text">First Party or third party client?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Access-Token-Owner？"><span class="nav-number">4.0.2.</span> <span class="nav-text">Access Token Owner？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Client-type"><span class="nav-number">4.0.3.</span> <span class="nav-text">Client type?</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OAuth设计上的安全性考虑"><span class="nav-number">5.</span> <span class="nav-text">OAuth设计上的安全性考虑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何引入authorization-code？"><span class="nav-number">5.0.1.</span> <span class="nav-text">为何引入authorization_code？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一切只是看上去很美好，但其实很多坑"><span class="nav-number">5.0.2.</span> <span class="nav-text">一切只是看上去很美好，但其实很多坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击者使用自己的账户申请第三方授权登陆"><span class="nav-number">5.0.3.</span> <span class="nav-text">攻击者使用自己的账户申请第三方授权登陆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法："><span class="nav-number">5.0.4.</span> <span class="nav-text">解决办法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后，切记HTTPS"><span class="nav-number">5.0.5.</span> <span class="nav-text">最后，切记HTTPS</span></a></li></ol></li></div>
             
 
           </div>
@@ -694,10 +692,10 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright" >
+<div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

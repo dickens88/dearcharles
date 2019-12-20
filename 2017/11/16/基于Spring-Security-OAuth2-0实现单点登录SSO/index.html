@@ -6,15 +6,15 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -32,7 +32,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -66,21 +66,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Java,OAuth2.0,SSO," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
 
 
+  <meta name="keywords" content="Java,OAuth2.0,SSO,">
 
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/"/>
+  <link rel="canonical" href="http://www.dearcharles.cn/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/">
 
 
 
@@ -176,7 +176,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
+      <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Charles' Big Plan</span>
         <span class="logo-line-after"><i></i></span>
@@ -206,7 +206,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -216,7 +216,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -226,7 +226,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -236,7 +236,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -246,7 +246,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -256,7 +256,7 @@
         <li class="menu-item menu-item-echart">
           <a href="/echart" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
             
             词云
           </a>
@@ -295,7 +295,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Charles Liu">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content>
       <meta itemprop="image" content="/images/8390209.jpg">
     </span>
 
@@ -327,7 +327,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:25:00+02:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:25:00+05:30">
                 2017-11-16
               </time>
             
@@ -338,7 +338,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
             
               <span class="post-meta-divider">|</span>
             
@@ -396,15 +396,15 @@
       
 
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>本文简要总结一下如果使用Spring Security OAuth和Spring Boot来实现SSO，文末有样例代码。不了解OAuth2.0协议的同学请参考<a href="http://dearcharles.cn/2017/11/15/OAuth2-0%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/" target="_blank" rel="external">《OAuth2.0协议原理详解》</a></p>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>本文简要总结一下如果使用Spring Security OAuth和Spring Boot来实现SSO，文末有样例代码。不了解OAuth2.0协议的同学请参考<a href="http://dearcharles.cn/2017/11/15/OAuth2-0%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener">《OAuth2.0协议原理详解》</a></p>
 <p>整个工程包括三个独立的应用，一个认证服务和两个客户端应用，结构非常简单。当一个用户访问客户端应用中被防护的API时，系统会被自动重定向到认证服务，之后我们使用OAuth2.0的Authorization code授权方式来实现认证授权。</p>
 <a id="more"></a>
 <h1 id="2-客户端APP"><a href="#2-客户端APP" class="headerlink" title="2. 客户端APP"></a>2. 客户端APP</h1><p>我们先从客户端应用入手，使用Spring Boot可以最大程度简化配置</p>
-<h2 id="2-1-Maven依赖"><a href="#2-1-Maven依赖" class="headerlink" title="2.1 Maven依赖"></a>2.1 Maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">   &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;</div><div class="line">   &lt;artifactId&gt;thymeleaf-extras-springsecurity4&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h2 id="2-2-安全配置"><a href="#2-2-安全配置" class="headerlink" title="2.2 安全配置"></a>2.2 安全配置</h2><p>客户端的安全配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">@EnableOAuth2Sso</div><div class="line">public class UiSecurityConfig extends WebSecurityConfigurerAdapter &#123;</div><div class="line">    @Override</div><div class="line">    public void configure(HttpSecurity http) throws Exception &#123;</div><div class="line">        http.antMatcher(&quot;/**&quot;)</div><div class="line">          .authorizeRequests()</div><div class="line">          .antMatchers(&quot;/&quot;, &quot;/login**&quot;)</div><div class="line">          .permitAll()</div><div class="line">          .anyRequest()</div><div class="line">          .authenticated();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="2-1-Maven依赖"><a href="#2-1-Maven依赖" class="headerlink" title="2.1 Maven依赖"></a>2.1 Maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">   &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;</span><br><span class="line">   &lt;artifactId&gt;thymeleaf-extras-springsecurity4&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-安全配置"><a href="#2-2-安全配置" class="headerlink" title="2.2 安全配置"></a>2.2 安全配置</h2><p>客户端的安全配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableOAuth2Sso</span><br><span class="line">public class UiSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.antMatcher(&quot;/**&quot;)</span><br><span class="line">          .authorizeRequests()</span><br><span class="line">          .antMatchers(&quot;/&quot;, &quot;/login**&quot;)</span><br><span class="line">          .permitAll()</span><br><span class="line">          .anyRequest()</span><br><span class="line">          .authenticated();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>配置最核心的部分是 @EnableOAuth2Sso注解来开启SSO。这里要注意，我们需要重写WebSecurityConfigurerAdapter 否则所有的路径都会受到SSO的保护，这样无论用户访问哪个页面都会被重定向到登录页面，在这个例子里，index和login页面是唯一不需要被防护的。</p>
 <p>最后，我们定义一个RequestContextListener bean来处理request scopes。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">application.yml:</div><div class="line">server:</div><div class="line">    port: 8082</div><div class="line">    context-path: /ui</div><div class="line">    session:</div><div class="line">      cookie:</div><div class="line">        name: UISESSION</div><div class="line">security:</div><div class="line">  basic:</div><div class="line">    enabled: false</div><div class="line">  oauth2:</div><div class="line">    client:</div><div class="line">      clientId: SampleClientId</div><div class="line">      clientSecret: secret</div><div class="line">      accessTokenUri: http://localhost:8081/auth/oauth/token</div><div class="line">      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize</div><div class="line">    resource:</div><div class="line">      userInfoUri: http://localhost:8081/auth/user/me</div><div class="line">spring:</div><div class="line">  thymeleaf:</div><div class="line">    cache: false</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">application.yml:</span><br><span class="line">server:</span><br><span class="line">    port: 8082</span><br><span class="line">    context-path: /ui</span><br><span class="line">    session:</span><br><span class="line">      cookie:</span><br><span class="line">        name: UISESSION</span><br><span class="line">security:</span><br><span class="line">  basic:</span><br><span class="line">    enabled: false</span><br><span class="line">  oauth2:</span><br><span class="line">    client:</span><br><span class="line">      clientId: SampleClientId</span><br><span class="line">      clientSecret: secret</span><br><span class="line">      accessTokenUri: http://localhost:8081/auth/oauth/token</span><br><span class="line">      userAuthorizationUri: http://localhost:8081/auth/oauth/authorize</span><br><span class="line">    resource:</span><br><span class="line">      userInfoUri: http://localhost:8081/auth/user/me</span><br><span class="line">spring:</span><br><span class="line">  thymeleaf:</span><br><span class="line">    cache: false</span><br></pre></td></tr></table></figure>
 <p>说明：</p>
 <ul>
 <li><p>我们禁用了default Basic Authentication</p>
@@ -417,16 +417,16 @@
 </li>
 </ul>
 <p>在这个case里，认证服务是我们自己建设的，但是在实际的应用场景下认证服务往往是第三方提供的比如Facebook 或者 gitHub</p>
-<h2 id="2-3-前端"><a href="#2-3-前端" class="headerlink" title="2.3 前端"></a>2.3 前端</h2><p>前端并非本文的重点，这里简单提一下。客户端有一个非常简单的前端页面<br>index.html:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;Spring Security SSO&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;a href=&quot;securedPage&quot;&gt;Login&lt;/a&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="2-3-前端"><a href="#2-3-前端" class="headerlink" title="2.3 前端"></a>2.3 前端</h2><p>前端并非本文的重点，这里简单提一下。客户端有一个非常简单的前端页面<br>index.html:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Spring Security SSO&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;a href=&quot;securedPage&quot;&gt;Login&lt;/a&gt;</span><br></pre></td></tr></table></figure></p>
 <p>securedPage.html:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;h1&gt;Secured   Page&lt;/h1&gt;</div><div class="line"></div><div class="line">Welcome, &lt;span th:text=&quot;$&#123;#authentication.name&#125;&quot;&gt;Name&lt;/span&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;Secured   Page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">Welcome, &lt;span th:text=&quot;$&#123;#authentication.name&#125;&quot;&gt;Name&lt;/span&gt;</span><br></pre></td></tr></table></figure>
 <p>securedPage.html需要用户通过授权才能访问，如果一个未授权的用户访问这个页面，他会被重定向到login页面</p>
-<h1 id="3-认证服务器"><a href="#3-认证服务器" class="headerlink" title="3. 认证服务器"></a>3. 认证服务器</h1><h2 id="3-1-Maven依赖"><a href="#3-1-Maven依赖" class="headerlink" title="3.1 Maven依赖"></a>3.1 Maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h1 id="3-认证服务器"><a href="#3-认证服务器" class="headerlink" title="3. 认证服务器"></a>3. 认证服务器</h1><h2 id="3-1-Maven依赖"><a href="#3-1-Maven依赖" class="headerlink" title="3.1 Maven依赖"></a>3.1 Maven依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="3-2-OAuth配置"><a href="#3-2-OAuth配置" class="headerlink" title="3.2 OAuth配置"></a>3.2 OAuth配置</h2><p>本例中我们把AS(认证服务)器和RS放(资源服务器)在一个实例中部署。</p>
-<p>RS配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">@EnableResourceServer</div><div class="line">public class AuthorizationServerApplication extends SpringBootServletInitializer &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        SpringApplication.run(AuthorizationServerApplication.class, args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>AS配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">@EnableAuthorizationServer</div><div class="line">public class AuthServerConfig extends AuthorizationServerConfigurerAdapter &#123;</div><div class="line">    @Autowired</div><div class="line">    private AuthenticationManager authenticationManager;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception &#123;</div><div class="line">        oauthServer.tokenKeyAccess(&quot;permitAll()&quot;)</div><div class="line">          .checkTokenAccess(&quot;isAuthenticated()&quot;);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void configure(ClientDetailsServiceConfigurer clients) throws Exception &#123;</div><div class="line">        clients.inMemory()</div><div class="line">          .withClient(&quot;SampleClientId&quot;)</div><div class="line">          .secret(&quot;secret&quot;)</div><div class="line">          .authorizedGrantTypes(&quot;authorization_code&quot;)</div><div class="line">          .scopes(&quot;user_info&quot;)</div><div class="line">          .autoApprove(true) ; </div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception &#123;</div><div class="line">        endpoints.authenticationManager(authenticationManager);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>RS配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@EnableResourceServer</span><br><span class="line">public class AuthorizationServerApplication extends SpringBootServletInitializer &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(AuthorizationServerApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>AS配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableAuthorizationServer</span><br><span class="line">public class AuthServerConfig extends AuthorizationServerConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private AuthenticationManager authenticationManager;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception &#123;</span><br><span class="line">        oauthServer.tokenKeyAccess(&quot;permitAll()&quot;)</span><br><span class="line">          .checkTokenAccess(&quot;isAuthenticated()&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void configure(ClientDetailsServiceConfigurer clients) throws Exception &#123;</span><br><span class="line">        clients.inMemory()</span><br><span class="line">          .withClient(&quot;SampleClientId&quot;)</span><br><span class="line">          .secret(&quot;secret&quot;)</span><br><span class="line">          .authorizedGrantTypes(&quot;authorization_code&quot;)</span><br><span class="line">          .scopes(&quot;user_info&quot;)</span><br><span class="line">          .autoApprove(true) ; </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    @Override</span><br><span class="line">    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception &#123;</span><br><span class="line">        endpoints.authenticationManager(authenticationManager);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>这里我们只开启authorization_code授权模式，另外这里注意到autoApprove=true，这意味着用户不会被重定向到授权的页面，也不需要手动给请求授权。</p>
-<h2 id="3-3-安全配置"><a href="#3-3-安全配置" class="headerlink" title="3.3 安全配置"></a>3.3 安全配置</h2><p>这里需要定义一个简单的认证机制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Configuration</div><div class="line">public class SecurityConfig extends WebSecurityConfigurerAdapter &#123;</div><div class="line">    @Autowired</div><div class="line">    private AuthenticationManager authenticationManager;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</div><div class="line">        http.requestMatchers()</div><div class="line">          .antMatchers(&quot;/login&quot;, &quot;/oauth/authorize&quot;)</div><div class="line">          .and()</div><div class="line">          .authorizeRequests()</div><div class="line">          .anyRequest().authenticated()</div><div class="line">          .and()</div><div class="line">          .formLogin().permitAll();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</div><div class="line">        auth.parentAuthenticationManager(authenticationManager)</div><div class="line">          .inMemoryAuthentication()</div><div class="line">          .withUser(&quot;john&quot;).password(&quot;123&quot;).roles(&quot;USER&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="3-3-安全配置"><a href="#3-3-安全配置" class="headerlink" title="3.3 安全配置"></a>3.3 安全配置</h2><p>这里需要定义一个简单的认证机制<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class SecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private AuthenticationManager authenticationManager;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.requestMatchers()</span><br><span class="line">          .antMatchers(&quot;/login&quot;, &quot;/oauth/authorize&quot;)</span><br><span class="line">          .and()</span><br><span class="line">          .authorizeRequests()</span><br><span class="line">          .anyRequest().authenticated()</span><br><span class="line">          .and()</span><br><span class="line">          .formLogin().permitAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">        auth.parentAuthenticationManager(authenticationManager)</span><br><span class="line">          .inMemoryAuthentication()</span><br><span class="line">          .withUser(&quot;john&quot;).password(&quot;123&quot;).roles(&quot;USER&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注意，我们用了in-memory认证，这里只是做一个简单的例子，我们直接把账号密码写到内存里了，真正使用的时候这里要换成自定义的userDetailsService.</p>
 <h2 id="3-4-用户终端"><a href="#3-4-用户终端" class="headerlink" title="3.4 用户终端"></a>3.4 用户终端</h2><p>一个很简单的返回JSON消息的接口</p>
 <pre><code>@RestController
@@ -440,8 +440,8 @@ public class UserController {
     }
 
 }
-</code></pre><p>完整的代码下载链接：<a href="https://github.com/eugenp/tutorials/tree/master/spring-security-sso" target="_blank" rel="external">Over On Github</a></p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h1><p><a href="http://blog.csdn.net/j754379117/article/details/70175198" target="_blank" rel="external">http://blog.csdn.net/j754379117/article/details/70175198</a><br><a href="http://www.baeldung.com/sso-spring-security-oauth2" target="_blank" rel="external">http://www.baeldung.com/sso-spring-security-oauth2</a></p>
+</code></pre><p>完整的代码下载链接：<a href="https://github.com/eugenp/tutorials/tree/master/spring-security-sso" target="_blank" rel="noopener">Over On Github</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h1><p><a href="http://blog.csdn.net/j754379117/article/details/70175198" target="_blank" rel="noopener">http://blog.csdn.net/j754379117/article/details/70175198</a><br><a href="http://www.baeldung.com/sso-spring-security-oauth2" target="_blank" rel="noopener">http://www.baeldung.com/sso-spring-security-oauth2</a></p>
 
       
     </div>
@@ -544,7 +544,7 @@ public class UserController {
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -555,9 +555,7 @@ public class UserController {
 
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/8390209.jpg"
-               alt="Charles Liu" />
+          <img class="site-author-image" itemprop="image" src="/images/8390209.jpg" alt="Charles Liu">
           <p class="site-author-name" itemprop="name">Charles Liu</p>
            
               <p class="site-description motion-element" itemprop="description"></p>
@@ -653,10 +651,10 @@ public class UserController {
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright" >
+<div class="copyright">
   
   &copy;  2017 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
