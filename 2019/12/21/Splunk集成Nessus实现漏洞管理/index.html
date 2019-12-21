@@ -133,7 +133,7 @@
     
         
             
-            <li><div data-rel="Java技术">Java技术<small>(2)</small></div>
+            <li><div data-rel="网络安全">网络安全<small>(2)</small></div>
                 
             </li>
             
@@ -141,7 +141,7 @@
     
         
             
-            <li><div data-rel="网络安全">网络安全<small>(2)</small></div>
+            <li><div data-rel="Java技术">Java技术<small>(2)</small></div>
                 
             </li>
             
@@ -157,7 +157,7 @@
     
         
             
-            <li><div data-rel="Splunk">Splunk<small>(3)</small></div>
+            <li><div data-rel="数据与智能">数据与智能<small>(4)</small></div>
                 
             </li>
             
@@ -165,7 +165,7 @@
     
         
             
-            <li><div data-rel="数据与智能">数据与智能<small>(4)</small></div>
+            <li><div data-rel="Splunk">Splunk<small>(3)</small></div>
                 
             </li>
             
@@ -224,15 +224,7 @@
     <div class="tags-list">
     
     <li class="article-tag-list-item">
-        <a class="color2">Docker</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a class="color4">ELK</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color5">Java</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -240,7 +232,11 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color2">Splunk</a>
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -249,6 +245,10 @@
     
     <li class="article-tag-list-item">
         <a class="color4">可视化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Splunk</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -268,6 +268,10 @@
     </li>
     
     <li class="article-tag-list-item">
+        <a class="color3">Seafile</a>
+    </li>
+    
+    <li class="article-tag-list-item">
         <a class="color2">python</a>
     </li>
     
@@ -284,14 +288,6 @@
     </li>
     
     <li class="article-tag-list-item">
-        <a class="color3">Seafile</a>
-    </li>
-    
-    <li class="article-tag-list-item">
-        <a class="color4">大数据</a>
-    </li>
-    
-    <li class="article-tag-list-item">
         <a class="color5">网络安全</a>
     </li>
     
@@ -301,6 +297,10 @@
     
     <li class="article-tag-list-item">
         <a class="color5">行为分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大数据</a>
     </li>
     
     <li class="article-tag-list-item">
@@ -399,7 +399,7 @@
         
         <a  class="网络安全 "
            href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/"
-           data-tag="Java,OAuth2.0,SSO"
+           data-tag="OAuth2.0,Java,SSO"
            data-author="" >
             <span class="post-title" title="基于Spring Security OAuth2.0实现单点登录SSO">基于Spring Security OAuth2.0实现单点登录SSO</span>
             <span class="post-date" title="2017-11-16 22:25:00">2017/11/16</span>
@@ -447,7 +447,7 @@
         
         <a  class="数据与智能 "
            href="/2017/11/11/新一代数据安全的制胜法宝-UBA/"
-           data-tag="大数据,网络安全,机器学习,行为分析"
+           data-tag="网络安全,机器学习,行为分析,大数据"
            data-author="" >
             <span class="post-title" title="新一代数据安全的制胜法宝-UBA">新一代数据安全的制胜法宝-UBA</span>
             <span class="post-date" title="2017-11-11 00:17:00">2017/11/11</span>
@@ -507,7 +507,7 @@
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-12-21 00:46:52'>2019-12-21 00:42</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-21 13:57:29'>2019-12-21 00:42</time>
         
     </div>
     <div class="article-meta">
@@ -563,15 +563,15 @@
 <li>Splunk Enterprise平台</li>
 <li>Nessus 漏洞扫描平台</li>
 </ul>
-<h1 id="0x02-安装Splunk插件"><a href="#0x02-安装Splunk插件" class="headerlink" title="0x02  安装Splunk插件"></a>0x02  安装Splunk插件</h1><p>到Splunk官网免费下载插件<a href="https://splunkbase.splunk.com/app/1710/" target="_blank" rel="noopener">Splunk Add-on for Tenable</a>,完成以后到你的Splunk WEB UI进行安装。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-6c0f476a57c37391.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安装插件"><br>根据提示重新过后，在Splunk WEB UI首页会看到多出一个app图标：<br><img src="https://upload-images.jianshu.io/upload_images/8818451-146f8f7d848d9398.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app"><br>进入到这个app进行Nessus基本设置，点击“Create New Input”，有两个选项Security Center 和 Nessus，因为我的环境是单点的Nessus服务器，所以这里我们选择后者。<br><img src="https://upload-images.jianshu.io/upload_images/8818451-ec3cf824d885d701.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus信息配置"></p>
+<h1 id="0x02-安装Splunk插件"><a href="#0x02-安装Splunk插件" class="headerlink" title="0x02  安装Splunk插件"></a>0x02  安装Splunk插件</h1><p>到Splunk官网免费下载插件<a href="https://splunkbase.splunk.com/app/1710/" target="_blank" rel="noopener">Splunk Add-on for Tenable</a>,完成以后到你的Splunk WEB UI进行安装。<br><img src="https://i.postimg.cc/P5m1g0Dz/n1.png" alt="安装插件"><br>根据提示重新过后，在Splunk WEB UI首页会看到多出一个app图标：<br><img src="https://i.postimg.cc/XYMwDnrY/n2.png" alt="app"><br>进入到这个app进行Nessus基本设置，点击“Create New Input”，有两个选项Security Center 和 Nessus，因为我的环境是单点的Nessus服务器，所以这里我们选择后者。<br><img src="https://i.postimg.cc/KzYLgzHJ/n3.png" alt="Nessus信息配置"></p>
 <p>Nessus Metrics 下面有两个选项：</p>
 <ul>
 <li>Nessus Plugins 收集Nessus内部已经安装的各种扫描插件和CVE信息</li>
-<li>Nessus Host Scans 收集每次扫描的结果信息<br>Access Key和Secret Key要从Nessus的管理界面上获取<br><img src="https://upload-images.jianshu.io/upload_images/8818451-5c91047df4fd72d7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生成Key"><br>这里每个用户每次生成的Key都是不一样的，所以要妥善保存生成的Key，否则就要重新生成再配置了<br>配置好以后点击“add”即可完成配置</li>
+<li>Nessus Host Scans 收集每次扫描的结果信息<br>Access Key和Secret Key要从Nessus的管理界面上获取<br><img src="https://i.postimg.cc/ZnGygLKM/n4.png" alt="生成Key"><br>这里每个用户每次生成的Key都是不一样的，所以要妥善保存生成的Key，否则就要重新生成再配置了<br>配置好以后点击“add”即可完成配置</li>
 </ul>
 <p>0x03 证书问题<br>根据官方文档的介绍，到这里理论上就应该可以搜索到数据了，然而并非如此，因为大部分人在部署Nessus的时候使用的证书都是自签发的，Splunk在访问Nessus的时候会因为证书校验失败而停止数据访问，结果就是我们什么也搜不到。定位这个问题可以从Splunk的内部日志看到一些报错：</p>
 <pre><code>index=_internal sourcetype=ta:nessus:log error
-</code></pre><p>[SSL: CERTIFICATE_VERIFY_FAILED] certificate verification failed. The certificate validation is enabled for Nessus. You may need to check the certificate and refer to the documentation and add it to the trust list.<br><img src="https://upload-images.jianshu.io/upload_images/8818451-1195e20db0b39bc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="error"><br>这时候有两个种做法，一种是将Nessus的证书导出并加入到Splunk的信任证书库里，但是这种方式笔者一直没成功。另一种做法就是关闭Splunk对证书的校验：</p>
+</code></pre><p>[SSL: CERTIFICATE_VERIFY_FAILED] certificate verification failed. The certificate validation is enabled for Nessus. You may need to check the certificate and refer to the documentation and add it to the trust list.<br><img src="https://i.postimg.cc/LsDLXfNJ/n5.png" alt="error"><br>这时候有两个种做法，一种是将Nessus的证书导出并加入到Splunk的信任证书库里，但是这种方式笔者一直没成功。另一种做法就是关闭Splunk对证书的校验：</p>
 <pre><code>vi /opt/splunk/etc/apps/Splunk_TA_nessus/local/inputs.conf
 </code></pre><p>在每一段input配置后面加一段<code>disable_ssl_certificate_validation = true</code> 如下文所示：</p>
 <pre><code>[nessus://scan]
@@ -596,11 +596,11 @@ url = https://&lt;Splunk-ip&gt;:&lt;port&gt;
 disabled = 0
 disable_ssl_certificate_validation = true
 </code></pre><p>加完以后重启Splunk即可。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/8818451-f8d9465e90404b64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Splunk-nessus"><br>这里我们可以随意对扫描结果以及插件CVE的信息进行组合搜索，跟踪，甚至安全建模，或者也可以配置可视化报表进行跟踪。</p>
+<p><img src="https://i.postimg.cc/wxZJ79cQ/n6.png" alt="Splunk-nessus"><br>这里我们可以随意对扫描结果以及插件CVE的信息进行组合搜索，跟踪，甚至安全建模，或者也可以配置可视化报表进行跟踪。</p>
 <h1 id="0x03-预定义报表"><a href="#0x03-预定义报表" class="headerlink" title="0x03 预定义报表"></a>0x03 预定义报表</h1><p>Splunk 官方提供了几个对plugin的预定义报表，可以在Saved Search里面找到，同时还有几个预定于的面板，这里简单介绍一下：<br>Setting -&gt; User Interface -&gt; Prebuilt panels 可以找到预定的面板</p>
-<h2 id="Nessus-Map-Destination-IP-by-Severity"><a href="#Nessus-Map-Destination-IP-by-Severity" class="headerlink" title="Nessus Map - Destination IP by Severity"></a>Nessus Map - Destination IP by Severity</h2><p>将漏扫的结果数据根据目的IP显示在地图上<br><img src="https://upload-images.jianshu.io/upload_images/8818451-e68ba6b6a8d1514c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus Map - Destination IP by Severity"></p>
-<h2 id="Nessus-Pie-Chart-–-Severity"><a href="#Nessus-Pie-Chart-–-Severity" class="headerlink" title="Nessus Pie Chart – Severity"></a>Nessus Pie Chart – Severity</h2><p>根据漏洞的风险等级分类统计<br><img src="https://upload-images.jianshu.io/upload_images/8818451-9a686866010da29e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Nessus Pie Chart – Severity"></p>
-<h2 id="Nessus-Graph-–-Severity-Count-over-Time"><a href="#Nessus-Graph-–-Severity-Count-over-Time" class="headerlink" title="Nessus Graph – Severity Count over Time"></a>Nessus Graph – Severity Count over Time</h2><p>根据扫描结果的风险等级以时间维度进行展示<br><img src="https://upload-images.jianshu.io/upload_images/8818451-0956d3c46af38740.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="Nessus-Map-Destination-IP-by-Severity"><a href="#Nessus-Map-Destination-IP-by-Severity" class="headerlink" title="Nessus Map - Destination IP by Severity"></a>Nessus Map - Destination IP by Severity</h2><p>将漏扫的结果数据根据目的IP显示在地图上<br><img src="https://i.postimg.cc/vTgV3KMn/n7.png" alt="Nessus Map - Destination IP by Severity"></p>
+<h2 id="Nessus-Pie-Chart-–-Severity"><a href="#Nessus-Pie-Chart-–-Severity" class="headerlink" title="Nessus Pie Chart – Severity"></a>Nessus Pie Chart – Severity</h2><p>根据漏洞的风险等级分类统计<br><img src="https://i.postimg.cc/VNmXm4By/n8.png" alt="Nessus Pie Chart – Severity"></p>
+<h2 id="Nessus-Graph-–-Severity-Count-over-Time"><a href="#Nessus-Graph-–-Severity-Count-over-Time" class="headerlink" title="Nessus Graph – Severity Count over Time"></a>Nessus Graph – Severity Count over Time</h2><p>根据扫描结果的风险等级以时间维度进行展示<br><img src="https://i.postimg.cc/PxFDbHGh/n9.png" alt="image.png"></p>
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>通过集成漏扫的结果，SOC团队除了对风险进行跟踪闭环，还可以通过定时扫描并配置对结果数据的监控实现实时监控漏洞风险，再多的我就不说了。。。</p>
 
       
@@ -615,7 +615,7 @@ disable_ssl_certificate_validation = true
     <p><span class="copy-title">文章字数:</span><span class="post-count">973</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Charles Liu">Charles Liu</a></p>
     <p><span class="copy-title">发布时间:</span>2019-12-21, 00:42:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-12-21, 00:46:52</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-21, 13:57:29</p>
     <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/21/Splunk集成Nessus实现漏洞管理/" title="Splunk集成Nessus实现漏洞管理">http://www.dearcharles.cn/2019/12/21/Splunk集成Nessus实现漏洞管理/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
@@ -681,7 +681,7 @@ disable_ssl_certificate_validation = true
     /*作者、标签的自动补全*/
     $(function () {
         $('.search').AutoComplete({
-            'data': ['#Docker','#ELK','#Java','#OAuth2.0','#Splunk','#Python','#可视化','#漏洞管理','#Kafka','#ProGuard','#混淆','#python','#自动化','#数据与智能','#SSO','#Seafile','#大数据','#网络安全','#机器学习','#行为分析','#Metaspliot','#渗透测试',],
+            'data': ['#ELK','#OAuth2.0','#Docker','#Java','#Python','#可视化','#Splunk','#漏洞管理','#Kafka','#ProGuard','#混淆','#Seafile','#python','#自动化','#数据与智能','#SSO','#网络安全','#机器学习','#行为分析','#大数据','#Metaspliot','#渗透测试',],
             'itemHeight': 20,
             'width': 418
         }).AutoComplete('show');
