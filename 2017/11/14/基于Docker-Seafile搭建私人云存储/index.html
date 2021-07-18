@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <title>基于Docker+Seafile搭建私人云存储 | Charles&#39; Big Plan</title>
+  <meta name="keywords" content=" Docker , Seafile ">
+  <meta name="description" content="基于Docker+Seafile搭建私人云存储 | Charles&#39; Big Plan">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="分类">
+<meta property="og:url" content="http://www.dearcharles.cn/categories/index.html">
+<meta property="og:site_name" content="Charles&#39; Big Plan">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分类">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.0.1" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.0.1" rel="stylesheet">
+
+<link href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="/js/jquery.autocomplete.min.js?v=1.0.1"></script>
+
+<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+<script src="/js/iconfont.js?v=1.0.1"></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="true">
+  <input class="theme_blog_path" value>
+</div>
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/" class="avatar_target">
+    <img class="avatar" src="/img/avatar.jpg" />
+</a>
+<div class="author">
+    <span>Charles Liu</span>
+</div>
+
+<div class="icon">
+    
+        
+        <a title="github" href="https://github.com/dickens88" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-github"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="linkedin" href="https://www.linkedin.com/in/charlesliu4j/" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-linkedin"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="jianshu" href="https://www.jianshu.com/u/d8765fe339d7" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-jianshu"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="email" href="mailto:370716264@qq.com" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-email"></use>
+                </svg>
+            
+        </a>
+        
+    
+        
+        <a title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=370716264&site=qq&menu=yes" target="_blank">
+            
+                <svg class="iconfont-svg" aria-hidden="true">
+                    <use xlink:href="#icon-qq"></use>
+                </svg>
+            
+        </a>
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li><div class="all active">全部文章<small>(21)</small></div></li>
+    
+        
+            
+            <li><div data-rel="数据与智能">数据与智能<small>(9)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="安全技术">安全技术<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="Docker">Docker<small>(3)</small></div>
+                
+            </li>
+            
+        
+    
+        
+            
+            <li><div data-rel="渗透测试">渗透测试<small>(2)</small></div>
+                
+            </li>
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+    
+    
+    
+    
+    </div>
+    <div><a class="about  site_url"  href="/about">关于</a></div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="21">
+<input type="hidden" id="yelog_site_word_count" value="27k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="back-title-list"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <form onkeydown="if(event.keyCode==13){return false;}">
+        <input class="search" type="text" placeholder="Search..." autocomplete="off"id="local-search-input" >
+        <i class="cross"></i>
+        <span>
+            <label for="tagswitch">Tags:</label>
+            <input id="tagswitch" type="checkbox" style="display: none" />
+            <i id="tagsWitchIcon"></i>
+        </span>
+    </form>
+    <div class="tags-list">
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ELK</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">Java</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Docker</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">OAuth2.0</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">可视化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">Splunk</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Kafka</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">ProGuard</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">混淆</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color2">python</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">自动化</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">漏洞管理</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">数据与智能</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">SSO</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color3">Seafile</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">大数据</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">网络安全</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">机器学习</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color5">行为分析</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color4">mimikatz</a>
+    </li>
+    
+    <li class="article-tag-list-item">
+        <a class="color1">Metaspliot</a>
+    </li>
+    
+    <div class="clearfix"></div>
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        <a  class="渗透测试 "
+           href="/2019/12/21/简单几步搞定Mimikatz无文件-免杀/"
+           data-tag="mimikatz"
+           data-author="" >
+            <span class="post-title" title="简单几步搞定Mimikatz无文件+免杀">简单几步搞定Mimikatz无文件+免杀</span>
+            <span class="post-date" title="2019-12-21 14:43:00">2019/12/21</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2019/12/21/ELK-7-2-单节点开启安全认证/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="ELK 7.2 单节点开启安全认证">ELK 7.2 单节点开启安全认证</span>
+            <span class="post-date" title="2019-12-21 14:25:00">2019/12/21</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2019/12/21/Logstash配置以服务方式运行/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Logstash配置以服务方式运行">Logstash配置以服务方式运行</span>
+            <span class="post-date" title="2019-12-21 14:02:00">2019/12/21</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2019/12/21/Splunk集成Nessus实现漏洞管理/"
+           data-tag="Splunk,漏洞管理"
+           data-author="" >
+            <span class="post-title" title="Splunk集成Nessus实现漏洞管理">Splunk集成Nessus实现漏洞管理</span>
+            <span class="post-date" title="2019-12-21 00:42:00">2019/12/21</span>
+        </a>
+        
+        <a  class="渗透测试 "
+           href="/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/"
+           data-tag="Metaspliot"
+           data-author="" >
+            <span class="post-title" title="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">渗透测试初探：利用Metasploit自动发现利用靶机漏洞</span>
+            <span class="post-date" title="2018-04-29 18:35:00">2018/04/29</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/04/06/利用微信实现自动发送监控告警/"
+           data-tag="python,自动化"
+           data-author="" >
+            <span class="post-title" title="利用微信实现自动发送监控告警">利用微信实现自动发送监控告警</span>
+            <span class="post-date" title="2018-04-06 16:41:00">2018/04/06</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2018/03/04/使用Python自动登录SSO爬取动态页面/"
+           data-tag="python,数据与智能,SSO"
+           data-author="" >
+            <span class="post-title" title="使用Python自动登录SSO爬取动态页面">使用Python自动登录SSO爬取动态页面</span>
+            <span class="post-date" title="2018-03-04 17:24:00">2018/03/04</span>
+        </a>
+        
+        <a  class=""
+           href="/2018/01/21/Logstash集成Kafka配置方法-基于Docker/"
+           data-tag="Docker"
+           data-author="" >
+            <span class="post-title" title="Logstash集成Kafka配置方法(基于Docker)">Logstash集成Kafka配置方法(基于Docker)</span>
+            <span class="post-date" title="2018-01-21 22:02:00">2018/01/21</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/12/10/Scrapy-eChart自动爬取生成网络安全词云/"
+           data-tag="Python,可视化"
+           data-author="" >
+            <span class="post-title" title="Scrapy+eChart自动爬取生成网络安全词云">Scrapy+eChart自动爬取生成网络安全词云</span>
+            <span class="post-date" title="2017-12-10 15:36:00">2017/12/10</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/24/Splunk集成Kafka配置方法/"
+           data-tag="Splunk,Kafka"
+           data-author="" >
+            <span class="post-title" title="Splunk集成Kafka配置方法">Splunk集成Kafka配置方法</span>
+            <span class="post-date" title="2017-11-24 21:21:00">2017/11/24</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/23/基于Docker搭建分布式消息队列Kafka/"
+           data-tag="Docker,Kafka"
+           data-author="" >
+            <span class="post-title" title="基于Docker搭建分布式消息队列Kafka">基于Docker搭建分布式消息队列Kafka</span>
+            <span class="post-date" title="2017-11-23 22:43:00">2017/11/23</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/20/Splunk-Forwarder-收集分析Windows系统日志/"
+           data-tag="ELK,Splunk"
+           data-author="" >
+            <span class="post-title" title="Splunk + Forwarder 收集分析Windows系统日志">Splunk + Forwarder 收集分析Windows系统日志</span>
+            <span class="post-date" title="2017-11-20 23:51:00">2017/11/20</span>
+        </a>
+        
+        <a  class="安全技术 "
+           href="/2017/11/19/Spring-Boot-Java应用代码混淆介绍/"
+           data-tag="Java,ProGuard,混淆"
+           data-author="" >
+            <span class="post-title" title="Spring Boot Java应用代码混淆介绍">Spring Boot Java应用代码混淆介绍</span>
+            <span class="post-date" title="2017-11-19 15:19:00">2017/11/19</span>
+        </a>
+        
+        <a  class="安全技术 "
+           href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/"
+           data-tag="Java,OAuth2.0,SSO"
+           data-author="" >
+            <span class="post-title" title="基于Spring Security OAuth2.0实现单点登录SSO">基于Spring Security OAuth2.0实现单点登录SSO</span>
+            <span class="post-date" title="2017-11-16 22:25:00">2017/11/16</span>
+        </a>
+        
+        <a  class=""
+           href="/2017/11/15/OAuth2-0协议原理详解/"
+           data-tag="OAuth2.0"
+           data-author="" >
+            <span class="post-title" title="OAuth2.0协议原理详解">OAuth2.0协议原理详解</span>
+            <span class="post-date" title="2017-11-15 22:03:00">2017/11/15</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/14/基于Docker-Seafile搭建私人云存储/"
+           data-tag="Docker,Seafile"
+           data-author="" >
+            <span class="post-title" title="基于Docker+Seafile搭建私人云存储">基于Docker+Seafile搭建私人云存储</span>
+            <span class="post-date" title="2017-11-14 23:55:00">2017/11/14</span>
+        </a>
+        
+        <a  class=""
+           href="/2017/11/11/ELK-Beats实现Windows服务器系统日志监控/"
+           data-tag="ELK"
+           data-author="" >
+            <span class="post-title" title="ELK+Beats实现Windows服务器系统日志监控">ELK+Beats实现Windows服务器系统日志监控</span>
+            <span class="post-date" title="2017-11-11 19:11:00">2017/11/11</span>
+        </a>
+        
+        <a  class="安全技术 "
+           href="/2017/11/11/Java-依赖注入总结/"
+           data-tag="Java"
+           data-author="" >
+            <span class="post-title" title="Java 依赖注入总结">Java 依赖注入总结</span>
+            <span class="post-date" title="2017-11-11 00:21:00">2017/11/11</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/11/机器学习算法在用户行为检测-UBA-领域的应用/"
+           data-tag="网络安全,机器学习,行为分析"
+           data-author="" >
+            <span class="post-title" title="机器学习算法在用户行为检测(UBA)领域的应用">机器学习算法在用户行为检测(UBA)领域的应用</span>
+            <span class="post-date" title="2017-11-11 00:19:00">2017/11/11</span>
+        </a>
+        
+        <a  class="数据与智能 "
+           href="/2017/11/11/新一代数据安全的制胜法宝-UBA/"
+           data-tag="大数据,网络安全,机器学习,行为分析"
+           data-author="" >
+            <span class="post-title" title="新一代数据安全的制胜法宝-UBA">新一代数据安全的制胜法宝-UBA</span>
+            <span class="post-date" title="2017-11-11 00:17:00">2017/11/11</span>
+        </a>
+        
+        <a  class="Docker "
+           href="/2017/11/11/基于Docker快速搭建ELK/"
+           data-tag="ELK"
+           data-author="" >
+            <span class="post-title" title="基于Docker快速搭建ELK">基于Docker快速搭建ELK</span>
+            <span class="post-date" title="2017-11-11 00:13:00">2017/11/11</span>
+        </a>
+        
+    </nav>
+</div>
+    </div>
+    <div class="hide-list">
+        <div class="semicircle">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div class="post">
+    <div class="pjax">
+        <article id="post-基于Docker-Seafile搭建私人云存储" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">基于Docker+Seafile搭建私人云存储</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            
+                <a  data-rel="Docker">Docker</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            
+            <a class="color2">Docker</a>
+            
+            <a class="color3">Seafile</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-06-11 21:35:02'>2017-11-14 23:55</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.1k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+        <span class="top-comment" title="跳转至评论区">
+            <a href="#comments">
+                评论:<span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </a>
+        </span>
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开通华为云服务"><span class="toc-text">开通华为云服务</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装Docker平台"><span class="toc-text">安装Docker平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#部署Seafile容器"><span class="toc-text">部署Seafile容器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设置安全组"><span class="toc-text">设置安全组</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绑定域名"><span class="toc-text">绑定域名</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在墙里的同学们不难发现，现在除了百度云以外，国内几乎没有什么公开的云盘服务了，有时我们想在自己的不同设备之间、或者给客户共享点资料非常困难，试想一下如果能有自己私有云存储，并且能支持自动同步本地数据还能轻松与他人共享，是件多面嗨皮的事。本文介绍一下如何利用华为云，基于Docker+Seafile搭建私人云存储。</p>
+<h1 id="开通华为云服务"><a href="#开通华为云服务" class="headerlink" title="开通华为云服务"></a>开通华为云服务</h1><p>工欲善其事，必先利其器。如何购买华为云，这里就不赘述了，详见<a href="http://www.huaweicloud.com/" target="_blank" rel="noopener">官网</a>介绍，总之乖乖按照官方指引轻松几步就搞定。笔者双11把手打折了，索性只买了1C1G的弹性云服务器（首月只要30+元），预装了Centos7.2操作系统。通过“管理控制台”进入弹性云服务器界面，可以远程登录主机，如下图所示。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-d166887ad2b31f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114225111.png"><br><a id="more"></a></p>
+<h1 id="安装Docker平台"><a href="#安装Docker平台" class="headerlink" title="安装Docker平台"></a>安装Docker平台</h1><p>使用共有云的一个好处就是OS创建好了以后什么都不需要配置就可以连接公网，比在自家电脑上搭VM方便千百倍。弹性云服务器已经配置好了国内的yum源，通过yum安装docker只需要一个命令即可</p>
+<pre><code>yum install -y docker
+</code></pre><p>安装完成后，执行如下命令启动docker平台，并查看执行结果</p>
+<pre><code>service docker start
+docker ps
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/8818451-94abb6ec1a330e85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114230514.png"></p>
+<h1 id="部署Seafile容器"><a href="#部署Seafile容器" class="headerlink" title="部署Seafile容器"></a>部署Seafile容器</h1><p>Seafile是业界比较有名的开源云存储应用服务，Docker Hub上有现成的镜像，<a href="https://hub.docker.com/r/jenserat/seafile/" target="_blank" rel="noopener">详情参见</a>。<br>执行pull拉取镜像：</p>
+<pre><code>docker pull docker.io/jenserat/seafile
+</code></pre><p>不到一分钟镜像就拉取到本地了。基于这个镜像首次创建容器需要让容器从网关拉取一些额外的配置文件，运行如下命令创建容器，并开启交互模式：</p>
+<pre><code>docker run -t -i \
+  -p 10001:10001 \
+  -p 12001:12001 \
+  -p 8000:8000 \
+  -p 8080:8080 \
+  -p 8082:8082 \
+  -v /srv/seafile:/opt/seafile \
+  jenserat/seafile -- /bin/bash
+</code></pre><p>此命令将容器内的/opt/seafile映射到宿主机的/srv/seafile目录，用于保存后续步骤下载的配置，另外映射了几个端口到宿主机，其中8000是访问UI用的，8082是上传下载文件用的，其他端口不知道干嘛的。</p>
+<ul>
+<li>容器启动后，在命令行执行<code>download-seafile</code>下载Seafile的主要配置文件</li>
+<li>下载完成后，执行<code>/opt/seafile/seafile-server-5.*/setup-seafile.sh</code>执行安装向导，记住不要修改默认的存储位置，其他看情况改。</li>
+<li>执行<code>/opt/seafile/seafile-server-latest/seafile.sh start</code>来启动Seafile主进程</li>
+<li>执行<code>/opt/seafile/seafile-server-latest/seahub.sh</code>启动WEB UI</li>
+<li>配置完成后执行<code>exit</code>退出。<br>以上是首次启动容器的步骤，接下来就不需要这么麻烦了，执行如下命令启动终极容器，不需要交互式命令，用-d参数让他在后台安静的跑。<pre><code>docker run -d \
+--name seafile \
+-p 10001:10001 \
+-p 12001:12001 \
+-p 8000:8000 \
+-p 8080:8080 \
+-p 8082:8082 \
+-v /srv/seafile:/opt/seafile \
+-e autostart=true \
+jenserat/seafile
+</code></pre><h1 id="设置安全组"><a href="#设置安全组" class="headerlink" title="设置安全组"></a>设置安全组</h1>到这里我们就已经在弹性云服务器上部署好了一个Seafile私有云存储，这时候我们尝试访问这台机器的8000端口，你会发现端口没有响应。这是因为云主机为了安全考虑自动设置了VPC（虚拟子网）和安全组，也就相当于我们说的防火墙，接下来需要在安全组里加上相应的规则，让云主机放通我们的服务端口。<br>打开“管理控制台”页面，选择“网络”-&gt;“私有云”，选择“安全组”，如下图<br>选择“新建安全组”，添加规则，将我们要用到的端口都添加到“入方向”<br><img src="http://upload-images.jianshu.io/upload_images/8818451-de4e27c18e3b9d08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114233641.png"><br>此时我们再尝试访问服务器的8000端口，如：<a href="http://122.112.204.xxx:8000，就能看到Seafile的登录界面了，用我们前面初始化的管理账号即可登录" target="_blank" rel="noopener">http://122.112.204.xxx:8000，就能看到Seafile的登录界面了，用我们前面初始化的管理账号即可登录</a><br><img src="http://upload-images.jianshu.io/upload_images/8818451-64c56c0d44c3eeae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234141.png"><br><img src="http://upload-images.jianshu.io/upload_images/8818451-e5f486a3b892294d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234502.png"><br>之后我们就可以尽情的享受私有云存储带来的便利了，从Seafile官网上可以下载到Windows、Mac等的客户端，轻松实现本地文件自动同步，一点不逊色百度云盘。</li>
+</ul>
+<h1 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h1><p>如果觉得通过IP访问不够便利，还可以自己申请一个域名，然后通过配置DNS解析直接通过域名访问，这类教程网上一搜一大把，租个域名一年不过也就几十块钱。绑好域名后的效果类似于<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1a1bf314ebe45f2f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20171114234914.png"><br>大功告成</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 370716264@qq.com </span>
+    </div>
+</article>
+
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>基于Docker+Seafile搭建私人云存储</p>
+    <p><span class="copy-title">文章字数:</span><span class="post-count">1.1k</span></p>
+    <p><span class="copy-title">本文作者:</span><a  title="Charles Liu">Charles Liu</a></p>
+    <p><span class="copy-title">发布时间:</span>2017-11-14, 23:55:00</p>
+    <p><span class="copy-title">最后更新:</span>2020-06-11, 21:35:02</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2017/11/14/基于Docker-Seafile搭建私人云存储/" title="基于Docker+Seafile搭建私人云存储">http://www.dearcharles.cn/2017/11/14/基于Docker-Seafile搭建私人云存储/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+    <div id="comments"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<script type="text/javascript">
+    $.getScript('/js/gitalk.js', function () {
+        var gitalk = new Gitalk({
+            clientID: '',
+            clientSecret: '',
+            repo: '',
+            owner: '',
+            admin: [''],
+            id: decodeURI(location.pathname),
+            distractionFreeMode: '',
+            language: '',
+            perPage: parseInt('',10)
+        })
+        gitalk.render('comments')
+    })
+</script>
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">©2016-2019 Charles</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full"><span class="min "></span></button>
+<button class="post-toc-menu"><span class="post-toc-menu-icons"></span></button>
+<div class="post-toc"><span class="post-toc-title">目录</span>
+    <div class="post-toc-content">
+
+    </div>
+</div>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+<div class="acParent"></div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.0.1" ></script>
+
+<script src="/js/script.js?v=1.0.1" ></script>
+<script>
+    var img_resize = 'default';
+    /*作者、标签的自动补全*/
+    $(function () {
+        $('.search').AutoComplete({
+            'data': ['#ELK','#Java','#Docker','#OAuth2.0','#Python','#可视化','#Splunk','#Kafka','#ProGuard','#混淆','#python','#自动化','#漏洞管理','#数据与智能','#SSO','#Seafile','#大数据','#网络安全','#机器学习','#行为分析','#mimikatz','#Metaspliot',],
+            'itemHeight': 20,
+            'width': 418
+        }).AutoComplete('show');
+    })
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $(".post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().split('\n').length - 1, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: #fafafa;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+        .nav .hide-list.fullscreen {
+            left: 492px
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+    .post .pjax article .article-entry>ol, .post .pjax article .article-entry>ul, .post .pjax article>ol, .post .pjax article>ul{
+        border: #e2dede solid 1px;
+        border-radius: 10px;
+        padding: 10px 32px 10px 56px;
+    }
+    .post .pjax article .article-entry li>ol, .post .pjax article .article-entry li>ul,.post .pjax article li>ol, .post .pjax article li>ul{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .post .pjax article .article-entry>ol>li, .post .pjax article .article-entry>ul>li,.post .pjax article>ol>li, .post .pjax article>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    .post .pjax article .article-entry li>ol>li, .post .pjax article .article-entry li>ul>li,.post .pjax article li>ol>li, .post .pjax article li>ul>li{
+        margin-bottom: auto;
+        margin-left: auto;
+    }
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+    .nav-right:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        background: url("https://i.loli.net/2019/07/22/5d3521411f3f169375.png");
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        -ms-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        background-size: cover;
+    }
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
