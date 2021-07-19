@@ -21,7 +21,7 @@
   </script>
 
   <meta name="description" content="最近的项目在做一些数据方面的集成，五花八门的系统对应的接口更是千奇百怪，数据集成的过程总结成八个字就是：逢山开路，遇水架桥。 恰好这两天碰到一个问题，我们要集成的WEB系统没有提供专门的数据集成接口，没有API可以调，数据库更是不让访问，万般无奈之下，我在想是否可以用python自动爬取页面。web页面有SSO，用的应该是开源的CAS框架，并且后面的页面全都是由动态JS、AJAX异步加载进去的，这">
-<meta name="keywords" content="python,数据与智能,SSO">
+<meta name="keywords" content="数据与智能,SSO,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Python自动登录SSO爬取动态页面">
 <meta property="og:url" content="http://www.dearcharles.cn/2018/03/04/使用Python自动登录SSO爬取动态页面/index.html">
@@ -369,9 +369,9 @@ def login():
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
               <a href="/tags/数据与智能/" rel="tag"># 数据与智能</a>
               <a href="/tags/SSO/" rel="tag"># SSO</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -587,7 +587,7 @@ def login():
         });
     }
 
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":null,"security":true};
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":true};
     function fetchData(api_server) {
       var Counter = (method, url, data) => {
         return fetch(`${api_server}/1.1${url}`, {
