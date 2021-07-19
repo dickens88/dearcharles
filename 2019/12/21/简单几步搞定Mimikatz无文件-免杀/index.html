@@ -29,7 +29,7 @@
 <meta property="og:description" content="MimikatzMimikatz可以从Windows内存中dump出登录用户的密码hash(或明文密码)，在安全界可以说家喻户晓，在2016年前后也是大杀四方，现在虽然微软已经发布了相关补丁但是对于大量存量版本Windows系统来讲依然是杀伤力巨大。当前业界大多数防病毒产品对于原生和大部分变种的mimikatz已经有比较高的查杀率，因此在渗透过程中如何投递如何免杀是个大问题，业界已经有很多mimi">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.postimg.cc/t4R7CgmT/8818451-9d2e137d6c16630d.png">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:48:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单几步搞定Mimikatz无文件+免杀">
 <meta name="twitter:description" content="MimikatzMimikatz可以从Windows内存中dump出登录用户的密码hash(或明文密码)，在安全界可以说家喻户晓，在2016年前后也是大杀四方，现在虽然微软已经发布了相关补丁但是对于大量存量版本Windows系统来讲依然是杀伤力巨大。当前业界大多数防病毒产品对于原生和大部分变种的mimikatz已经有比较高的查杀率，因此在渗透过程中如何投递如何免杀是个大问题，业界已经有很多mimi">
@@ -130,11 +130,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -208,7 +203,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
+                <time title="Modified: 2021-07-19 23:48:04" itemprop="dateModified" datetime="2021-07-19T23:48:04+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,12 +216,12 @@
             </span>
 
           
-            <span id="/2019/12/21/简单几步搞定Mimikatz无文件-免杀/" class="post-meta-item leancloud_visitors" data-flag-title="简单几步搞定Mimikatz无文件+免杀" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -256,7 +251,7 @@
 <h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
 <li><a href="https://github.com/PowerShellMafia/PowerSploit" target="_blank" rel="noopener">PowerSploit</a></li>
 </ul>
-<p>PowerSploit工程提供了多种黑客工具的加密版本和加密方法，基本都是基于Powershell的，其中也包括了<a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1" target="_blank" rel="noopener">Invoke-Mimikatz</a>，他已经对mimikatz进行了一次加密，并且将通过powershell封装可以让其直接在内存中运行而本地无明文的mimikatz。</p>
+<p>PowerSploit工程提供了多种黑客工具的加密版本和加密方法，基本都是基于Powershell的，其中也包括了[Invoke-Mimikatz]<br><a id="more"></a><br>(<a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1)，他已经对mimikatz进行了一次加密，并且将通过powershell封装可以让其直接在内存中运行而本地无明文的mimikatz。" target="_blank" rel="noopener">https://github.com/PowerShellMafia/PowerSploit/blob/master/Exfiltration/Invoke-Mimikatz.ps1)，他已经对mimikatz进行了一次加密，并且将通过powershell封装可以让其直接在内存中运行而本地无明文的mimikatz。</a></p>
 <p><strong>但是</strong>即便这样大部分杀毒软件也已经可以识别Invoke-Mimikatz脚本并进行查杀了。。</p>
 <h1 id="免杀"><a href="#免杀" class="headerlink" title="免杀"></a>免杀</h1><p>在最近一次渗透测试中，蓝军的做法给了新的思路，如果对Invoke-Mimikatz再做一次加密，并将解密的内容全加载到内存，似乎又可以做到无文件和免杀了。</p>
 <p>这里我们用到PowerSploit里面的<a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/ScriptModification" target="_blank" rel="noopener">Out-EncryptedScript.ps1</a>实现，这个神奇可以加密所有文本文件或者脚本，并将解密结果写到内存，磁盘上不留半点痕迹。</p>
@@ -443,103 +438,32 @@ C:\PS&gt; Invoke-Mimikatz
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>

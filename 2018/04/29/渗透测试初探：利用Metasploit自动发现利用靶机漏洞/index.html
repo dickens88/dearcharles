@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://i.postimg.cc/bYBr3LZy/m13.png">
 <meta property="og:image" content="https://i.postimg.cc/nzdr8GT1/m14.png">
 <meta property="og:image" content="https://i.postimg.cc/QCwMCN29/m15.png">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:49:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="渗透测试初探：利用Metasploit自动发现利用靶机漏洞">
 <meta name="twitter:description" content="网络安全的攻和守一直以来都是安全建设的两个方面，笔者最近也在研究一些渗透测试的技术，以丰富网络安全建设的知识储备。本文简要介绍一下，如何在虚拟环境下利用Metasploit pro自动对靶机完成漏洞发现和漏洞利用，最终通过漏洞实现控制对方主机的目的。使用的工具包括：  Virtualbox for windows Kali Linux Metasploit pro Metasploitable 靶">
@@ -144,11 +144,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -222,7 +217,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
+                <time title="Modified: 2021-07-19 23:49:08" itemprop="dateModified" datetime="2021-07-19T23:49:08+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,12 +230,12 @@
             </span>
 
           
-            <span id="/2018/04/29/渗透测试初探：利用Metasploit自动发现利用靶机漏洞/" class="post-meta-item leancloud_visitors" data-flag-title="渗透测试初探：利用Metasploit自动发现利用靶机漏洞" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -273,6 +268,7 @@
 <li><a href="https://www.rapid7.com/products/metasploit/download" target="_blank" rel="noopener">Metasploit pro</a></li>
 <li><a href="https://www.rapid7.com/resources/test-metasploit-with-metasploitable/" target="_blank" rel="noopener">Metasploitable</a> 靶机<br>下文假设你已经在windows上安装了Virtualbox虚拟机平台，并且在virtualbox里面已经创建好了Kali Linux的虚拟机</li>
 </ul>
+<a id="more"></a>
 <h1 id="0x01-Kali-配置"><a href="#0x01-Kali-配置" class="headerlink" title="0x01 Kali 配置"></a>0x01 Kali 配置</h1><ul>
 <li>安装增强功能<br>因为后续环境准备工作要频繁用到诸如共享文件，复制黏贴等功能，更重要的是，没有增强工具Kali的图形界面也没法适配窗口的大小，所以建议还是先安装增强功能，在virtualbox界面点击[设备]-&gt;[安装增强功能]，如下图<br><img src="https://i.postimg.cc/nLphCPPk/m1.png" alt="image.png"><br>然后打开命令行工具，我们需要手动将cdrom挂载到系统<pre><code>mkdir /mnt/cdrom
 mount /dev/cdrom /mnt/cdrom
@@ -459,103 +455,32 @@ apt-get upgrade
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>

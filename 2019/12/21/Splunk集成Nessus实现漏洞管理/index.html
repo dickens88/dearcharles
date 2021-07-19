@@ -37,7 +37,7 @@
 <meta property="og:image" content="https://i.postimg.cc/vTgV3KMn/n7.png">
 <meta property="og:image" content="https://i.postimg.cc/VNmXm4By/n8.png">
 <meta property="og:image" content="https://i.postimg.cc/PxFDbHGh/n9.png">
-<meta property="og:updated_time" content="2021-07-18T15:24:04.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:48:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Splunk集成Nessus实现漏洞管理">
 <meta name="twitter:description" content="系统漏洞管理是SOC安全运营非常重要的环节，通常SOC团队需要定期对公司内部服务器进行漏洞扫描，以确定和评估内部系统是否存在系统漏洞和不合规配置，通过漏洞扫描来进行安全风险检查是一种非常常用的手段。业界比较有名的商用漏扫工具有Nessus和Nexpose等，而漏洞扫描的结果对于后续的风险评估和整改有非常重要的意义，正确合理的做法是由IT人员对相关风险进行跟踪闭环，本文简要介绍一下使用Splunk集">
@@ -138,11 +138,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -216,7 +211,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-18 23:24:04" itemprop="dateModified" datetime="2021-07-18T23:24:04+08:00">2021-07-18</time>
+                <time title="Modified: 2021-07-19 23:48:50" itemprop="dateModified" datetime="2021-07-19T23:48:50+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -229,12 +224,12 @@
             </span>
 
           
-            <span id="/2019/12/21/Splunk集成Nessus实现漏洞管理/" class="post-meta-item leancloud_visitors" data-flag-title="Splunk集成Nessus实现漏洞管理" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -263,9 +258,9 @@
         <p>系统漏洞管理是SOC安全运营非常重要的环节，通常SOC团队需要定期对公司内部服务器进行漏洞扫描，以确定和评估内部系统是否存在系统漏洞和不合规配置，通过漏洞扫描来进行安全风险检查是一种非常常用的手段。业界比较有名的商用漏扫工具有Nessus和Nexpose等，而漏洞扫描的结果对于后续的风险评估和整改有非常重要的意义，正确合理的做法是由IT人员对相关风险进行跟踪闭环，本文简要介绍一下使用Splunk集成Nessus进行系统漏洞集中跟踪管理的方法。</p>
 <h1 id="0x01-准备条件"><a href="#0x01-准备条件" class="headerlink" title="0x01 准备条件"></a>0x01 准备条件</h1><ul>
 <li>Splunk Enterprise平台</li>
-<li>Nessus 漏洞扫描平台</li>
+<li>Nessus 漏洞扫描平台<a id="more"></a>
+<h1 id="0x02-安装Splunk插件"><a href="#0x02-安装Splunk插件" class="headerlink" title="0x02  安装Splunk插件"></a>0x02  安装Splunk插件</h1>到Splunk官网免费下载插件<a href="https://splunkbase.splunk.com/app/1710/" target="_blank" rel="noopener">Splunk Add-on for Tenable</a>,完成以后到你的Splunk WEB UI进行安装。<br><img src="https://i.postimg.cc/P5m1g0Dz/n1.png" alt="安装插件"><br>根据提示重新过后，在Splunk WEB UI首页会看到多出一个app图标：<br><img src="https://i.postimg.cc/XYMwDnrY/n2.png" alt="app"><br>进入到这个app进行Nessus基本设置，点击“Create New Input”，有两个选项Security Center 和 Nessus，因为我的环境是单点的Nessus服务器，所以这里我们选择后者。<br><img src="https://i.postimg.cc/KzYLgzHJ/n3.png" alt="Nessus信息配置"></li>
 </ul>
-<h1 id="0x02-安装Splunk插件"><a href="#0x02-安装Splunk插件" class="headerlink" title="0x02  安装Splunk插件"></a>0x02  安装Splunk插件</h1><p>到Splunk官网免费下载插件<a href="https://splunkbase.splunk.com/app/1710/" target="_blank" rel="noopener">Splunk Add-on for Tenable</a>,完成以后到你的Splunk WEB UI进行安装。<br><img src="https://i.postimg.cc/P5m1g0Dz/n1.png" alt="安装插件"><br>根据提示重新过后，在Splunk WEB UI首页会看到多出一个app图标：<br><img src="https://i.postimg.cc/XYMwDnrY/n2.png" alt="app"><br>进入到这个app进行Nessus基本设置，点击“Create New Input”，有两个选项Security Center 和 Nessus，因为我的环境是单点的Nessus服务器，所以这里我们选择后者。<br><img src="https://i.postimg.cc/KzYLgzHJ/n3.png" alt="Nessus信息配置"></p>
 <p>Nessus Metrics 下面有两个选项：</p>
 <ul>
 <li>Nessus Plugins 收集Nessus内部已经安装的各种扫描插件和CVE信息</li>
@@ -472,103 +467,32 @@ disable_ssl_certificate_validation = true
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>

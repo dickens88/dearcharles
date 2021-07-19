@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="来杯菊花茶">
 <meta property="og:description" content="logstash最常见的运行方式即命令行运行./bin/logstash -f logstash.conf然后通过ctrl+c结束，这种方式的优点在于运行方便，但是缺点也很明显，不便于管理，同时如果遇到服务器重启，则维护成本会更高一些，如果在生产环境运行logstash建议还是使用服务的方式运行。本文介绍如何将logstash加入linux的service中，以服务的方式启动logstash，同时">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:48:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logstash配置以服务方式运行">
 <meta name="twitter:description" content="logstash最常见的运行方式即命令行运行./bin/logstash -f logstash.conf然后通过ctrl+c结束，这种方式的优点在于运行方便，但是缺点也很明显，不便于管理，同时如果遇到服务器重启，则维护成本会更高一些，如果在生产环境运行logstash建议还是使用服务的方式运行。本文介绍如何将logstash加入linux的service中，以服务的方式启动logstash，同时">
@@ -127,11 +127,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -205,7 +200,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
+                <time title="Modified: 2021-07-19 23:48:38" itemprop="dateModified" datetime="2021-07-19T23:48:38+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,12 +213,12 @@
             </span>
 
           
-            <span id="/2019/12/21/Logstash配置以服务方式运行/" class="post-meta-item leancloud_visitors" data-flag-title="Logstash配置以服务方式运行" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -254,6 +249,7 @@
 <li>logstash 5.x 以上版本，假设安装在/opt/logstash目录</li>
 <li>Centos服务器</li>
 </ul>
+<a id="more"></a>
 <h1 id="0x02-配置"><a href="#0x02-配置" class="headerlink" title="0x02 配置"></a>0x02 配置</h1><p>在安装目录下修改<code>startip.optins</code>文件</p>
 <pre><code>vi /opt/logstash/config/startup.options
 </code></pre><pre><code># Set a home directory
@@ -469,103 +465,32 @@ output{
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>

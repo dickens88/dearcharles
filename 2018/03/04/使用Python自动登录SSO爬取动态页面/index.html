@@ -31,7 +31,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/8818451-45460f0bfe01e03c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:49:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Python自动登录SSO爬取动态页面">
 <meta name="twitter:description" content="最近的项目在做一些数据方面的集成，五花八门的系统对应的接口更是千奇百怪，数据集成的过程总结成八个字就是：逢山开路，遇水架桥。 恰好这两天碰到一个问题，我们要集成的WEB系统没有提供专门的数据集成接口，没有API可以调，数据库更是不让访问，万般无奈之下，我在想是否可以用python自动爬取页面。web页面有SSO，用的应该是开源的CAS框架，并且后面的页面全都是由动态JS、AJAX异步加载进去的，这">
@@ -132,11 +132,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -210,7 +205,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
+                <time title="Modified: 2021-07-19 23:49:36" itemprop="dateModified" datetime="2021-07-19T23:49:36+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -223,12 +218,12 @@
             </span>
 
           
-            <span id="/2018/03/04/使用Python自动登录SSO爬取动态页面/" class="post-meta-item leancloud_visitors" data-flag-title="使用Python自动登录SSO爬取动态页面" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -261,7 +256,8 @@
 <li>python3</li>
 <li>requests</li>
 </ul>
-<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。<br><a id="more"></a><br>接下来我们在页面上输入账号密码，点登录按钮，通过页面追踪分析并模拟整个登录过程，这个过程要尤其仔细，因为很多CAS在登录页面上埋了很多隐藏的标记，一个地方模仿的不对可能就会登录失败然后又被重定向到开始的地方。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析登录过程"><br>从分析可以看到，登录按钮提交的时候会用POST方式提交一个表格，而表格里面的除了账号密码等显眼的字段以外还有一个lt，经验告诉我们这个字段应该隐藏在之前的登录页面上，用来校验登录页面的合法性，所以我们要从登录页面上找到并提取这个信息。同时还要注意http的消息头，最好按照浏览器抓取的消息头去构造，因为网站同样会校验这里面的信息。<br>下面是登录的主要代码，我们基于python3和requests包来处理https访问请求，模拟浏览器的行为将认证需要的信息构造出来发给网站。</p>
+<a id="more"></a>
+<h1 id="分析登录页面"><a href="#分析登录页面" class="headerlink" title="分析登录页面"></a>分析登录页面</h1><p>打开登录页面，按F12打开Chrome自带的分析工具，在Network选卡上可以看到当前浏览器显示页面和提交登录信息的详情，如下图<br><img src="http://upload-images.jianshu.io/upload_images/8818451-ecdf27408913efcf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="某网站登录页面"><br>从截图上可以看到，当我们访问app/这个url的日志，因为我们还没有登录过，SSO会把我们自动重定向到登录页面，所以http status是302重定向。<br><!--more--><br>接下来我们在页面上输入账号密码，点登录按钮，通过页面追踪分析并模拟整个登录过程，这个过程要尤其仔细，因为很多CAS在登录页面上埋了很多隐藏的标记，一个地方模仿的不对可能就会登录失败然后又被重定向到开始的地方。<br><img src="http://upload-images.jianshu.io/upload_images/8818451-1faf4bceb9dfba82.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分析登录过程"><br>从分析可以看到，登录按钮提交的时候会用POST方式提交一个表格，而表格里面的除了账号密码等显眼的字段以外还有一个lt，经验告诉我们这个字段应该隐藏在之前的登录页面上，用来校验登录页面的合法性，所以我们要从登录页面上找到并提取这个信息。同时还要注意http的消息头，最好按照浏览器抓取的消息头去构造，因为网站同样会校验这里面的信息。<br>下面是登录的主要代码，我们基于python3和requests包来处理https访问请求，模拟浏览器的行为将认证需要的信息构造出来发给网站。</p>
 <pre><code>import requests
 import urllib3
 from lxml import etree
@@ -529,103 +525,32 @@ def login():
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>

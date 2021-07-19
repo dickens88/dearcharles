@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"www.dearcharles.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。 0x00 前提 已完成单节点ELK部署  0x01 Elasticsearch开启安全认证如果使用">
+  <meta name="description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELK 7.2 单节点开启安全认证">
 <meta property="og:url" content="http://www.dearcharles.cn/2019/12/21/ELK-7-2-单节点开启安全认证/index.html">
 <meta property="og:site_name" content="来杯菊花茶">
-<meta property="og:description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。 0x00 前提 已完成单节点ELK部署  0x01 Elasticsearch开启安全认证如果使用">
+<meta property="og:description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.postimg.cc/mrxWDXmr/2019-12-21-142246.png">
 <meta property="og:image" content="https://i.postimg.cc/tT5KBXp1/k1.png">
 <meta property="og:image" content="https://i.postimg.cc/gJm9ywFF/k2.png">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:updated_time" content="2021-07-19T15:48:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK 7.2 单节点开启安全认证">
-<meta name="twitter:description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。 0x00 前提 已完成单节点ELK部署  0x01 Elasticsearch开启安全认证如果使用">
+<meta name="twitter:description" content="7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。 本文简要介绍如何ELK开启安全认证功能。">
 <meta name="twitter:image" content="https://i.postimg.cc/mrxWDXmr/2019-12-21-142246.png">
 
 <link rel="canonical" href="http://www.dearcharles.cn/2019/12/21/ELK-7-2-单节点开启安全认证/">
@@ -131,11 +131,6 @@
     <a href="/" rel="section">Home</a>
 
   </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section">About</a>
-
-  </li>
         <li class="menu-item menu-item-tags">
 
     <a href="/tags/" rel="section">Tags</a>
@@ -209,7 +204,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
+                <time title="Modified: 2021-07-19 23:48:26" itemprop="dateModified" datetime="2021-07-19T23:48:26+08:00">2021-07-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,12 +217,12 @@
             </span>
 
           
-            <span id="/2019/12/21/ELK-7-2-单节点开启安全认证/" class="post-meta-item leancloud_visitors" data-flag-title="ELK 7.2 单节点开启安全认证" title="Views">
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
               <span class="post-meta-item-text">Views: </span>
-              <span class="leancloud-visitors-count"></span>
+              <span id="busuanzi_value_page_pv"></span>
             </span>
   
   <span class="post-meta-item">
@@ -255,6 +250,7 @@
       
         <p>7.2.0 版本以后的Elastic Stack添加了很多安全相关的功能，6.3版本以后原本闭源收费的X-pack组件也开源了一部分功能，代码可以在github下载免费试用。这其中最关键的一点是ES和Kibana的安全认证功能可以在开源的ELK版本中使用了。</p>
 <p>本文简要介绍如何ELK开启安全认证功能。<br><img src="https://i.postimg.cc/mrxWDXmr/2019-12-21-142246.png" alt="kibana auth"></p>
+<a id="more"></a>
 <h1 id="0x00-前提"><a href="#0x00-前提" class="headerlink" title="0x00 前提"></a>0x00 前提</h1><ul>
 <li>已完成单节点ELK部署</li>
 </ul>
@@ -465,103 +461,32 @@ server.ssl.certificate: /path/to/your/server.crt
   </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
 
 
 
-<script>
-  (function() {
-    function leancloudSelector(url) {
-      url = encodeURI(url);
-      return document.getElementById(url).querySelector('.leancloud-visitors-count');
-    }
-
-    function addCount(Counter) {
-      var visitors = document.querySelector('.leancloud_visitors');
-      var url = decodeURI(visitors.id);
-      var title = visitors.dataset.flagTitle;
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          if (results.length > 0) {
-            var counter = results[0];
-            leancloudSelector(url).innerText = counter.time + 1;
-            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
-              .catch(error => {
-                console.error('Failed to save visitor count', error);
-              });
-          } else {
-              Counter('post', '/classes/Counter', { title, url, time: 1 })
-                .then(response => response.json())
-                .then(() => {
-                  leancloudSelector(url).innerText = 1;
-                })
-                .catch(error => {
-                  console.error('Failed to create', error);
-                });
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    function showTime(Counter) {
-      var visitors = document.querySelectorAll('.leancloud_visitors');
-      var entries = [...visitors].map(element => {
-        return decodeURI(element.id);
-      });
-
-      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
-        .then(response => response.json())
-        .then(({ results }) => {
-          for (let url of entries) {
-            let target = results.find(item => item.url === url);
-            leancloudSelector(url).innerText = target ? target.time : 0;
-          }
-        })
-        .catch(error => {
-          console.error('LeanCloud Counter Error', error);
-        });
-    }
-
-    let { app_id, app_key, server_url } = {"enable":true,"app_id":"AkPvhjgQUAc97zveto2UtHcc-gzGzoHsz","app_key":"JUI3sIdt4nlD0SGxMyzHNNhS","server_url":"http://dearcharles.cn/","security":false};
-    function fetchData(api_server) {
-      var Counter = (method, url, data) => {
-        return fetch(`${api_server}/1.1${url}`, {
-          method,
-          headers: {
-            'X-LC-Id'     : app_id,
-            'X-LC-Key'    : app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      if (CONFIG.page.isPost) {
-        if (CONFIG.hostname !== location.hostname) return;
-        addCount(Counter);
-      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
-        showTime(Counter);
-      }
-    }
-
-    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
-
-    if (api_server) {
-      fetchData(api_server);
-    } else {
-      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
-        .then(response => response.json())
-        .then(({ api_server }) => {
-          fetchData('https://' + api_server);
-        });
-    }
-  })();
-</script>
 
 
       </div>
