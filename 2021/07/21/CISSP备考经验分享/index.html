@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.dearcharles.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="我的CISSP备考前后大概花了半年时间，因为“新冠”疫情影响广州的考点一直约不到考试时间，结果白白又拖了2个月，终于在7月初一把通过。回顾CISSP的备考过程，总体来讲收获还是很大的，虽然中间也遇到不少波折，但是回头看困难都是成功路上的点缀。 正如网上评论的，CISSP的考察特点是“寸之深，亩之阔”，笔者在备考CISSP之前已经做了6年的网络安全软件产品开发和2年多安全运营，虽说一直从事的是网络安">
+<meta name="keywords" content="CISSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CISSP备考经验分享">
+<meta property="og:url" content="http://www.dearcharles.cn/2021/07/21/CISSP备考经验分享/index.html">
+<meta property="og:site_name" content="来杯菊花茶">
+<meta property="og:description" content="我的CISSP备考前后大概花了半年时间，因为“新冠”疫情影响广州的考点一直约不到考试时间，结果白白又拖了2个月，终于在7月初一把通过。回顾CISSP的备考过程，总体来讲收获还是很大的，虽然中间也遇到不少波折，但是回头看困难都是成功路上的点缀。 正如网上评论的，CISSP的考察特点是“寸之深，亩之阔”，笔者在备考CISSP之前已经做了6年的网络安全软件产品开发和2年多安全运营，虽说一直从事的是网络安">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.postimg.cc/dVWwbM0P/8818451-8e0df68498e3c954.png">
+<meta property="og:updated_time" content="2021-07-21T14:00:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CISSP备考经验分享">
+<meta name="twitter:description" content="我的CISSP备考前后大概花了半年时间，因为“新冠”疫情影响广州的考点一直约不到考试时间，结果白白又拖了2个月，终于在7月初一把通过。回顾CISSP的备考过程，总体来讲收获还是很大的，虽然中间也遇到不少波折，但是回头看困难都是成功路上的点缀。 正如网上评论的，CISSP的考察特点是“寸之深，亩之阔”，笔者在备考CISSP之前已经做了6年的网络安全软件产品开发和2年多安全运营，虽说一直从事的是网络安">
+<meta name="twitter:image" content="https://i.postimg.cc/dVWwbM0P/8818451-8e0df68498e3c954.png">
+
+<link rel="canonical" href="http://www.dearcharles.cn/2021/07/21/CISSP备考经验分享/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CISSP备考经验分享 | 来杯菊花茶</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eaa0cbd126e3efa878c7e8afa429611";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">来杯菊花茶</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生活不只是眼前的苟且，还有诗和远方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/07/21/CISSP备考经验分享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/8390209.jpg">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来杯菊花茶">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CISSP备考经验分享
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-21 21:52:00 / Modified: 22:00:18" itemprop="dateCreated datePublished" datetime="2021-07-21T21:52:00+08:00">2021-07-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/" itemprop="url" rel="index"><span itemprop="name">安全技术</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/07/21/CISSP备考经验分享/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/21/CISSP备考经验分享/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>我的CISSP备考前后大概花了半年时间，因为“新冠”疫情影响广州的考点一直约不到考试时间，结果白白又拖了2个月，终于在7月初一把通过。回顾CISSP的备考过程，总体来讲收获还是很大的，虽然中间也遇到不少波折，但是回头看困难都是成功路上的点缀。</p>
+<p>正如网上评论的，CISSP的考察特点是“寸之深，亩之阔”，笔者在备考CISSP之前已经做了6年的网络安全软件产品开发和2年多安全运营，虽说一直从事的是网络安全技术行业但是对于领域知识一直没有系统的认识，与安全相关的知识点都是孤立的、烟囱似的，参与安全方案评审的时候发现还是经常遇到知识盲区。CISSP属于知识性的考试，囊括了信息安全领域的方方面面，为了通过考试你往往不能指望某一本书能回答一切，一本好的教材可以帮你快速入门但是还不足以通过考试，比如《All in one》里讲到kerberos认证，里面大致描述了认证的交互过程，但是如果要了解详细的认证过程和安全威胁就需要自己上网查资料，因为《All in one》教材的内容也是第三方的作者根据ISC2的大纲编写的，没有办法保证100%覆盖，总之备考还是要在教材的知识基础上多扩展一些。通过学习CISSP可以对信息系统安全领域有一个非常全面的认识，完全可以达到扩充知识面的目的，再往后就看垂直领域缺啥补啥了。</p>
+<a id="more"></a>
+<p><strong>备考选择合适的教材很重要</strong>，中文的话选择<a href="https://book.douban.com/subject/30203422/" target="_blank" rel="noopener">《CISSP认证考试指南》</a>（俗称ALL IN ONE，下文简称AIO）就没错了，<strong>备考最重要的就是反复研读AIO的知识点</strong>，通常至少要把整本书研读个3-4遍。笔者刚开始备考的时候长期在印度出差，当时买不到中文版，索性花了大几百买了本英文版的《CISSP Official Study Guide》（俗称OSG），讲真的如果英文水平一般的话这本书最好还是别看了，写的又臭又长，浪费时间。后来一段时间，我把网上找到的AIO的影印版用打印机缩印到纸上，即使缩印+双面打印依然是好几百页的样子，将近1000页的AIO我就是这样完整的看完第一遍。AOI看第一遍大概花了2个月的时间，因为白天要上班，晚上还经常加班，看书基本上都是周末，这也要拜长期出差所赐，印度这鬼地方也没啥好玩的，周末只能窝在屋里看书，也算是以外收获了。</p>
+<p>做AIO的课后习题的最初总会有一种感觉，虽然习题是中文的，每个字也都认识，但是连到一起就不是人话，这点在后来的考试中发现也是一样的情况（我清楚的记得考试的题目中文版里面有个错别字），但是考试好歹是有中英文对照的，而课后习题的神级翻译我们就只能默默承受了，有时候题目的答案也让人匪夷所思，总之领会核心思想即可不必太较真。</p>
+<p>另外一本ISC2出的习题集要着重推荐一下，在印度买英文书的时候顺便买了本习题《OFFICAL PRACTICE TESTS》，这本书总体来讲还是不错的，每道题都有详细的解答，虽然是英文的但是也比AIO里面的机器翻译强上百倍，另外拿英文的习题练习后来证明也是非常有必要的，<strong>正式考试题目提供中英文对照</strong>，而中文的题面比AIO习题的翻译强不到哪去，所以我在考试的时候基本上每道题都要看下英文原版，因为之前英文习题练的多一些，所以考试也就觉得很习惯了。</p>
+<p><img src="https://i.postimg.cc/dVWwbM0P/8818451-8e0df68498e3c954.png" alt="image.png"></p>
+<p><strong>善用思维导图</strong>，看书的时候不仅要在书上划重点，制作思维导图是一个非常好的方法，使用最简单的工具<a href="http://freemind.sourceforge.net/wiki/index.php/Main_Page" target="_blank" rel="noopener">freemind</a>即可。开始刷第二遍AIO的时候我已经回到可爱的祖国，并且也拿上了纸质版的AIO，因为对全书的结构已经有了初步的记忆，所以第二遍刷书的时候就可以一边看一遍做思维导图。做思维导图有两个好处，一是方便知识体系归纳，二是方便检索，经常碰到这样的场景，在做习题的时候碰到一个知识点没记住，但是又忘了在书上哪个章节，1000页的书找资源也不是那么好找的，这个场景用思维导图的检索就可以快速定位到书上了。当然也听说不少同学喜欢把厚厚的AIO按章节拆开成小册子，想想也许是个办法，但是笔者还是喜欢更完整的书。。。</p>
+<p><strong>选择培训机构</strong>，前面说了一大堆，也许选择一个合适培训机构才是最重要的方法，尤其是对于我们这种意志薄弱的上班族来说，就好像去健身房锻炼身体，虽然公司有免费健身房，但是假设不办一张5000块钱的健身年卡估计你一次都不会去健身。最近看公司也有统一组织参加培训班的，选的供应商是谷安天下，没错，我自己选的也是这家，只是没赶上公司这一波，自己掏了腰包orz。</p>
+<p><strong>说说考试</strong>，CISSP考试一共250道题（50个做调查的题不计分，具体哪些不知道），全是单选，6个小时，要答对70%才算过，题目有中英文对照，机考不用涂答题卡，考完试立马出成绩(所以点结束考试的时候手抖得狠厉害)，出考场小姐姐会递给你一张打印出来的纸，如果纸上写的是“恭喜您！你已初步通过CISSP”，那么它就是真的在恭喜你了。</p>
+<p>考试很折腾，深圳或者东莞都没有考点，最近的在广州，而考试都是一大早，所以要提前一天过去，订个酒店猫一宿，考场很专业，单人单桌，每个人头顶上都有一个摄像头监视着。考场连水都不让带进去，有提供带锁的储物柜放随身物品，要坐6个小时确实是对屁股的考验，好在笔者4个半小时就提前出来了。</p>
+<p>最后，虽然笔者通过培训班、通过习题册做了很多习题，但是在实际考试的时候真的没碰到几个原题，看起来眼熟的题目不超过10个，所以还是建议各位，做题的时候还是要真正理解要考察的知识点，多多百度一下，刷题个人感觉没啥用。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CISSP/" rel="tag"># CISSP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/21/简单几步搞定Mimikatz无文件-免杀/" rel="prev" title="简单几步搞定Mimikatz无文件+免杀">
+      <i class="fa fa-chevron-left"></i> 简单几步搞定Mimikatz无文件+免杀
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/" rel="next" title="手把手教你：基于JWT实现Flask API身份认证">
+      手把手教你：基于JWT实现Flask API身份认证 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Charles Liu"
+      src="/images/8390209.jpg">
+  <p class="site-author-name" itemprop="name">Charles Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dickens88" title="GitHub → https://github.com/dickens88" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:370716264@qq.com" title="E-Mail → mailto:370716264@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/charlesliu4j/" title="Weibo → https://www.linkedin.com/in/charlesliu4j/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://dearcharles-cn.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.dearcharles.cn/2021/07/21/CISSP备考经验分享/";
+    this.page.identifier = "2021/07/21/CISSP备考经验分享/";
+    this.page.title = "CISSP备考经验分享";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dearcharles-cn.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
