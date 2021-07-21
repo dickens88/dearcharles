@@ -20,22 +20,28 @@
     var CONFIG = {"hostname":"www.dearcharles.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
-<meta name="keywords" content="Java,ProGuard,混淆">
+  <meta name="description" content="近期工作中需要逆向分析一个神奇的木马，文件看起来是一个linux下面的elf文件，但是通过常规手段用ida或者ghidra分析完全没有头绪(主要是因为菜&amp;gt;_&amp;lt;)，但是通过ida的分析可以看出明显的python痕迹，后来通过万能的谷歌学习到，还有另一种途径可以完美的逆向python打包的可执行程序。本文简要记录一下逆向python打包的elf/exe程序的逆向分析方法。 python打包">
+<meta name="keywords" content="逆向工程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot Java应用代码混淆介绍">
-<meta property="og:url" content="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/index.html">
+<meta property="og:title" content="反编译Python打包的可执行程序">
+<meta property="og:url" content="http://www.dearcharles.cn/2021/07/21/反编译Python打包的可执行程序/index.html">
 <meta property="og:site_name" content="来杯菊花茶">
-<meta property="og:description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
+<meta property="og:description" content="近期工作中需要逆向分析一个神奇的木马，文件看起来是一个linux下面的elf文件，但是通过常规手段用ida或者ghidra分析完全没有头绪(主要是因为菜&amp;gt;_&amp;lt;)，但是通过ida的分析可以看出明显的python痕迹，后来通过万能的谷歌学习到，还有另一种途径可以完美的逆向python打包的可执行程序。本文简要记录一下逆向python打包的elf/exe程序的逆向分析方法。 python打包">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:image" content="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png">
+<meta property="og:image" content="https://i.postimg.cc/1zrpkn5X/8818451-9ae8aba5f4d85bbb.png">
+<meta property="og:image" content="https://i.postimg.cc/zGL2Yk9B/8818451-bb0a1f304c8abba4.png">
+<meta property="og:image" content="https://i.postimg.cc/1RHjGXG9/8818451-53dd6df6d04bf6ea.png">
+<meta property="og:image" content="https://i.postimg.cc/tJXm0GjQ/8818451-21b24943202a0c70.png">
+<meta property="og:image" content="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png">
+<meta property="og:image" content="https://i.postimg.cc/tTGM5Vvg/8818451-37066d7a97aa286a.png">
+<meta property="og:updated_time" content="2021-07-21T14:52:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot Java应用代码混淆介绍">
-<meta name="twitter:description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
-<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png">
+<meta name="twitter:title" content="反编译Python打包的可执行程序">
+<meta name="twitter:description" content="近期工作中需要逆向分析一个神奇的木马，文件看起来是一个linux下面的elf文件，但是通过常规手段用ida或者ghidra分析完全没有头绪(主要是因为菜&amp;gt;_&amp;lt;)，但是通过ida的分析可以看出明显的python痕迹，后来通过万能的谷歌学习到，还有另一种途径可以完美的逆向python打包的可执行程序。本文简要记录一下逆向python打包的elf/exe程序的逆向分析方法。 python打包">
+<meta name="twitter:image" content="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png">
 
-<link rel="canonical" href="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/">
+<link rel="canonical" href="http://www.dearcharles.cn/2021/07/21/反编译Python打包的可执行程序/">
 
 
 <script id="page-configurations">
@@ -48,7 +54,7 @@
   };
 </script>
 
-  <title>Spring Boot Java应用代码混淆介绍 | 来杯菊花茶</title>
+  <title>反编译Python打包的可执行程序 | 来杯菊花茶</title>
   
 
 
@@ -173,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/07/21/反编译Python打包的可执行程序/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/8390209.jpg">
@@ -186,7 +192,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring Boot Java应用代码混淆介绍
+          反编译Python打包的可执行程序
         </h1>
 
         <div class="post-meta">
@@ -195,16 +201,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2017-11-19 15:19:00" itemprop="dateCreated datePublished" datetime="2017-11-19T15:19:00+08:00">2017-11-19</time>
+              <time title="Created: 2021-07-21 22:48:00 / Modified: 22:52:50" itemprop="dateCreated datePublished" datetime="2021-07-21T22:48:00+08:00">2021-07-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -231,8 +231,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2017/11/19/Spring-Boot-Java应用代码混淆介绍/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/19/Spring-Boot-Java应用代码混淆介绍/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/07/21/反编译Python打包的可执行程序/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/21/反编译Python打包的可执行程序/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -247,50 +247,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classLoader去解密并加载到JVM，这种方式有个问题，一旦对方拿到你这个自定义的ClassLoader那么保密也就不存在了。相信类似的技术手段还有很多，用ProGuard对Spring Boot的应用做混淆处理<br><a id="more"></a><br>文末有示例代码，这里只记录主要步骤：</p>
+        <p>近期工作中需要逆向分析一个神奇的木马，文件看起来是一个linux下面的elf文件，但是通过常规手段用ida或者ghidra分析完全没有头绪(主要是因为菜&gt;_&lt;)，但是通过ida的分析可以看出明显的python痕迹，后来通过万能的谷歌学习到，还有另一种途径可以完美的逆向python打包的可执行程序。本文简要记录一下逆向python打包的elf/exe程序的逆向分析方法。</p>
+<h3 id="python打包的可执行程序"><a href="#python打包的可执行程序" class="headerlink" title="python打包的可执行程序"></a>python打包的可执行程序</h3><p>将python脚本打包成可执行程序可以更方便的在目标平台上执行，打包工具有很多，其中最常用的当数<code>pyinstaller</code>了，在Linux/Windows平台上可以通过pip安装：</p>
+<pre><code>pip install pyinstaller
+</code></pre><p>打包方法很简单，直接对写好的python程序<code>demo.py</code>执行：</p>
+<pre><code>pyinstaller -F demo.py
+</code></pre><p>打包好的exe程序会在dist目录中，elf需要在Linux下打包，方法是一样的</p>
+<h3 id="pyinstaller打包可执行程序的特征"><a href="#pyinstaller打包可执行程序的特征" class="headerlink" title="pyinstaller打包可执行程序的特征"></a>pyinstaller打包可执行程序的特征</h3><p>接下来分析一下用ida打开打包好的elf/exe有什么特征，将exe拖到ida中分析。</p>
 <ol>
-<li>混淆工具依赖到工程pom.xml</li>
-<li>guard.conf到Spring boot应用</li>
+<li>main函数特征</li>
 </ol>
-<ul>
-<li>不包括 hibernate模型的字段或者隐式配置的列名</li>
-<li>不包括 JpaRepository类的方法名</li>
-</ul>
+<p>首先在函数窗口可以找到<code>main</code>方法，双击打开然后上<code>F5</code>大法</p>
+<p>下图中标注了几条main中比较明显的特征，猜测应该是pyinstaller打包的一种固定模式代码</p>
+<p><img src="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png" alt="image-20210225223221890.png"></p>
+<ol start="2">
+<li>字符串特征</li>
+</ol>
+<p>按<code>shift+F12</code>查看变量(本例中，想在这里找到程序中的密码是不可能的)，可以看到很多<code>Py</code>开头的文件，这也是为什么我开始猜测这个elf文件是由python打包的</p>
+<p><img src="https://i.postimg.cc/1zrpkn5X/8818451-9ae8aba5f4d85bbb.png" alt="image-20210225223510030.png"></p>
+<h3 id="反编译可执行文件"><a href="#反编译可执行文件" class="headerlink" title="反编译可执行文件"></a>反编译可执行文件</h3><p>从ida的内容分析似乎很难找到真正的程序逻辑入口在哪里，后来在谷歌一番搜索终于找到的正确方向。反编译首先要用python(我用python3.7)自带的<code>archive_viewer.py</code>将elf/exe程序提取出<code>pyc</code>文件，然后再从<code>pyc</code>反编译成<code>py</code></p>
+<ol>
+<li>提取pyc文件</li>
+</ol>
+<p>windows下的<code>archive_viewer.py</code>文件目录在<code>{Python_Home}\Lib\site-packages\PyInstaller\utils\cliutils</code>，将这个文件复制到工作目录下，执行如下命令:</p>
+<pre><code>python archive_viewer.py demo
+</code></pre><p><img src="https://i.postimg.cc/zGL2Yk9B/8818451-bb0a1f304c8abba4.png" alt="image-20210225224909857.png"></p>
+<p>这里看到分析出目标程序的模块，其中唯一一个不带前缀后缀的就是我们要找的模块</p>
+<p>接下来提取该模块<code>x client-update</code>,提取后的文件如下图所示：</p>
+<p><img src="https://i.postimg.cc/1RHjGXG9/8818451-53dd6df6d04bf6ea.png" alt="image-20210225225419108.png"></p>
+<ol start="2">
+<li>修改文件头</li>
+</ol>
+<p>使用pyinstaller打包的文件，文件头的数据会被抹消掉。再还原的过程中，我们需要手动进行修补。文件头的格式为：magic(4字节，编译器标志) + 时间戳(4字节)。在实际修补时，需要添加的数据可能不止是8个字节。（笔者python版本为3.7，需要填充16个字节）以下为修补的步骤</p>
+<p>承接上面的步骤，除了要提取目标文件.pyc以外，还需要再提一个<code>struct</code>文件：</p>
+<p><img src="https://i.postimg.cc/tJXm0GjQ/8818451-21b24943202a0c70.png" alt="image-20210225225734159.png"></p>
+<p>使用<a href="https://www.hhdsoftware.com/free-hex-editor" target="_blank" rel="noopener">二进制编辑工具</a>打开这两个文件，对比发现，提取出的目标文件头部比<code>struct.pyc</code>少了8个字节</p>
+<p>[图片上传失败…(image-bb5cab-1626878121733)]</p>
+<p>接下来需要将缺失的部分补全，将<code>struct.pyc</code>头部的8个字节内容拷贝到目标文件头部，然后保存文件</p>
+<p><img src="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png" alt="image-20210225230130177.png"></p>
 <ol start="3">
-<li>配置proguard-maven-plugin</li>
+<li><p>反编译pyc文件</p>
+<p>这里需要安装<code>uncompyle6</code></p>
+<pre><code>pip install uncompyle6
+</code></pre><p>安装后的可执行程序在<code>{Python_Home}/Scripts}</code>下，可以直接执行：</p>
+<pre><code>uncompyle6.exe client-update.pyc &gt; client-update.py
+</code></pre></li>
 </ol>
-<ul>
-<li>指定proguard.conf文件位置</li>
-<li>添加java runtime包<pre><code>&lt;libs&gt;
-&lt;lib&gt;${java.home}/lib/rt.jar&lt;/lib&gt;
-&lt;/libs&gt;
-</code></pre></li>
-<li>指定想要混淆的模块名称，proguard maven 插件会将其转换成 –injar参数，比如：<pre><code>&lt;assembly&gt;
-&lt;inclusions&gt;
-&lt;inclusion&gt;
-&lt;groupId&gt;org.alext.learning&lt;/groupId&gt;
-&lt;artifactId&gt;bsmod&lt;/artifactId&gt;
-&lt;/inclusion&gt;
-&lt;/inclusions&gt;
-&lt;/assembly&gt;
-</code></pre></li>
-</ul>
-<ol start="4">
-<li>Proguar会把所有injars合并到一个公共的混淆jar包，所以这里还需要把未混淆的jar从Spring boot的输出jar里面去掉，这里可以用spring-boot-maven-plugin来排除上一步指定的injars<pre><code>&lt;configuration&gt;
-&lt;excludes&gt;
-&lt;exclude&gt;
-&lt;groupId&gt;org.alext.learning&lt;/groupId&gt;
-&lt;artifactId&gt;bsmod&lt;/artifactId&gt;
-&lt;/exclude&gt;
-&lt;/excludes&gt;
-&lt;/configuration&gt;
-</code></pre></li>
-<li>运行混淆编译<pre><code>mvn clean package -DskipTests=true -P obfuscation
-</code></pre></li>
-<li>运行jar<pre><code>java -jar uxmod/target/uxmod-1.0-SNAPSHOT.jar 
-</code></pre>访问<a href="http://localhost:8085/验证应用" target="_blank" rel="noopener">http://localhost:8085/验证应用</a><br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png" alt="mark"><br>浏览输出jar文件可以看到uxmod-1.0-SNAPSHOT.jar\BOOT-INF\lib不包含我们之前指定的-injars模块(bsmod.jar)。bsmod类与uxmod类合并到一起，混淆后的类在uxmod-1.0-SNAPSHOT.jar\classes</li>
-</ol>
-<p>上例中的完整代码可以在github上找到<a href="https://github.com/tsuria/examples" target="_blank" rel="noopener">请参考</a></p>
+<p>可以看到最后反编译的结果非常清晰可读</p>
+<p><img src="https://i.postimg.cc/tTGM5Vvg/8818451-37066d7a97aa286a.png" alt="image-20210225231522152.png"></p>
 
     </div>
 
@@ -300,9 +304,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/ProGuard/" rel="tag"># ProGuard</a>
-              <a href="/tags/混淆/" rel="tag"># 混淆</a>
+              <a href="/tags/逆向工程/" rel="tag"># 逆向工程</a>
           </div>
 
         
@@ -311,12 +313,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/" rel="prev" title="基于Spring Security OAuth2.0实现单点登录SSO">
-      <i class="fa fa-chevron-left"></i> 基于Spring Security OAuth2.0实现单点登录SSO
+    <a href="/2021/07/21/CISSP备考经验分享/" rel="prev" title="CISSP备考经验分享">
+      <i class="fa fa-chevron-left"></i> CISSP备考经验分享
     </a></div>
       <div class="post-nav-item">
-    <a href="/2017/11/20/Splunk-Forwarder-收集分析Windows系统日志/" rel="next" title="Splunk + Forwarder 收集分析Windows系统日志">
-      Splunk + Forwarder 收集分析Windows系统日志 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/" rel="next" title="蓝队知识管理利器(1)-ATT&CK Workbench">
+      蓝队知识管理利器(1)-ATT&CK Workbench <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -383,6 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python打包的可执行程序"><span class="nav-number">1.</span> <span class="nav-text">python打包的可执行程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pyinstaller打包可执行程序的特征"><span class="nav-number">2.</span> <span class="nav-text">pyinstaller打包可执行程序的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反编译可执行文件"><span class="nav-number">3.</span> <span class="nav-text">反编译可执行文件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -533,9 +536,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/";
-    this.page.identifier = "2017/11/19/Spring-Boot-Java应用代码混淆介绍/";
-    this.page.title = "Spring Boot Java应用代码混淆介绍";
+    this.page.url = "http://www.dearcharles.cn/2021/07/21/反编译Python打包的可执行程序/";
+    this.page.identifier = "2021/07/21/反编译Python打包的可执行程序/";
+    this.page.title = "反编译Python打包的可执行程序";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {

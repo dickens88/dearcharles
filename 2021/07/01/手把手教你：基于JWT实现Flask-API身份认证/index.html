@@ -24,7 +24,7 @@
 <meta name="keywords" content="API">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手教你：基于JWT实现Flask API身份认证">
-<meta property="og:url" content="http://www.dearcharles.cn/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/index.html">
+<meta property="og:url" content="http://www.dearcharles.cn/2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/index.html">
 <meta property="og:site_name" content="来杯菊花茶">
 <meta property="og:description" content="本文主要参考国外大佬的文章教你如何使用JWT框架实现Flask API的身份认证。 JSON Web Token(JWT)是一个非常流行的WEB认证认证框架，JWT可以说是SPA和web服务器之间授权和通信的标准做法。在本文中，我们会构建一个具有JWT授权的Flask web服务器。 完整的代码从这里下载：https://github.com/dickens88/flask-jwt-demo 步骤">
 <meta property="og:locale" content="en">
@@ -37,13 +37,13 @@
 <meta property="og:image" content="https://i.postimg.cc/tCCwnBb2/8818451-92cd21fdc592508f.png">
 <meta property="og:image" content="https://i.postimg.cc/FR6dbPq3/8818451-29d4b2ab2d657521.png">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/8818451-1217510b0516b248.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2021-07-21T14:12:26.000Z">
+<meta property="og:updated_time" content="2021-07-21T14:53:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手把手教你：基于JWT实现Flask API身份认证">
 <meta name="twitter:description" content="本文主要参考国外大佬的文章教你如何使用JWT框架实现Flask API的身份认证。 JSON Web Token(JWT)是一个非常流行的WEB认证认证框架，JWT可以说是SPA和web服务器之间授权和通信的标准做法。在本文中，我们会构建一个具有JWT授权的Flask web服务器。 完整的代码从这里下载：https://github.com/dickens88/flask-jwt-demo 步骤">
 <meta name="twitter:image" content="https://i.postimg.cc/VvCXTQPz/8818451-082441ce953e0277.png">
 
-<link rel="canonical" href="http://www.dearcharles.cn/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/">
+<link rel="canonical" href="http://www.dearcharles.cn/2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/">
 
 
 <script id="page-configurations">
@@ -181,7 +181,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/8390209.jpg">
@@ -203,10 +203,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-07-21 22:02:00 / Modified: 22:12:26" itemprop="dateCreated datePublished" datetime="2021-07-21T22:02:00+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-01 22:02:00" itemprop="dateCreated datePublished" datetime="2021-07-01T22:02:00+08:00">2021-07-01</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-21 22:53:08" itemprop="dateModified" datetime="2021-07-21T22:53:08+08:00">2021-07-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -233,8 +239,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -629,10 +635,13 @@ class UserLogoutRefresh(Resource):
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/07/21/CISSP备考经验分享/" rel="prev" title="CISSP备考经验分享">
-      <i class="fa fa-chevron-left"></i> CISSP备考经验分享
+    <a href="/2019/12/21/简单几步搞定Mimikatz无文件-免杀/" rel="prev" title="简单几步搞定Mimikatz无文件+免杀">
+      <i class="fa fa-chevron-left"></i> 简单几步搞定Mimikatz无文件+免杀
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/07/21/CISSP备考经验分享/" rel="next" title="CISSP备考经验分享">
+      CISSP备考经验分享 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -714,7 +723,7 @@ class UserLogoutRefresh(Resource):
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -727,7 +736,7 @@ class UserLogoutRefresh(Resource):
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -849,8 +858,8 @@ class UserLogoutRefresh(Resource):
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://www.dearcharles.cn/2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/";
-    this.page.identifier = "2021/07/21/手把手教你：基于JWT实现Flask-API身份认证/";
+    this.page.url = "http://www.dearcharles.cn/2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/";
+    this.page.identifier = "2021/07/01/手把手教你：基于JWT实现Flask-API身份认证/";
     this.page.title = "手把手教你：基于JWT实现Flask API身份认证";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {

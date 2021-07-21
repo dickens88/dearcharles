@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"www.dearcharles.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
-<meta name="keywords" content="Java,ProGuard,混淆">
+  <meta name="description" content="ATT&amp;amp;CK Workbench是MITRE组织最新开源的一款工具，通过它可以更加容易的管理自己本地的TTP库。Workbench 允许用户探索、创建、注释和共享ATT&amp;amp;CK 知识库的扩展。组织或个人可以通过workbench来初始化他们自己的应用程序实例，配合ATT&amp;amp;CK Navigator可以更容易的定制出自己的TTP矩阵。 ATT&amp;amp;CK Workbench的适">
+<meta name="keywords" content="ATT&amp;CK">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Boot Java应用代码混淆介绍">
-<meta property="og:url" content="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/index.html">
+<meta property="og:title" content="蓝队知识管理利器(1)-ATT&amp;CK Workbench">
+<meta property="og:url" content="http://www.dearcharles.cn/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/index.html">
 <meta property="og:site_name" content="来杯菊花茶">
-<meta property="og:description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
+<meta property="og:description" content="ATT&amp;amp;CK Workbench是MITRE组织最新开源的一款工具，通过它可以更加容易的管理自己本地的TTP库。Workbench 允许用户探索、创建、注释和共享ATT&amp;amp;CK 知识库的扩展。组织或个人可以通过workbench来初始化他们自己的应用程序实例，配合ATT&amp;amp;CK Navigator可以更容易的定制出自己的TTP矩阵。 ATT&amp;amp;CK Workbench的适">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png">
-<meta property="og:updated_time" content="2020-06-11T13:35:02.000Z">
+<meta property="og:image" content="https://i.postimg.cc/3r6F0khb/screenshot-2.png">
+<meta property="og:image" content="https://i.postimg.cc/HLs64FhS/screenshot-3.png">
+<meta property="og:image" content="https://i.postimg.cc/Xvm9GhSB/screenshot-4.png">
+<meta property="og:updated_time" content="2021-07-21T15:28:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Boot Java应用代码混淆介绍">
-<meta name="twitter:description" content="本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classL">
-<meta name="twitter:image" content="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png">
+<meta name="twitter:title" content="蓝队知识管理利器(1)-ATT&amp;CK Workbench">
+<meta name="twitter:description" content="ATT&amp;amp;CK Workbench是MITRE组织最新开源的一款工具，通过它可以更加容易的管理自己本地的TTP库。Workbench 允许用户探索、创建、注释和共享ATT&amp;amp;CK 知识库的扩展。组织或个人可以通过workbench来初始化他们自己的应用程序实例，配合ATT&amp;amp;CK Navigator可以更容易的定制出自己的TTP矩阵。 ATT&amp;amp;CK Workbench的适">
+<meta name="twitter:image" content="https://i.postimg.cc/3r6F0khb/screenshot-2.png">
 
-<link rel="canonical" href="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/">
+<link rel="canonical" href="http://www.dearcharles.cn/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>Spring Boot Java应用代码混淆介绍 | 来杯菊花茶</title>
+  <title>蓝队知识管理利器(1)-ATT&CK Workbench | 来杯菊花茶</title>
   
 
 
@@ -173,7 +175,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/8390209.jpg">
@@ -186,7 +188,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Spring Boot Java应用代码混淆介绍
+          蓝队知识管理利器(1)-ATT&CK Workbench
         </h1>
 
         <div class="post-meta">
@@ -195,16 +197,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2017-11-19 15:19:00" itemprop="dateCreated datePublished" datetime="2017-11-19T15:19:00+08:00">2017-11-19</time>
+              <time title="Created: 2021-07-21 22:55:00 / Modified: 23:28:24" itemprop="dateCreated datePublished" datetime="2021-07-21T22:55:00+08:00">2021-07-21</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-11 21:35:02" itemprop="dateModified" datetime="2020-06-11T21:35:02+08:00">2020-06-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -231,8 +227,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2017/11/19/Spring-Boot-Java应用代码混淆介绍/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/19/Spring-Boot-Java应用代码混淆介绍/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/07/21/蓝队知识管理利器ATT-CK-Workbench/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -247,50 +243,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>本文简要介绍一下开源Java混淆编译工具ProGuard的实际应用案例。我们知道某些情况下软件的作者需要保护软件本身不被使用者反编译，或者给对方反编译制造一定的障碍，为了达到这个目的人们可以有很多不同的做法，比如在编译的过程中把一些变量名替换成无意义的abcd或者将类名方法打散等等，制造一些混乱让反编译的人很难读懂你的逻辑；还有一种是对java编译后的class文件加密，然后用自定义的classLoader去解密并加载到JVM，这种方式有个问题，一旦对方拿到你这个自定义的ClassLoader那么保密也就不存在了。相信类似的技术手段还有很多，用ProGuard对Spring Boot的应用做混淆处理<br><a id="more"></a><br>文末有示例代码，这里只记录主要步骤：</p>
-<ol>
-<li>混淆工具依赖到工程pom.xml</li>
-<li>guard.conf到Spring boot应用</li>
-</ol>
+        <p><a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend" target="_blank" rel="noopener">ATT&amp;CK Workbench</a>是MITRE组织最新开源的一款工具，通过它可以更加容易的管理自己本地的TTP库。Workbench 允许用户<em>探索</em>、<em>创建</em>、<em>注释</em>和<em>共享</em>ATT&amp;CK 知识库的扩展。组织或个人可以通过workbench来初始化他们自己的应用程序实例，配合ATT&amp;CK Navigator可以更容易的定制出自己的TTP矩阵。</p>
+<p><strong>ATT&amp;CK Workbench的适用人群？</strong></p>
+<p>如果你符合以下问题中的任何一个，那么这个工程就适用于你的组织</p>
 <ul>
-<li>不包括 hibernate模型的字段或者隐式配置的列名</li>
-<li>不包括 JpaRepository类的方法名</li>
+<li>ATT&amp;CK是你安全运营组织的核心？</li>
+<li>你使用ATT&amp;CK追踪外部威胁动态？</li>
+<li>你是否以ATT&amp;CK对齐防护工作？</li>
+<li>你是否基于ATT&amp;CK计划你的安全投资？</li>
 </ul>
-<ol start="3">
-<li>配置proguard-maven-plugin</li>
-</ol>
+<p><strong>给你的ATT&amp;CK副本添加注释</strong></p>
+<p>Workbench提供给用户注释本地ATT&amp;CK副本的能力，<code>Notes</code>是一种非常好的方式用于给你的知识库添加额外的说明信息，同时也可以关联到<code>matrices</code>, <code>techniques</code>, <code>tactics</code>, <code>mitigations</code>, <code>groups</code> 和<code>software</code>，同时你本地的自定义知识库也可以更新线上最新的ATT&amp;CK库，并且当你的知识库更新的最新的ATT&amp;CK数据，workbench还会保留你的<code>notes</code></p>
+<p>Notes的一些使用场景：</p>
 <ul>
-<li>指定proguard.conf文件位置</li>
-<li>添加java runtime包<pre><code>&lt;libs&gt;
-&lt;lib&gt;${java.home}/lib/rt.jar&lt;/lib&gt;
-&lt;/libs&gt;
-</code></pre></li>
-<li>指定想要混淆的模块名称，proguard maven 插件会将其转换成 –injar参数，比如：<pre><code>&lt;assembly&gt;
-&lt;inclusions&gt;
-&lt;inclusion&gt;
-&lt;groupId&gt;org.alext.learning&lt;/groupId&gt;
-&lt;artifactId&gt;bsmod&lt;/artifactId&gt;
-&lt;/inclusion&gt;
-&lt;/inclusions&gt;
-&lt;/assembly&gt;
-</code></pre></li>
+<li>在组织内共享非正式知识（例如“这种缓解措施可能有助于保护我们免受<em>X</em>侵害”）</li>
+<li>记录潜在的知识（例如“TO DO：验证威胁报告<em>X 中</em>提到的是否实际上是这种技术”）</li>
+<li>在开发工作流程中实现协作（例如“审查数据源信息并制定计划以开始收集检测此技术所需的数据。”）</li>
 </ul>
-<ol start="4">
-<li>Proguar会把所有injars合并到一个公共的混淆jar包，所以这里还需要把未混淆的jar从Spring boot的输出jar里面去掉，这里可以用spring-boot-maven-plugin来排除上一步指定的injars<pre><code>&lt;configuration&gt;
-&lt;excludes&gt;
-&lt;exclude&gt;
-&lt;groupId&gt;org.alext.learning&lt;/groupId&gt;
-&lt;artifactId&gt;bsmod&lt;/artifactId&gt;
-&lt;/exclude&gt;
-&lt;/excludes&gt;
-&lt;/configuration&gt;
-</code></pre></li>
-<li>运行混淆编译<pre><code>mvn clean package -DskipTests=true -P obfuscation
-</code></pre></li>
-<li>运行jar<pre><code>java -jar uxmod/target/uxmod-1.0-SNAPSHOT.jar 
-</code></pre>访问<a href="http://localhost:8085/验证应用" target="_blank" rel="noopener">http://localhost:8085/验证应用</a><br><img src="http://oyy7pve7f.bkt.clouddn.com/blog/171119/aCf4EEcjAG.png" alt="mark"><br>浏览输出jar文件可以看到uxmod-1.0-SNAPSHOT.jar\BOOT-INF\lib不包含我们之前指定的-injars模块(bsmod.jar)。bsmod类与uxmod类合并到一起，混淆后的类在uxmod-1.0-SNAPSHOT.jar\classes</li>
-</ol>
-<p>上例中的完整代码可以在github上找到<a href="https://github.com/tsuria/examples" target="_blank" rel="noopener">请参考</a></p>
+<p><img src="https://i.postimg.cc/3r6F0khb/screenshot-2.png" alt="image-20210716180534799"></p>
+<p><strong>扩展你的ATT&amp;CK副本</strong></p>
+<p>Workbench最主要的用处在于提供给你一个简单的界面创建和扩展TTP对象的能力，你可以根据自己的实际情况编辑<code>matrices</code>, <code>techniques</code>, <code>tactics</code>, <code>mitigations</code>, <code>groups</code> 和<code>software</code>，这也意味着你可以根据你的需要来扩展现有的知识库，也可以创建与 ATT&amp;CK 术语一致且可与 ATT&amp;CK 工具一起使用的全新数据集。在工作台中创建的数据可以无缝集成到现有的 ATT&amp;CK 数据中——新的<code>group</code>或<code>software</code>可以通过<code>procedure</code>示例连接到现有的<code>technique</code>，也可以在现有的 ATT&amp;CK的<code>technique</code>下创建新的<code>sub-technique</code></p>
+<p>在本地知识库中创建或扩展 ATT&amp;CK 数据可实现许多重要的场景，例如：</p>
+<ul>
+<li>创建本地红队的技术库，以便可以像上线ATT&amp;CK技术一样跟踪它们</li>
+<li>记录针对您的部门或组织但目前未被 ATT&amp;CK 团队跟踪的group或software</li>
+<li>使用上线ATT&amp;CK知识库范围之外的新技术和策略开发你自己的TTP矩阵</li>
+</ul>
+<p><img src="https://i.postimg.cc/HLs64FhS/screenshot-3.png" alt="image-20210716181642905"></p>
+<p>Workbench 还包括一些支持团队协作的功能，例如能够将对象标记为“work in progress”、“awaiting review”或“reviewed”，以及查看对象历史，用以查看对象在何时被谁更新了。</p>
+<p><strong>打破孤岛——更新和分享你的扩展</strong></p>
+<p>随着团队扩展和注释他们的 ATT&amp;CK 数据，Workbench 支持导入和导出本地ATT&amp;CK数据来实现工作成功的共享。Workbench 用户可以订阅线上 ATT&amp;CK 数据集，合并发布自己的数据。订阅允许用户保持与指定的知识库的同步更新，将集合导入 Workbench 后，您可以预览其中包含的内容以及内容与本地知识库的关系。</p>
+<p>在组织之间共享 ATT&amp;CK 相关信息作为集合将：</p>
+<ul>
+<li>通过启用自动导入并提供详细的更改历史记录，简化与 ATT&amp;CK 保持同步的过程</li>
+<li>通过导入多个集合，允许用户将来自 ATT&amp;CK 的最新信息与来自其他来源（威胁情报供应商、ISAC 和 ISAO 以及 ATT&amp;CK 社区的其他成员）的情报扩展集成</li>
+<li>为 ATT&amp;CK 的贡献创建结构和一致性</li>
+</ul>
+<p><img src="https://i.postimg.cc/Xvm9GhSB/screenshot-4.png" alt="image-20210716182337198"></p>
+<p>ATT&amp;CK 在GitHub 上提供了当前和历史版本的知识库文件<a href="https://github.com/mitre-attack/attack-stix-data" target="_blank" rel="noopener">官方集合</a>。用户可以简单地订阅这些集合，并在发布后导入新的 ATT&amp;CK 版本。</p>
+<p><strong>工具集成</strong></p>
+<p>Workbench 工具支持与其他 ATT&amp;CK 工具的许多集成。REST API 提供对知识库内容的编程访问，允许 ATT&amp;CK 开发的工具或第三方应用程序扩展本地知识库的功能以匹配您的用例。当前 Workbench 版本默认支持以下组件的集成：</p>
+<ul>
+<li><a href="https://github.com/mitre-attack/attack-website" target="_blank" rel="noopener">ATT&amp;CK  Website Repository</a>：通过 ATT&amp;CK 网站的视角查看您的知识库，并直接在网站上的对象页面上查看您在对象上创建的注释。我们希望 ATT&amp;CK 网站集成对于希望在熟悉的环境中查看自定义内容或使用网站的许多内置功能（例如完整的 ATT&amp;CK 矩阵、生成的导航器层等）。</li>
+<li><a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT&amp;CK Navigator</a>：在<a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT&amp;CK Navigator</a>查看和注释您的新技术、战术和矩阵，并在矩阵视图中查看您在技术上创建的注释。这种集成允许用户根据 ATT&amp;CK 数据集的自定义扩展创建图层文件，从而支持在 ATT&amp;CK 社区内开发的许多使用导航器的现有工作流。</li>
+</ul>
+<p>有关Workbench与其他组件集成的配置方法，可以参考<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/integrations.md" target="_blank" rel="noopener">集成文档</a></p>
+<p><strong>配套资源</strong></p>
+<p>在 <a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend" target="_blank" rel="noopener">ATT&amp;CK Workbench Frontend</a> 是用户文档和安装说明的入口。除了单独安装配置每个组件外，还包含一个 docker compose（和<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/docker-compose.md" target="_blank" rel="noopener">相关说明</a>）以简化应用程序的部署。</p>
+<ul>
+<li>在<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/usage.md" target="_blank" rel="noopener">使用文档</a>介绍了如何使用和应用程序的每个功能多用于开发扩展知识基础的潜在工作流程。</li>
+<li>该<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/integrations.md" target="_blank" rel="noopener">集成文档</a>提供了<a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT＆CK Navigator</a>和<a href="https://github.com/mitre-attack/attack-website" target="_blank" rel="noopener">ATT＆CK网站</a>连接到本地Workbench的详尽说明。</li>
+</ul>
+<p><strong>参考文档</strong></p>
+<p><a href="https://medium.com/mitre-engenuity/att-ck-workbench-a-tool-for-extending-att-ck-e1718cbfe0ef" target="_blank" rel="noopener">https://medium.com/mitre-engenuity/att-ck-workbench-a-tool-for-extending-att-ck-e1718cbfe0ef</a></p>
 
     </div>
 
@@ -300,9 +305,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/ProGuard/" rel="tag"># ProGuard</a>
-              <a href="/tags/混淆/" rel="tag"># 混淆</a>
+              <a href="/tags/ATT-CK/" rel="tag"># ATT&CK</a>
           </div>
 
         
@@ -311,13 +314,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2017/11/16/基于Spring-Security-OAuth2-0实现单点登录SSO/" rel="prev" title="基于Spring Security OAuth2.0实现单点登录SSO">
-      <i class="fa fa-chevron-left"></i> 基于Spring Security OAuth2.0实现单点登录SSO
+    <a href="/2021/07/21/反编译Python打包的可执行程序/" rel="prev" title="反编译Python打包的可执行程序">
+      <i class="fa fa-chevron-left"></i> 反编译Python打包的可执行程序
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2017/11/20/Splunk-Forwarder-收集分析Windows系统日志/" rel="next" title="Splunk + Forwarder 收集分析Windows系统日志">
-      Splunk + Forwarder 收集分析Windows系统日志 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -533,9 +533,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://www.dearcharles.cn/2017/11/19/Spring-Boot-Java应用代码混淆介绍/";
-    this.page.identifier = "2017/11/19/Spring-Boot-Java应用代码混淆介绍/";
-    this.page.title = "Spring Boot Java应用代码混淆介绍";
+    this.page.url = "http://www.dearcharles.cn/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/";
+    this.page.identifier = "2021/07/21/蓝队知识管理利器ATT-CK-Workbench/";
+    this.page.title = "蓝队知识管理利器(1)-ATT&CK Workbench";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
