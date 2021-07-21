@@ -190,7 +190,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-07-21 22:55:00 / Modified: 23:28:24" itemprop="dateCreated datePublished" datetime="2021-07-21T22:55:00+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-21 22:55:00 / Modified: 23:31:36" itemprop="dateCreated datePublished" datetime="2021-07-21T22:55:00+08:00">2021-07-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -236,51 +236,14 @@
 <li>你是否以ATT&amp;CK对齐防护工作？</li>
 <li>你是否基于ATT&amp;CK计划你的安全投资？</li>
 </ul>
-<p><strong>给你的ATT&amp;CK副本添加注释</strong></p>
-<p>Workbench提供给用户注释本地ATT&amp;CK副本的能力，<code>Notes</code>是一种非常好的方式用于给你的知识库添加额外的说明信息，同时也可以关联到<code>matrices</code>, <code>techniques</code>, <code>tactics</code>, <code>mitigations</code>, <code>groups</code> 和<code>software</code>，同时你本地的自定义知识库也可以更新线上最新的ATT&amp;CK库，并且当你的知识库更新的最新的ATT&amp;CK数据，workbench还会保留你的<code>notes</code></p>
-<p>Notes的一些使用场景：</p>
-<ul>
-<li>在组织内共享非正式知识（例如“这种缓解措施可能有助于保护我们免受<em>X</em>侵害”）</li>
-<li>记录潜在的知识（例如“TO DO：验证威胁报告<em>X 中</em>提到的是否实际上是这种技术”）</li>
-<li>在开发工作流程中实现协作（例如“审查数据源信息并制定计划以开始收集检测此技术所需的数据。”）</li>
-</ul>
-<p><img src="https://i.postimg.cc/3r6F0khb/screenshot-2.png" alt="image-20210716180534799"></p>
-<p><strong>扩展你的ATT&amp;CK副本</strong></p>
-<p>Workbench最主要的用处在于提供给你一个简单的界面创建和扩展TTP对象的能力，你可以根据自己的实际情况编辑<code>matrices</code>, <code>techniques</code>, <code>tactics</code>, <code>mitigations</code>, <code>groups</code> 和<code>software</code>，这也意味着你可以根据你的需要来扩展现有的知识库，也可以创建与 ATT&amp;CK 术语一致且可与 ATT&amp;CK 工具一起使用的全新数据集。在工作台中创建的数据可以无缝集成到现有的 ATT&amp;CK 数据中——新的<code>group</code>或<code>software</code>可以通过<code>procedure</code>示例连接到现有的<code>technique</code>，也可以在现有的 ATT&amp;CK的<code>technique</code>下创建新的<code>sub-technique</code></p>
-<p>在本地知识库中创建或扩展 ATT&amp;CK 数据可实现许多重要的场景，例如：</p>
-<ul>
-<li>创建本地红队的技术库，以便可以像上线ATT&amp;CK技术一样跟踪它们</li>
-<li>记录针对您的部门或组织但目前未被 ATT&amp;CK 团队跟踪的group或software</li>
-<li>使用上线ATT&amp;CK知识库范围之外的新技术和策略开发你自己的TTP矩阵</li>
-</ul>
-<p><img src="https://i.postimg.cc/HLs64FhS/screenshot-3.png" alt="image-20210716181642905"></p>
-<p>Workbench 还包括一些支持团队协作的功能，例如能够将对象标记为“work in progress”、“awaiting review”或“reviewed”，以及查看对象历史，用以查看对象在何时被谁更新了。</p>
-<p><strong>打破孤岛——更新和分享你的扩展</strong></p>
-<p>随着团队扩展和注释他们的 ATT&amp;CK 数据，Workbench 支持导入和导出本地ATT&amp;CK数据来实现工作成功的共享。Workbench 用户可以订阅线上 ATT&amp;CK 数据集，合并发布自己的数据。订阅允许用户保持与指定的知识库的同步更新，将集合导入 Workbench 后，您可以预览其中包含的内容以及内容与本地知识库的关系。</p>
-<p>在组织之间共享 ATT&amp;CK 相关信息作为集合将：</p>
-<ul>
-<li>通过启用自动导入并提供详细的更改历史记录，简化与 ATT&amp;CK 保持同步的过程</li>
-<li>通过导入多个集合，允许用户将来自 ATT&amp;CK 的最新信息与来自其他来源（威胁情报供应商、ISAC 和 ISAO 以及 ATT&amp;CK 社区的其他成员）的情报扩展集成</li>
-<li>为 ATT&amp;CK 的贡献创建结构和一致性</li>
-</ul>
-<p><img src="https://i.postimg.cc/Xvm9GhSB/screenshot-4.png" alt="image-20210716182337198"></p>
-<p>ATT&amp;CK 在GitHub 上提供了当前和历史版本的知识库文件<a href="https://github.com/mitre-attack/attack-stix-data" target="_blank" rel="noopener">官方集合</a>。用户可以简单地订阅这些集合，并在发布后导入新的 ATT&amp;CK 版本。</p>
-<p><strong>工具集成</strong></p>
-<p>Workbench 工具支持与其他 ATT&amp;CK 工具的许多集成。REST API 提供对知识库内容的编程访问，允许 ATT&amp;CK 开发的工具或第三方应用程序扩展本地知识库的功能以匹配您的用例。当前 Workbench 版本默认支持以下组件的集成：</p>
-<ul>
-<li><a href="https://github.com/mitre-attack/attack-website" target="_blank" rel="noopener">ATT&amp;CK  Website Repository</a>：通过 ATT&amp;CK 网站的视角查看您的知识库，并直接在网站上的对象页面上查看您在对象上创建的注释。我们希望 ATT&amp;CK 网站集成对于希望在熟悉的环境中查看自定义内容或使用网站的许多内置功能（例如完整的 ATT&amp;CK 矩阵、生成的导航器层等）。</li>
-<li><a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT&amp;CK Navigator</a>：在<a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT&amp;CK Navigator</a>查看和注释您的新技术、战术和矩阵，并在矩阵视图中查看您在技术上创建的注释。这种集成允许用户根据 ATT&amp;CK 数据集的自定义扩展创建图层文件，从而支持在 ATT&amp;CK 社区内开发的许多使用导航器的现有工作流。</li>
-</ul>
-<p>有关Workbench与其他组件集成的配置方法，可以参考<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/integrations.md" target="_blank" rel="noopener">集成文档</a></p>
-<p><strong>配套资源</strong></p>
-<p>在 <a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend" target="_blank" rel="noopener">ATT&amp;CK Workbench Frontend</a> 是用户文档和安装说明的入口。除了单独安装配置每个组件外，还包含一个 docker compose（和<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/docker-compose.md" target="_blank" rel="noopener">相关说明</a>）以简化应用程序的部署。</p>
-<ul>
-<li>在<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/usage.md" target="_blank" rel="noopener">使用文档</a>介绍了如何使用和应用程序的每个功能多用于开发扩展知识基础的潜在工作流程。</li>
-<li>该<a href="https://github.com/center-for-threat-informed-defense/attack-workbench-frontend/blob/master/docs/integrations.md" target="_blank" rel="noopener">集成文档</a>提供了<a href="https://github.com/mitre-attack/attack-navigator" target="_blank" rel="noopener">ATT＆CK Navigator</a>和<a href="https://github.com/mitre-attack/attack-website" target="_blank" rel="noopener">ATT＆CK网站</a>连接到本地Workbench的详尽说明。</li>
-</ul>
-<p><strong>参考文档</strong></p>
-<p><a href="https://medium.com/mitre-engenuity/att-ck-workbench-a-tool-for-extending-att-ck-e1718cbfe0ef" target="_blank" rel="noopener">https://medium.com/mitre-engenuity/att-ck-workbench-a-tool-for-extending-att-ck-e1718cbfe0ef</a></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -324,7 +287,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-07-21 22:48:00 / Modified: 22:52:50" itemprop="dateCreated datePublished" datetime="2021-07-21T22:48:00+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-21 22:48:00 / Modified: 23:31:48" itemprop="dateCreated datePublished" datetime="2021-07-21T22:48:00+08:00">2021-07-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -367,49 +330,14 @@
 </code></pre><p>打包方法很简单，直接对写好的python程序<code>demo.py</code>执行：</p>
 <pre><code>pyinstaller -F demo.py
 </code></pre><p>打包好的exe程序会在dist目录中，elf需要在Linux下打包，方法是一样的</p>
-<h3 id="pyinstaller打包可执行程序的特征"><a href="#pyinstaller打包可执行程序的特征" class="headerlink" title="pyinstaller打包可执行程序的特征"></a>pyinstaller打包可执行程序的特征</h3><p>接下来分析一下用ida打开打包好的elf/exe有什么特征，将exe拖到ida中分析。</p>
-<ol>
-<li>main函数特征</li>
-</ol>
-<p>首先在函数窗口可以找到<code>main</code>方法，双击打开然后上<code>F5</code>大法</p>
-<p>下图中标注了几条main中比较明显的特征，猜测应该是pyinstaller打包的一种固定模式代码</p>
-<p><img src="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png" alt="image-20210225223221890.png"></p>
-<ol start="2">
-<li>字符串特征</li>
-</ol>
-<p>按<code>shift+F12</code>查看变量(本例中，想在这里找到程序中的密码是不可能的)，可以看到很多<code>Py</code>开头的文件，这也是为什么我开始猜测这个elf文件是由python打包的</p>
-<p><img src="https://i.postimg.cc/1zrpkn5X/8818451-9ae8aba5f4d85bbb.png" alt="image-20210225223510030.png"></p>
-<h3 id="反编译可执行文件"><a href="#反编译可执行文件" class="headerlink" title="反编译可执行文件"></a>反编译可执行文件</h3><p>从ida的内容分析似乎很难找到真正的程序逻辑入口在哪里，后来在谷歌一番搜索终于找到的正确方向。反编译首先要用python(我用python3.7)自带的<code>archive_viewer.py</code>将elf/exe程序提取出<code>pyc</code>文件，然后再从<code>pyc</code>反编译成<code>py</code></p>
-<ol>
-<li>提取pyc文件</li>
-</ol>
-<p>windows下的<code>archive_viewer.py</code>文件目录在<code>{Python_Home}\Lib\site-packages\PyInstaller\utils\cliutils</code>，将这个文件复制到工作目录下，执行如下命令:</p>
-<pre><code>python archive_viewer.py demo
-</code></pre><p><img src="https://i.postimg.cc/zGL2Yk9B/8818451-bb0a1f304c8abba4.png" alt="image-20210225224909857.png"></p>
-<p>这里看到分析出目标程序的模块，其中唯一一个不带前缀后缀的就是我们要找的模块</p>
-<p>接下来提取该模块<code>x client-update</code>,提取后的文件如下图所示：</p>
-<p><img src="https://i.postimg.cc/1RHjGXG9/8818451-53dd6df6d04bf6ea.png" alt="image-20210225225419108.png"></p>
-<ol start="2">
-<li>修改文件头</li>
-</ol>
-<p>使用pyinstaller打包的文件，文件头的数据会被抹消掉。再还原的过程中，我们需要手动进行修补。文件头的格式为：magic(4字节，编译器标志) + 时间戳(4字节)。在实际修补时，需要添加的数据可能不止是8个字节。（笔者python版本为3.7，需要填充16个字节）以下为修补的步骤</p>
-<p>承接上面的步骤，除了要提取目标文件.pyc以外，还需要再提一个<code>struct</code>文件：</p>
-<p><img src="https://i.postimg.cc/tJXm0GjQ/8818451-21b24943202a0c70.png" alt="image-20210225225734159.png"></p>
-<p>使用<a href="https://www.hhdsoftware.com/free-hex-editor" target="_blank" rel="noopener">二进制编辑工具</a>打开这两个文件，对比发现，提取出的目标文件头部比<code>struct.pyc</code>少了8个字节</p>
-<p>[图片上传失败…(image-bb5cab-1626878121733)]</p>
-<p>接下来需要将缺失的部分补全，将<code>struct.pyc</code>头部的8个字节内容拷贝到目标文件头部，然后保存文件</p>
-<p><img src="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png" alt="image-20210225230130177.png"></p>
-<ol start="3">
-<li><p>反编译pyc文件</p>
-<p>这里需要安装<code>uncompyle6</code></p>
-<pre><code>pip install uncompyle6
-</code></pre><p>安装后的可执行程序在<code>{Python_Home}/Scripts}</code>下，可以直接执行：</p>
-<pre><code>uncompyle6.exe client-update.pyc &gt; client-update.py
-</code></pre></li>
-</ol>
-<p>可以看到最后反编译的结果非常清晰可读</p>
-<p><img src="https://i.postimg.cc/tTGM5Vvg/8818451-37066d7a97aa286a.png" alt="image-20210225231522152.png"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/21/反编译Python打包的可执行程序/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

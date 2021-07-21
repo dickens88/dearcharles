@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://i.postimg.cc/tJXm0GjQ/8818451-21b24943202a0c70.png">
 <meta property="og:image" content="https://i.postimg.cc/SRr3jNrx/8818451-2a3590ce60a81da7.png">
 <meta property="og:image" content="https://i.postimg.cc/tTGM5Vvg/8818451-37066d7a97aa286a.png">
-<meta property="og:updated_time" content="2021-07-21T14:52:50.000Z">
+<meta property="og:updated_time" content="2021-07-21T15:31:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="反编译Python打包的可执行程序">
 <meta name="twitter:description" content="近期工作中需要逆向分析一个神奇的木马，文件看起来是一个linux下面的elf文件，但是通过常规手段用ida或者ghidra分析完全没有头绪(主要是因为菜&amp;gt;_&amp;lt;)，但是通过ida的分析可以看出明显的python痕迹，后来通过万能的谷歌学习到，还有另一种途径可以完美的逆向python打包的可执行程序。本文简要记录一下逆向python打包的elf/exe程序的逆向分析方法。 python打包">
@@ -203,7 +203,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-07-21 22:48:00 / Modified: 22:52:50" itemprop="dateCreated datePublished" datetime="2021-07-21T22:48:00+08:00">2021-07-21</time>
+              <time title="Created: 2021-07-21 22:48:00 / Modified: 23:31:48" itemprop="dateCreated datePublished" datetime="2021-07-21T22:48:00+08:00">2021-07-21</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,6 +253,7 @@
 </code></pre><p>打包方法很简单，直接对写好的python程序<code>demo.py</code>执行：</p>
 <pre><code>pyinstaller -F demo.py
 </code></pre><p>打包好的exe程序会在dist目录中，elf需要在Linux下打包，方法是一样的</p>
+<a id="more"></a>
 <h3 id="pyinstaller打包可执行程序的特征"><a href="#pyinstaller打包可执行程序的特征" class="headerlink" title="pyinstaller打包可执行程序的特征"></a>pyinstaller打包可执行程序的特征</h3><p>接下来分析一下用ida打开打包好的elf/exe有什么特征，将exe拖到ida中分析。</p>
 <ol>
 <li>main函数特征</li>
