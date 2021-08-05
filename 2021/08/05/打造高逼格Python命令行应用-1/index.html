@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.dearcharles.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"disqus","storage":true,"lazyload":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="python脚本是我等IT脚男日常工作中的必备工具，功能稍微复杂一些的脚本时常需要接受用户输入，根据输入执行相应的分支，如何处理用户输入并提供合适的输出则直接决定了脚本的质量和使用体验，一个合适的命令行框架可以让你的开发和后续使用事半功倍。本文介绍几款开源的python命令行框架，简要对比一下优缺点，希望对你的工作有所帮助。 optparseoptparse 是python内置的命令行工具库之一，">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="打造高逼格Python命令行应用">
+<meta property="og:url" content="http://www.dearcharles.cn/2021/08/05/打造高逼格Python命令行应用-1/index.html">
+<meta property="og:site_name" content="来杯菊花茶">
+<meta property="og:description" content="python脚本是我等IT脚男日常工作中的必备工具，功能稍微复杂一些的脚本时常需要接受用户输入，根据输入执行相应的分支，如何处理用户输入并提供合适的输出则直接决定了脚本的质量和使用体验，一个合适的命令行框架可以让你的开发和后续使用事半功倍。本文介绍几款开源的python命令行框架，简要对比一下优缺点，希望对你的工作有所帮助。 optparseoptparse 是python内置的命令行工具库之一，">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.postimg.cc/0yJMrmrH/interactive.gif">
+<meta property="og:image" content="https://i.postimg.cc/9F2Cy7xn/image-20210804185153833.png">
+<meta property="og:updated_time" content="2021-08-05T15:51:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="打造高逼格Python命令行应用">
+<meta name="twitter:description" content="python脚本是我等IT脚男日常工作中的必备工具，功能稍微复杂一些的脚本时常需要接受用户输入，根据输入执行相应的分支，如何处理用户输入并提供合适的输出则直接决定了脚本的质量和使用体验，一个合适的命令行框架可以让你的开发和后续使用事半功倍。本文介绍几款开源的python命令行框架，简要对比一下优缺点，希望对你的工作有所帮助。 optparseoptparse 是python内置的命令行工具库之一，">
+<meta name="twitter:image" content="https://i.postimg.cc/0yJMrmrH/interactive.gif">
+
+<link rel="canonical" href="http://www.dearcharles.cn/2021/08/05/打造高逼格Python命令行应用-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>打造高逼格Python命令行应用 | 来杯菊花茶</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?3eaa0cbd126e3efa878c7e8afa429611";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">来杯菊花茶</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">生活不只是眼前的苟且，还有诗和远方</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://www.dearcharles.cn/2021/08/05/打造高逼格Python命令行应用-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/8390209.jpg">
+      <meta itemprop="name" content="Charles Liu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="来杯菊花茶">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          打造高逼格Python命令行应用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-08-05 23:31:00 / Modified: 23:51:04" itemprop="dateCreated datePublished" datetime="2021-08-05T23:31:00+08:00">2021-08-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/安全技术/" itemprop="url" rel="index"><span itemprop="name">安全技术</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/08/05/打造高逼格Python命令行应用-1/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/08/05/打造高逼格Python命令行应用-1/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>python脚本是我等IT脚男日常工作中的必备工具，功能稍微复杂一些的脚本时常需要接受用户输入，根据输入执行相应的分支，如何处理用户输入并提供合适的输出则直接决定了脚本的质量和使用体验，一个合适的命令行框架可以让你的开发和后续使用事半功倍。本文介绍几款开源的python命令行框架，简要对比一下优缺点，希望对你的工作有所帮助。</p>
+<h3 id="optparse"><a href="#optparse" class="headerlink" title="optparse"></a>optparse</h3><p><a href="https://docs.python.org/3/library/optparse.html" target="_blank" rel="noopener">optparse</a> 是python内置的命令行工具库之一，它可以提供<strong>非交互式命令行</strong>框架，即用户输入命令启动python脚本执行完成即退出，不会等待你输入下一个命令，适用于相对简单的python命令行工具，基本用法如下：</p>
+<p><strong>代码示例</strong><br><a id="more"></a></p>
+<pre><code class="python">from optparse import OptionParser
+
+if __name__ == &#39;__main__&#39;:
+    usage = &#39;&#39;&#39;
+    usage: -d &lt;domain_name&gt; [-u &lt;username&gt;] -p &lt;password&gt; 
+    &#39;&#39;&#39;
+    parser = OptionParser(usage)
+
+    parser.add_option(&quot;-d&quot;, &quot;--domain_name&quot;, dest=&quot;domain_name&quot;, help=&quot;The domain name of your huawei cloud account.&quot;)
+    parser.add_option(&quot;-u&quot;, &quot;--username&quot;, dest=&quot;username&quot;, help=&quot;The user name of your huawei cloud account.&quot;)
+    parser.add_option(&quot;-p&quot;, &quot;--password&quot;, dest=&quot;password&quot;, help=&quot;The password name of your huawei cloud account.&quot;)
+    (options, args) = parser.parse_args()
+
+    if options.domain_name and options.password:
+        # do something
+        print(&quot;try to do authentication&quot;)
+    else:
+        print(&quot;please input your password.&quot;)
+        print(usage)
+</code></pre>
+<p><strong>执行效果</strong></p>
+<pre><code class="shell">D:\10_pythonProject\PromptTookit&gt;python optparse_demo/my_app_optparse.py -d demo -p 123
+try to do authentication
+
+D:\10_pythonProject\PromptTookit&gt;python optparse_demo/my_app_optparse.py -h
+Usage:
+    usage: -d &lt;domain_name&gt; [-u &lt;username&gt;] -p &lt;password&gt;
+
+
+Options:
+  -h, --help            show this help message and exit
+  -d DOMAIN_NAME, --domain_name=DOMAIN_NAME
+                        The domain name of your huawei cloud account.
+  -u USERNAME, --username=USERNAME
+                        The user name of your huawei cloud account.
+  -p PASSWORD, --password=PASSWORD
+                        The password name of your huawei cloud account.
+
+</code></pre>
+<p>框架提供了对命令行参数的解析，<code>help</code>文档支持等常用功能，支持长短命令，可以满足90%的单命令行应用需求，另外因为这个库是python的内置库，所以不需要安装任何依赖也是一个特点。</p>
+<h3 id="cmd2"><a href="#cmd2" class="headerlink" title="cmd2"></a>cmd2</h3><p><a href="https://github.com/python-cmd2/cmd2" target="_blank" rel="noopener">cmd2</a> 是对python的原生库 <a href="https://docs.python.org/3/library/cmd.html" target="_blank" rel="noopener">cmd</a> 的扩展，它提供非常强大的<strong>交互式命令行</strong>框架，这是它与<code>optparse</code>最大的不同，而同时它除了供命令参数解析、<code>help</code> 文档等必要能力以外，还具备<strong>命令补全</strong>、<strong>历史记录</strong>、<strong>嵌套shell</strong> 等能力，更重要的是它还可以与<code>argparse</code>配合实现<strong>多级命令</strong>功能，多级命令在构建复杂的命令行工具的时候是不可或缺的，试想一下如果几十上百个命令参数扁平化显示，那么这个工具操作的复杂性也是难以接受的。</p>
+<p><strong>代码示例</strong></p>
+<pre><code class="python">import argparse
+
+import cmd2
+from cmd2 import with_category
+
+iam_parser = argparse.ArgumentParser()
+iam_subparser = iam_parser.add_subparsers(title=&#39;iam sub-commands options&#39;, help=&#39;sub-command help&#39;)
+iam_info_subparser = iam_subparser.add_parser(&#39;user_info&#39;, help=&quot;query user info by user_id and domain&quot;)
+iam_info_subparser.add_argument(&#39;-u&#39;, &#39;--user_id&#39;, required=True, help=&#39;target user_id&#39;)
+iam_info_subparser.add_argument(&#39;-n&#39;, &#39;--domain_name&#39;, help=&#39;target domain_name, should at least provide domain name or id&#39;)
+
+
+class ApiBox(cmd2.Cmd):
+    def __init__(self):
+        super().__init__()
+        self.prompt = &#39;api&gt; &#39;
+        self.intro = &quot;Documented commands (use &#39;help -v&#39; for verbose/&#39;help &lt;topic&gt;&#39; for details)&quot;
+
+    def user_info(self, args):
+        &quot;&quot;&quot;query user info&quot;&quot;&quot;
+        print(f&quot;* query user info for {args.user_id}&quot;)
+
+    iam_info_subparser.set_defaults(func=user_info)
+
+    @with_category(&quot;Service Commands&quot;)
+    @cmd2.with_argparser(iam_parser)
+    def do_iam(self, args):
+        &quot;&quot;&quot;query iam info&quot;&quot;&quot;
+        func = getattr(args, &#39;func&#39;, None)
+        if func is not None:
+            func(self, args)
+        else:
+            self.do_help(&#39;iam&#39;)
+
+
+prompt = ApiBox()
+prompt.cmdloop()
+</code></pre>
+<p><strong>执行效果</strong></p>
+<pre><code class="shell">D:\10_pythonProject\PromptTookit&gt;python cmd2_demo/my_app_cmd2.py
+Documented commands (use &#39;help -v&#39; for verbose/&#39;help &lt;topic&gt;&#39; for details)
+api&gt; help
+
+Documented commands (use &#39;help -v&#39; for verbose/&#39;help &lt;topic&gt;&#39; for details):
+
+Service Commands
+================
+iam
+
+Uncategorized
+=============
+alias  help     macro  run_pyscript  set    shortcuts
+edit   history  quit   run_script    shell
+
+api&gt; iam user_info
+usage: iam user_info [-h] -u USER_ID [-n DOMAIN_NAME]
+iam user_info: error: the following arguments are required: -u/--user_id
+
+api&gt; iam user_info -u demo
+* query user info for demo
+api&gt;
+
+</code></pre>
+<p>cmd2通过添加装饰器<code>with_category</code>实现<code>help</code>界面的分配显示，通过<code>cmd2.with_argparser</code>配合<code>argsparser</code>类实现二级甚至多级命令，极大程度上扩展了python命令行能够支持的关键字数量，提升用户体验</p>
+<p>cmd2支持命令自动补全，凡是<code>do_xxx</code>的命令包括子命令都可以在输入的时候按<code>tab</code>键进行自动补全</p>
+<p>另外，cmd2提供了很好的自定义扩展能力，大部分可见的回显内容都可以通过代码重新定义，具体可以参考<a href="https://cmd2.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">官方文档</a></p>
+<p>从笔者使用cmd2的体验看，这个库的缺点是，当你的程序需要支持多级命令，同时命令种类又很多的时候，注册命令关键字的代码会变得非常臃肿和难以维护。。。</p>
+<h3 id="nubia"><a href="#nubia" class="headerlink" title="nubia"></a>nubia</h3><p><a href="https://github.com/facebookincubator/python-nubia" target="_blank" rel="noopener">python-nubia</a> 是一款特征鲜明的命令行框架，它即支持<code>交互式命令行</code>也支持<code>非交互式命令行</code>，最鲜明的特征是它可以在linux或者windows shell下面用GUI画一个<strong>菜单</strong>出来，并且命令的输入和输出都支持<strong>关键字上色</strong>，也支持命令行补全，可以让你的python命令行程序瞬间变得高大上，一图顶万言。</p>
+<p><img src="https://i.postimg.cc/0yJMrmrH/interactive.gif" alt="xxx"></p>
+<p>python底层基于另一个开源项目 <a href="https://github.com/jonathanslenders/python-prompt-toolkit" target="_blank" rel="noopener">python-prompt-toolkit</a> ，前面提到的菜单、上色等特性都是这个库提供的，nubia主要是对它做了二次封装和扩展，以提升易用性</p>
+<p><strong>代码示例</strong></p>
+<p>nubia也支持多级命令，命令通过<code>command</code>装饰器定义</p>
+<pre><code class="python">from nubia import command
+
+@command
+class Daemon:
+    &quot;&quot;&quot;
+    This is a set of commands that run daemons
+    &quot;&quot;&quot;
+    @command
+    def start(self) -&gt; None:  # becomes a `daemon start` subcommand
+        &quot;Help message of start&quot;
+        # Starting the daemon
+        ...
+
+    @command
+    def stop(self) -&gt; None:  # becomes a `daemon stop` subcommand
+        &quot;Help message of stop&quot;
+        # Stopping the daemon
+        ...
+</code></pre>
+<p>命令参数声明</p>
+<pre><code class="python">import typing
+
+@command
+@argument(&quot;hostnames&quot;, description=&quot;Hostname for the server you want to start&quot;,
+    positional=True)
+def start_server(hostnames: typing.List[str]):
+    &quot;&quot;&quot;
+    Starts a server or more
+    &quot;&quot;&quot;
+    pass
+</code></pre>
+<p><a href="https://github.com/facebookincubator/python-nubia" target="_blank" rel="noopener">官方代码仓</a>也提供了一个更完整的例子，可以参考<code>example</code>文件</p>
+<p>从笔者实际使用情况看，这套框架完成度还是很高的，而且通过可视化菜单和命令自动补全的配置确实可以很大程度上提升用户体验，不过一个小小的缺憾是他对windows平台的支撑还是差一点，主要体现在命令着色上，猜测应该是windows使用的色彩库与Linux有所不同，所以windows平台下运行nubia程序有些颜色代码没法正常显示，看起来是这样：</p>
+<p><img src="https://i.postimg.cc/9F2Cy7xn/image-20210804185153833.png" alt="jietu"></p>
+<p>另外从github上的commit记录以及issue的处理情况来看，这个项目坟头上的草似乎已经长老高了。。。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文介绍了几个非常实用的python命令行框架，每个框架都有各自分明的优缺点，适用于不同的场景和需求，下面简单罗列一下各自的特点，相信选择正确的框架能让你的工作事半功倍。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>optparser</th>
+<th>cmd2</th>
+<th>nubia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交互式命令</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>非交互命令</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>帮助文档</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>命令补全</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>多级命令</td>
+<td>不支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>关键字高亮</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>跨平台</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>活跃度</td>
+<td>官方库</td>
+<td>活跃</td>
+<td>不活跃</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/07/21/蓝队知识管理利器ATT-CK-Workbench/" rel="prev" title="蓝队知识管理利器(1)-ATT&CK Workbench">
+      <i class="fa fa-chevron-left"></i> 蓝队知识管理利器(1)-ATT&CK Workbench
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#optparse"><span class="nav-number">1.</span> <span class="nav-text">optparse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmd2"><span class="nav-number">2.</span> <span class="nav-text">cmd2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nubia"><span class="nav-number">3.</span> <span class="nav-text">nubia</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Charles Liu"
+      src="/images/8390209.jpg">
+  <p class="site-author-name" itemprop="name">Charles Liu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/dickens88" title="GitHub → https://github.com/dickens88" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:370716264@qq.com" title="E-Mail → mailto:370716264@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/charlesliu4j/" title="Weibo → https://www.linkedin.com/in/charlesliu4j/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Charles Liu</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://dearcharles-cn.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://www.dearcharles.cn/2021/08/05/打造高逼格Python命令行应用-1/";
+    this.page.identifier = "2021/08/05/打造高逼格Python命令行应用-1/";
+    this.page.title = "打造高逼格Python命令行应用";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://dearcharles-cn.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
